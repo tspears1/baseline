@@ -1,9 +1,9 @@
-@use '@styles/abstracts/mixins/media-queries' as mq;
-@use '@styles/abstracts/mixins/links' as links;
+@use "@styles/abstracts/mixins/media-queries" as mq;
+@use "@styles/abstracts/mixins/links" as links;
 
-.prontoHeader {
-    background: var(--color-pronto-dark);
-    color: var(--color-pronto-light);
+.baselineHeader {
+    background: var(--color-baseline-dark);
+    color: var(--color-baseline-light);
     font-family: var(--font-mono);
 
     &__content {
@@ -11,7 +11,7 @@
 
         @include mq.breakpoint(lg) {
             grid-template-columns: 1fr max-content 1fr;
-            grid-template-areas: 'PRIMARY BRAND SECONDARY';
+            grid-template-areas: "PRIMARY BRAND SECONDARY";
         }
     }
 
@@ -61,10 +61,10 @@
 
         &[data-current-menu-item] {
             &::after {
-                background: var(--color-pronto-darkest);
+                background: var(--color-baseline-darkest);
                 block-size: var(--menu-spacing);
                 clip-path: circle(50% at 50% 100%);
-                content: '';
+                content: "";
                 inline-size: var(--menu-spacing);
                 inset-block-end: 0;
                 inset-inline: calc(50% - (var(--menu-spacing) / 2));
@@ -78,12 +78,13 @@
     }
 
     &__menuLink {
-        color: var(--color-pronto-light);
+        color: var(--color-baseline-light);
         text-decoration: none;
 
         @include mq.hover() {
-            color: var(--color-pronto-light);
-            text-decoration: underline overline dotted var(--color-pronto-light) 1px;
+            color: var(--color-baseline-light);
+            text-decoration: underline overline dotted
+                var(--color-baseline-light) 1px;
             text-underline-offset: 0.3em;
         }
     }

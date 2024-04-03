@@ -1,51 +1,50 @@
 {
-    "name": "pattern-library",
-    "version": "1.0.0",
-    "description": "A library of components and their documentation managed by Craft CMS.",
-    "main": "index.js",
-    "scripts": {
-        "lint": "eslint assets",
-        "dev": "vite",
-        "preview": "vite preview",
-        "prod": "vite build",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/imarc/craft-component-library.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/imarc/craft-component-library/issues"
-    },
-    "homepage": "https://github.com/imarc/craft-component-library#readme",
-    "dependencies": {
-        "@babel/preset-react": "^7.23.3",
-        "@imarc/component-library-starter-kit": "^1.0.2",
-        "@react-three/drei": "^9.97.0",
-        "@react-three/fiber": "^8.15.16",
-        "@react-three/postprocessing": "^2.15.13",
-        "@types/three": "^0.161.2",
-        "hamburgers": "^1.2.1",
-        "highlight.js": "^11.9.0",
-        "lit": "^2.7.6",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "swiper": "^10.3.1",
-        "three": "^0.161.0",
-        "vite-plugin-babel": "^1.1.3"
-    },
-    "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.18.6",
-        "@babel/plugin-proposal-decorators": "^7.22.10",
-        "@babel/plugin-transform-private-methods": "^7.23.3",
-        "eslint": "^8.48.0",
-        "eslint-config-standard": "^17.1.0",
-        "eslint-plugin-import": "^2.28.1",
-        "eslint-plugin-n": "^16.0.2",
-        "eslint-plugin-promise": "^6.1.1",
-        "vite-plugin-restart": "^0.3.1",
-        "vite-plugin-static-copy": "^0.17.0"
-    }
+  "name": "baseline",
+  "version": "1.0.0",
+  "description": "A library of components.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint assets",
+    "dev": "vite",
+    "preview": "vite preview",
+    "prod": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tspears1/baseline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tspears1/baseline/issues"
+  },
+  "homepage": "https://github.com/tspears1/baseline#readme",
+  "dependencies": {
+    "@babel/preset-react": "^7.23.3",
+    "@react-three/drei": "^9.97.0",
+    "@react-three/fiber": "^8.15.16",
+    "@react-three/postprocessing": "^2.15.13",
+    "@types/three": "^0.161.2",
+    "hamburgers": "^1.2.1",
+    "highlight.js": "^11.9.0",
+    "lit": "^2.7.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swiper": "^10.3.1",
+    "three": "^0.161.0",
+    "vite-plugin-babel": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.22.10",
+    "@babel/plugin-transform-private-methods": "^7.23.3",
+    "eslint": "^8.48.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "vite-plugin-restart": "^0.3.1",
+    "vite-plugin-static-copy": "^0.17.0"
+  }
 }

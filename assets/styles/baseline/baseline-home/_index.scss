@@ -1,0 +1,45 @@
+.baselineHome {
+    background: var(--color-baseline-darkest);
+}
+
+.baselineHome__graphic {
+    --viewport-block-size: 100vb;
+    block-size: calc(
+        var(--viewport-block-size) - var(--header-height, 0px) -
+            var(--footer-height, 0px)
+    );
+    position: relative;
+
+    @supports (block-size: 1dvb) {
+        --viewport-block-size: 100dvb;
+    }
+
+    &::before {
+        background: radial-gradient(
+            circle,
+            var(--color-baseline-darkish) 0%,
+            var(--color-baseline-darkest) 65%,
+            var(--color-baseline-black) 100%
+        );
+        content: "";
+        inset: 0;
+        opacity: 0.8;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    &::after {
+        background: repeating-linear-gradient(
+            var(--color-baseline-light),
+            var(--color-baseline-light) 0.125rem,
+            transparent 0.125rem,
+            transparent 0.25rem
+        );
+        content: "";
+        inset: 0;
+        mix-blend-mode: soft-light;
+        opacity: 0.4;
+        pointer-events: none;
+        position: absolute;
+    }
+}

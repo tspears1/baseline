@@ -1,7 +1,7 @@
 @use '@styles/abstracts/mixins/button' as btn;
 @use '@styles/abstracts/mixins/media-queries' as mq;
 
-.prontoEntry {
+.baselineEntry {
 
     &__header {
         font-family: var(--font-mono);
@@ -23,9 +23,9 @@
     }
 
     &__eyebrow {
-        background: var(--color-pronto-darkest);
+        background: var(--color-baseline-darkest);
         border-radius: var(--radius-round);
-        color: var(--color-pronto-lightest);
+        color: var(--color-baseline-lightest);
         font-size: var(--size-fluid-1);
         grid-area: EYEBROW;
         line-height: var(--leading-none);
@@ -35,7 +35,7 @@
     }
 
     &__title {
-        color: var(--color-pronto-darkish);
+        color: var(--color-baseline-darkish);
         font-family: var(--font-mono);
         font-weight: var(--font-weight-regular);
         grid-area: TITLE;
@@ -45,7 +45,7 @@
     }
 
     &__meta {
-        background: hsl(var(--color-pronto-light-hsl) / 0.2);
+        background: hsl(var(--color-baseline-light-hsl) / 0.2);
         border-radius: var(--radius-3);
         display: grid;
         gap: var(--size-2);
@@ -57,14 +57,14 @@
 
     &__metaItem {
         aspect-ratio: var(--icon-ratio, 1);
-        color: var(--color-pronto-darkish);
+        color: var(--color-baseline-darkish);
     }
 
     &__tabs {
-        --tab-button-border-color-selected: var(--color-pronto-medium);
-        --tab-button-border-color-hover: var(--color-pronto-medium);
+        --tab-button-border-color-selected: var(--color-baseline-medium);
+        --tab-button-border-color-hover: var(--color-baseline-medium);
         --tab-button-font-size: var(--size-1);
-        --tab-list-border: var(--border-size-2) solid var(--color-pronto-light);
+        --tab-list-border: var(--border-size-2) solid var(--color-baseline-light);
         --tab-list-gap: var(--size-fluid-4);
         --tab-panel-padding: 0;
 
@@ -74,16 +74,16 @@
 
     &__preview {
         --code-preview-background-color: var(--color-neutral-50);
-        --code-preview-trigger-background-color: var(--color-pronto-light);
+        --code-preview-trigger-background-color: var(--color-baseline-light);
 
         //Reset Tab defaults
-        --tab-button-border-color-hover:               var(--color-action-600);
-        --tab-button-border-color-selected:            var(--color-action-700);
-        --tab-button-font-color:                       var(--color-neutral-500);
-        --tab-button-font-size:                        var(--size-2);
-        --tab-list-border:                             2px solid var(--color-neutral-300);
-        --tab-list-gap:                                var(--size-5);
-        --tab-panel-padding:                           var(--size-1);
+        --tab-button-border-color-hover: var(--color-action-600);
+        --tab-button-border-color-selected: var(--color-action-700);
+        --tab-button-font-color: var(--color-neutral-500);
+        --tab-button-font-size: var(--size-2);
+        --tab-list-border: 2px solid var(--color-neutral-300);
+        --tab-list-gap: var(--size-5);
+        --tab-panel-padding: var(--size-1);
 
         display: grid;
         font-family: var(--font-sans);
@@ -105,12 +105,12 @@
 
     &__source {
         --tab-button-font-size: var(--size-fluid-2);
-        --tab-button-font-color: var(--color-pronto-light);
-        --tab-button-font-color-hover: var(--color-pronto-lightest);
+        --tab-button-font-color: var(--color-baseline-light);
+        --tab-button-font-color-hover: var(--color-baseline-lightest);
         --tab-button-font-color-selected: var(--color-neutral-0);
         --tab-list-gap: var(--size-fluid-3);
         --tab-button-padding: 0 1.5rem 0.25rem 0;
-        background: var(--color-pronto-darkest);
+        background: var(--color-baseline-darkest);
         padding-block: clamp(3rem, 5.5vw, 6rem);
     }
 
@@ -151,13 +151,13 @@
 
     &__code {
         --text-max-inline-size: none;
-        --theme-color-highlight: var(--color-pronto-black);
+        --theme-color-highlight: var(--color-baseline-black);
         max-block-size: 31rem;
         overflow: auto;
         position: relative;
 
         :is(code).hljs {
-            background: var(--color-pronto-black) !important; // how dare i!
+            background: var(--color-baseline-black) !important; // how dare i!
             padding: 0 var(--size-3) !important; // i dare not thrice!
         }
 
@@ -166,24 +166,24 @@
         }
 
         ::selection {
-            background: var(--color-pronto-light);
-            color: var(--color-pronto-darkest);
+            background: var(--color-baseline-light);
+            color: var(--color-baseline-darkest);
         }
     }
 
     &__documentation {
-        --code-color-background: var(--color-pronto-light);
-        --pre-color-background: var(--color-pronto-light);
+        --code-color-background: var(--color-baseline-light);
+        --pre-color-background: var(--color-baseline-light);
 
-        background: var(--color-pronto-white);
-        color: var(--color-pronto-darkest);
+        background: var(--color-baseline-white);
+        color: var(--color-baseline-darkest);
 
         :where(p, li) {
             font-family: var(--font-mono);
         }
 
         :where(h1, h2, h3, h4, h5) {
-            color: var(--color-pronto-dark);
+            color: var(--color-baseline-dark);
             font-family: var(--font-mono);
             font-weight: var(--font-weight-regular);
         }
@@ -193,16 +193,16 @@
         }
 
         :where(code) {
-            color: var(--color-pronto-darkish);
+            color: var(--color-baseline-darkish);
             font-weight: var(--font-weight-semibold);
         }
     }
 
     &__copy {
         @include btn.button-reset();
-        background: var(--color-pronto-dark);
+        background: var(--color-baseline-dark);
         border-radius: var(--radius-2);
-        color: var(--color-pronto-light);
+        color: var(--color-baseline-light);
         display: grid;
         gap: 0.625rem;
         grid-auto-flow: column;
@@ -218,8 +218,8 @@
         z-index: var(--z-max);
 
         @include mq.hover() {
-            background: var(--color-pronto-darkish);
-            color: var(--color-pronto-lightest);
+            background: var(--color-baseline-darkish);
+            color: var(--color-baseline-lightest);
             cursor: pointer;
         }
 

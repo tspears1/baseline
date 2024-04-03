@@ -1,4 +1,4 @@
-.prontoPages {
+.baselinePages {
     $b: &;
 
     container: pages / inline-size;
@@ -6,14 +6,14 @@
     &__wrapper {
         --split-columns: 18.75rem 1fr;
         --split-gap: 0;
-        --tab-button-border-color-hover: var(--color-pronto-medium);
-        --tab-button-border-color-selected: var(--color-pronto-medium);
-        --tab-button-font-color-hover: var(--color-pronto-lightest);
+        --tab-button-border-color-hover: var(--color-baseline-medium);
+        --tab-button-border-color-selected: var(--color-baseline-medium);
+        --tab-button-font-color-hover: var(--color-baseline-lightest);
         --tab-button-font-color-selected: var(--color-neutral-0);
-        --tab-button-font-color: var(--color-pronto-light);
+        --tab-button-font-color: var(--color-baseline-light);
         --tab-button-font-size: var(--size-fluid-2);
         --tab-button-padding: 0 1.5rem 0.25rem 0;
-        --tab-list-border: var(--border-size-2) solid var(--color-pronto-light);
+        --tab-list-border: var(--border-size-2) solid var(--color-baseline-light);
         --tab-list-gap: var(--size-fluid-3);
         --tab-panel-padding: 0;
         transition: grid-template-columns var(--duration-fast) var(--ease-out-expo);
@@ -33,16 +33,16 @@
 
     &__sidebar {
         align-items: start;
-        background: var(--color-pronto-darkest);
+        background: var(--color-baseline-darkest);
         display: grid;
         padding: var(--size-fluid-2) var(--size-fluid-4);
         justify-items: end;
     }
 
     &__switch {
-        --switch-track-color-active: var(--color-pronto-medium);
+        --switch-track-color-active: var(--color-baseline-medium);
         --switch-flex-direction: row-reverse;
-        --switch-label-color: var(--color-pronto-lightest);
+        --switch-label-color: var(--color-baseline-lightest);
         --switch-thumb-size: 0.75rem;
 
         font-size: 0.75em;
@@ -60,7 +60,7 @@
     }
 
     &__panels {
-        background: var(--color-pronto-black);
+        background: var(--color-baseline-black);
     }
 
     &__preview {
@@ -68,19 +68,19 @@
         --code-preview-inline-size: 100cqi;
         --code-preview-padding-block: 0px;
         --code-preview-padding-inline: 0px;
-        --code-preview-trigger-background-color: var(--color-pronto-light);
+        --code-preview-trigger-background-color: var(--color-baseline-light);
 
         //Reset Tab defaults
-        --tab-button-border-color-hover:                var(--color-action-600);
-        --tab-button-border-color-selected:             var(--color-action-700);
-        --tab-button-font-color-hover:                  var(--color-neutral-900);
-        --tab-button-font-color-selected:               var(--color-neutral-900);
-        --tab-button-font-color:                        var(--color-neutral-500);
-        --tab-button-font-size:                         var(--size-2);
-        --tab-button-padding:                           0 0 0.25rem 0;
-        --tab-list-border:                              2px solid var(--color-neutral-300);
-        --tab-list-gap:                                 var(--size-5);
-        --tab-panel-padding:                            var(--size-1);
+        --tab-button-border-color-hover: var(--color-action-600);
+        --tab-button-border-color-selected: var(--color-action-700);
+        --tab-button-font-color-hover: var(--color-neutral-900);
+        --tab-button-font-color-selected: var(--color-neutral-900);
+        --tab-button-font-color: var(--color-neutral-500);
+        --tab-button-font-size: var(--size-2);
+        --tab-button-padding: 0 0 0.25rem 0;
+        --tab-list-border: 2px solid var(--color-neutral-300);
+        --tab-list-gap: var(--size-5);
+        --tab-panel-padding: var(--size-1);
 
         //Reset Split defaults
         --split-columns: repeat(2, 1fr);
@@ -89,7 +89,7 @@
         container-type: inline-size;
         display: grid;
         justify-items: center;
-        inline-size:100%;
+        inline-size: 100%;
     }
 
     &__previewWindow {
@@ -105,10 +105,10 @@
     }
 
     &__docs {
-        background: var(--color-pronto-white);
+        background: var(--color-baseline-white);
 
         :where(h1, h2, h3, h4, h5, h6) {
-            color: var(--color-pronto-darkish);
+            color: var(--color-baseline-darkish);
             font-family: var(--font-mono);
         }
 
@@ -125,7 +125,7 @@
         }
 
         :where(article + article) {
-            border-block-start: var(--border-size-2) solid var(--color-pronto-light);
+            border-block-start: var(--border-size-2) solid var(--color-baseline-light);
             padding-block-start: var(--size-5);
         }
     }

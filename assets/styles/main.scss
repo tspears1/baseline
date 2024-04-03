@@ -1,4 +1,3 @@
-
 @use 'sass:meta';
 
 // IBM Plex Mono font family from Google ========================================
@@ -34,8 +33,8 @@
     }
 }
 
-@layer pronto {
-    @include meta.load-css('pronto');
+@layer baseline {
+    @include meta.load-css('baseline');
 }
 
 @layer plugins {

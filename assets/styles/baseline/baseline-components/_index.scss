@@ -1,12 +1,12 @@
-@use '@styles/abstracts/mixins/links' as links;
-@use '@styles/abstracts/mixins/media-queries' as mq;
+@use "@styles/abstracts/mixins/links" as links;
+@use "@styles/abstracts/mixins/media-queries" as mq;
 
-.prontoComponents {
+.baselineComponents {
     --components-grid-gap: var(--size-fluid-4);
     font-family: var(--font-mono);
 
     &__sidebar {
-        background: var(--color-pronto-darkest);
+        background: var(--color-baseline-darkest);
         display: grid;
         grid-column: 1 / span 4;
         grid-template-columns: subgrid;
@@ -27,7 +27,6 @@
     }
 
     &__details {
-
         &:where([open]) {
             --details-minus-display: block;
             --details-plus-display: none;
@@ -37,7 +36,6 @@
             --details-minus-display: none;
             --details-plus-display: block;
         }
-
     }
 
     &__summary {
@@ -60,7 +58,7 @@
     &__summaryIcon {
         aspect-ratio: var(--ratio-square);
         block-size: 0.8125rem;
-        color: var(--color-pronto-medium);
+        color: var(--color-baseline-medium);
         display: none;
         inline-size: 0.8125rem;
 
@@ -74,7 +72,7 @@
     }
 
     &__summaryHeading {
-        color: var(--color-pronto-medium);
+        color: var(--color-baseline-medium);
         font-family: var(--font-mono);
         grid-column: 1 / span 1;
         margin: 0;
@@ -88,13 +86,13 @@
     }
 
     &__sidebarLink {
-        color: var(--color-pronto-light);
+        color: var(--color-baseline-light);
         line-height: 1.1;
         text-decoration: underline solid currentColor 1px;
         text-underline-offset: 0.25em;
 
         @include mq.hover() {
-            color: var(--color-pronto-lightest);
+            color: var(--color-baseline-lightest);
             text-decoration-style: dotted;
         }
     }
@@ -116,7 +114,7 @@
     }
 
     &__sectionTitle {
-        color: var(--color-pronto-medium);
+        color: var(--color-baseline-medium);
         display: grid;
         margin-block-end: var(--size-fluid-3);
         opacity: 0.8;
@@ -141,7 +139,7 @@
         --component-alpha: 0.85;
         display: grid;
         grid-template-rows: auto max-content;
-        grid-template-areas: 'MEDIA' 'HEADER';
+        grid-template-areas: "MEDIA" "HEADER";
         position: relative;
 
         &:hover {
@@ -159,7 +157,7 @@
 
     &__componentLink {
         @include links.pseudo-link($z: 1);
-        color: var(--color-pronto-light);
+        color: var(--color-baseline-light);
         font-family: var(--font-mono);
         font-size: var(--size-1);
         font-weight: var(--font-weight-regular);
@@ -167,15 +165,15 @@
         text-underline-offset: 0.25em;
 
         @include mq.hover() {
-            color: var(--color-pronto-lightest);
+            color: var(--color-baseline-lightest);
             text-decoration-style: dotted;
         }
     }
 
     &__componentTag {
-        background: var(--color-pronto-dark);
+        background: var(--color-baseline-dark);
         border-radius: var(--radius-round);
-        color: var(--color-pronto-lightest);
+        color: var(--color-baseline-lightest);
         font-family: var(--font-mono);
         font-size: 0.625rem;
         line-height: 1;
