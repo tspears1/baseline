@@ -1,0 +1,5 @@
+@use '@styles/abstracts/mixins/button' as btn;
+
+.button {
+    @include btn.button();
+}

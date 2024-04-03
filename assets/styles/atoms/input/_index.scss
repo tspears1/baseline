@@ -1,0 +1,235 @@
+@use '@styles/abstracts/mixins/button' as btn;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+:where(label) {
+    color: var(--theme-color-heading, var(--color-neutral-900));
+    line-height: var(--leading-tight);
+
+    &:where(:not(.checkbox, .radio)) {
+        display: block;
+        font-size: var(--size-fluid-2);
+        font-weight: var(--font-weight-bold);
+        margin-block-end: var(--size-0);
+    }
+}
+
+:where(input, textarea, .input) {
+    &:where(:not(
+        [type="checkbox"],
+        [type="radio"],
+        [type="button"],
+        [type="submit"],
+        [type="reset"]
+    )) {
+                                                    // block-size = ( font-size * line-height ) + ( padding-block * 2 ) + ( border-width * 2 )
+        --_input-block-size:                       var(--input-block-size, calc((var(--_input-font-size) * var(--_input-line-height)) + (var(--_input-padding-block) * 2) + (var(--_input-border-width) * 2)));
+        --_input-border-radius:                    var(--input-border-radius, var(--radius-2));
+        --_input-border-width:                     var(--input-border-width, var(--border-size-2));
+        --_input-color-background:                 var(--input-color-background, var(--color-neutral-50));
+        --_input-color-background-disabled:        var(--input-color-background-disabled, hsl( var(--color-neutral-50-hsl) / 50% ));
+        --_input-color-border:                     var(--input-color-border, var(--color-neutral-500));
+        --_input-color-border-active:              var(--input-color-border-active, var(--color-action-600));
+        --_input-color-border-disabled:            var(--input-color-border-disabled, hsl( var(--color-neutral-500-hsl) / 20% ));
+        --_input-color-border-error:               var(--input-color-border-error, var(--color-error-600));
+        --_input-color-highlight:                  var(--input-color-highlight, hsl( var(--theme-color-text-neutral-hsl) / 10% ));
+        --_input-color-text:                       var(--input-color-text, var(--color-neutral-800));
+        --_input-color-text-disabled:              var(--input-color-text-disabled, hsl( var(--theme-color-text-neutral-hsl) / 30% ));
+        --_input-color-text-error:                 var(--input-color-text-error, var(--color-error-600));
+        --_input-color-text-placeholder:           var(--input-color-text-placeholder, var(--color-neutral-400));
+        --_input-font-size:                        var(--input-font-size, var(--size-1));
+        --_input-inline-size:                      var(--input-inline-size, max-content);
+        --_input-line-height:                      var(--input-line-height, var(--leading-none));
+        --_input-padding-block:                    var(--input-padding-block, var(--_input-padding));
+        --_input-padding-inline:                   var(--input-padding-inline, var(--_input-padding));
+        --_input-padding:                          var(--input-padding, var(--size-1));
+        --_input-size-highlight:                    0;
+    }
+}
+:where(input, textarea) {
+
+    &:where(:not(
+        [type="checkbox"],
+        [type="radio"],
+        [type="button"],
+        [type="submit"],
+        [type="reset"]
+    )) {
+        background-color: var(--_input-color-background);
+        border: var(--_input-border-width) solid var(--_input-color-border);
+        border-radius: var(--_input-border-radius);
+        box-shadow: 0 0 0 var(--_input-size-highlight) var(--_input-color-highlight);
+        color: var(--_input-color-text);
+        color-scheme: light; // Adjusts the color of the system icons on some inputs, like [type='data'].
+        font-size: var(--_input-font-size);
+        inline-size: var(--_input-inline-size);
+        line-height: var(--_input-line-height);
+        padding: var(--_input-padding-block) var(--_input-padding-inline);
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition: box-shadow var(--duration-quick) var(--ease-out);
+        }
+
+        &:disabled {
+            --_input-color-background: var(--_input-color-background-disabled);
+            --_input-color-border: var(--_input-color-border-disabled);
+            --_input-color-text: var(--_input-color-text-disabled);
+            --_input-color-text-placeholder: var(--_input-color-text-disabled);
+            cursor: not-allowed;
+            font-style: italic;
+        }
+
+        &:invalid {
+            --_input-color-border: var(--_input-color-border-error);
+            --_input-color-text: var(--_input-color-text-error);
+        }
+
+        @include mq.hover() {
+            &:where(:not(:disabled)) {
+                --_input-size-highlight: calc(var(--_input-block-size) * 0.15);
+            }
+        }
+
+        &:focus-visible {
+            &:where(:not(:disabled)) {
+                --_input-size-highlight: calc(var(--_input-block-size) * 0.15);
+            }
+        }
+
+        &:focus {
+            --_input-color-border: var(--_input-color-border-active);
+            outline: none;
+        }
+
+        &::placeholder {
+            color: var(--_input-color-text-placeholder);
+        }
+    }
+
+    /** [ Button Elements ] ------------------------------------------------------ */
+    &:where([type="button"], [type="submit"], [type="reset"]) {
+        @include btn.button();
+    }
+
+    /** [ Checkbox Elements ] ---------------------------------------------------- */
+    //== See ./styles/atoms/checkbox/_index.scss for styled version ===============//
+
+    /** [ Radio Elements ] ------------------------------------------------------- */
+    //== See ./styles/atoms/radio/_index.scss for styled version ==================//
+
+    /** [ Color Picker ] --------------------------------------------------------- */
+    &:where([type='color']) {
+        --_input-line-height: var(--leading-loose);
+        --_input-inline-size: min(100%, var(--size-fluid-4));
+        aspect-ratio: var(--ratio-square);
+        block-size: max-content;
+        padding: 0;
+        position: relative;
+
+        &::-webkit-color-swatch {
+            block-size: auto;
+            border: var(--border-size-2) solid var(--color-neutral-0);
+            border-radius: var(--radius-round);
+            inline-size: auto;
+            inset: 0.25rem;
+            position: absolute;
+        }
+
+        &::-moz-color-swatch {
+            block-size: auto;
+            border: var(--border-size-2) solid var(--color-neutral-200);
+            border-radius: var(--radius-round);
+            inline-size: auto;
+            inset: 0.25rem;
+            position: absolute;
+        }
+    }
+
+    /** [ Search ] --------------------------------------------------------------- */
+    &:where([type='search']) {
+        border-radius: var(--radius-round);
+        padding-inline: calc(var(--_input-padding-inline) * 1.5);
+    }
+}
+
+:where(textarea) {
+    min-block-size: min(14rem, 40vh);
+}
+
+/** [ .input ] class acts as a wrapper element to support adding icons. ------------- */
+// @example
+// <div class="input">
+//     <input type="text" />
+//     <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true">
+//         <use xlink:href="#icon-search"></use>
+//     </svg>
+// </div>
+
+.input {
+    --_input-icon-block-size:                    var(--input-icon-block-size, calc(var(--_input-block-size) / var(--_input-icon-ratio)));
+    --_input-icon-ratio:                         var(--input-icon-ratio, var(--ratio-square));
+    --_input-icon-gap:                           var(--input-icon-gap, var(--size-1));
+    --_input-icon-inline-size:                   var(--input-icon-inline-size, var(--size-1));
+    --_input-icon-inset-block:                   var(--input-icon-inset-block, calc(50% - (var(--_input-icon-block-size) / 2)));
+    --_input-icon-padding-inline:                var(--input-icon-padding-inline, calc(var(--_input-icon-inline-size) + var(--_input-icon-gap) + var(--_input-padding-inline)));
+    inline-size: fit-content;
+    position: relative;
+
+    :is(svg, .input__icon) {
+        block-size: var(--_input-icon-block-size);
+        inline-size: var(--_input-icon-inline-size);
+        inset-block-start: var(--_input-icon-inset-block);
+        position: absolute;
+    }
+
+    // Icon Before Input
+    &:has(:is(svg, .input__icon) + input) {
+        input {
+            padding-inline-start: var(--_input-icon-padding-inline);
+        }
+
+        :is(svg, .input__icon) {
+            inset-inline-start: var(--_input-padding-inline);
+        }
+    }
+
+    // Icon After Input
+    &:has(input + :is(svg, .input__icon)) {
+        input {
+            padding-inline-end: var(--_input-icon-padding-inline);
+        }
+
+        :is(svg, .input__icon) {
+            inset-inline-end: var(--_input-padding-inline);
+        }
+    }
+
+    // Fallback for browsers that don't support :has() selector.
+    @supports not (selector(:has(*))) {
+        &.has--icon-before {
+            input {
+                padding-inline-start: var(--_input-icon-padding-inline);
+            }
+
+            :is(svg, .input__icon) {
+                inset-inline-start: var(--_input-padding-inline);
+            }
+        }
+
+        &.has--icon-after {
+            input {
+                padding-inline-end: var(--_input-icon-padding-inline);
+            }
+
+            :is(svg, .input__icon) {
+                inset-inline-end: var(--_input-padding-inline);
+            }
+        }
+    }
+
+    // Rounded Border Radius for Inputs.
+    &.input--rounded {
+        input {
+            --_input-border-radius: var(--radius-round);
+        }
+    }
+}

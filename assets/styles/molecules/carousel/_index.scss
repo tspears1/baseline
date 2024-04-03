@@ -1,0 +1,85 @@
+@use '@styles/abstracts/mixins/container-queries' as cq;
+@use '@styles/abstracts/mixins/grid' as grid;
+
+.carousel {
+    --_carousel-gradient-overlay-color: var(--carousel-gradient-overlay-color, var(--color-neutral-0));
+
+    container: carousel / inline-size;
+    inline-size: 100%;
+
+    &__container {
+        --column-gap: 1rem;
+        --row-gap: 1rem;
+
+        display: grid !important;
+        @include grid.fluid-container-grid;
+
+        @include cq.container('md', carousel) {
+            --column-gap: 2rem;
+            --row-gap: 2rem;
+        }
+    }
+
+    &__container::after {
+        @include cq.container('md', carousel) {
+            content: '';
+            position: relative;
+            display: block;
+            background-image: linear-gradient(to right, transparent, var(--_carousel-gradient-overlay-color));
+            grid-row: 1 / 2;
+            grid-column: 12 / main-end-wide;
+            z-index: 1;
+        }
+    }
+
+    &__tray {
+        display: flex !important;
+        overflow: hidden;
+        grid-column: 3 / 13;
+        grid-row: 1 / 2;
+        z-index: 0 !important;
+
+        @include cq.container('md', carousel) {
+            overflow: visible;
+            grid-column: 3 / 11;
+        }
+    }
+
+    &__navButton {
+        @include cq.container('md', carousel) {
+            display: flex;
+        }
+    }
+
+    &__sliderPagination {
+        --pagination-padding-block: 0;
+        --pagination-padding-inline: 0;
+        grid-row: 2 / 3;
+        grid-column: main-start / main-end;
+        overflow-x: visible;
+
+        @include cq.container('md', carousel) {
+            grid-column: 3 / main-end;
+            justify-self: start;
+        }
+    }
+
+    &__slide {
+        //flex-shrink: 100;
+        width: fit-content;
+    }
+
+    &__sliderButton--prev {
+        grid-column: main-start / 3;
+        grid-row: 1 / 2;
+        align-self: center;
+        justify-self: start;
+    }
+
+    &__sliderButton--next {
+        grid-column: 11 / main-end;
+        grid-row: 1 / 2;
+        align-self: center;
+        justify-self: end;
+    }
+}

@@ -1,0 +1,42 @@
+@use '@styles/abstracts/mixins/container-queries' as cq;
+
+.columns {
+    --_columns-align-items:                 var(--columns-align-items, start);
+    --_columns-count-base:                  var(--columns-count-base, 1);
+    --_columns-count-sm:                    var(--columns-count-sm, repeat(2, 1fr));
+    --_columns-count-md:                    var(--columns-count-md, repeat(auto-fit, minmax(18.75rem, 1fr)));
+    --_columns-column-gap:                  var(--columns-column-gap, 2.25cqi );
+    --_columns-justify-items:               var(--columns-justify-itmes, center);
+    --_columns-row-gap:                     var(--columns-row-gap, var(--size-1));
+
+    --_column-grid-column:                  var(--column-grid-column, auto);
+    --_column-grid-column-featured:         var(--column-grid-column-featured, var(--_column-grid-column));
+
+    align-items: var(--_columns-align-items);
+    column-gap: var(--_columns-column-gap);
+    display: grid;
+    grid-template-columns: var(--_columns-count-base);
+    inline-size: 100%;
+    justify-items: var(--_columns-justify-items);
+    row-gap: var(--_columns-row-gap);
+
+    @include cq.container('sm') {
+        grid-template-columns: var(--_columns-count-sm);
+    }
+
+    @include cq.container('md') {
+        grid-template-columns: var(--_columns-count-md);
+    }
+
+    &__column {
+        grid-column: var(--_column-grid-column);
+    }
+
+    &__column--featured {
+        grid-column: 1 / -1;
+
+        @include cq.container('md') {
+            grid-column: var(--_column-grid-column-featured);
+        }
+    }
+}

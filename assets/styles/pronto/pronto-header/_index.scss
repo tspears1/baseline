@@ -1,0 +1,90 @@
+@use '@styles/abstracts/mixins/media-queries' as mq;
+@use '@styles/abstracts/mixins/links' as links;
+
+.prontoHeader {
+    background: var(--color-pronto-dark);
+    color: var(--color-pronto-light);
+    font-family: var(--font-mono);
+
+    &__content {
+        display: grid;
+
+        @include mq.breakpoint(lg) {
+            grid-template-columns: 1fr max-content 1fr;
+            grid-template-areas: 'PRIMARY BRAND SECONDARY';
+        }
+    }
+
+    &__brand {
+        block-size: var(--size-fluid-3);
+        margin-block: var(--size-fluid-3);
+        padding-inline: var(--size-fluid-3);
+        position: relative;
+
+        @include mq.breakpoint(lg) {
+            grid-area: BRAND;
+        }
+    }
+
+    &__brandLink {
+        @include links.pseudo-link();
+    }
+
+    &__menu {
+        --menu-spacing: var(--size-fluid-3);
+        align-items: center;
+        display: none;
+        gap: var(--menu-spacing);
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        @include mq.breakpoint(lg) {
+            display: flex;
+
+            &--primary {
+                grid-area: PRIMARY;
+                justify-content: flex-start;
+            }
+
+            &--secondary {
+                grid-area: SECONDARY;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    &__menuItem {
+        align-items: center;
+        block-size: 100%;
+        display: grid;
+        position: relative;
+
+        &[data-current-menu-item] {
+            &::after {
+                background: var(--color-pronto-darkest);
+                block-size: var(--menu-spacing);
+                clip-path: circle(50% at 50% 100%);
+                content: '';
+                inline-size: var(--menu-spacing);
+                inset-block-end: 0;
+                inset-inline: calc(50% - (var(--menu-spacing) / 2));
+                position: absolute;
+            }
+        }
+    }
+
+    &__menuSpan {
+        color: var(--color-neutral-0);
+    }
+
+    &__menuLink {
+        color: var(--color-pronto-light);
+        text-decoration: none;
+
+        @include mq.hover() {
+            color: var(--color-pronto-light);
+            text-decoration: underline overline dotted var(--color-pronto-light) 1px;
+            text-underline-offset: 0.3em;
+        }
+    }
+}

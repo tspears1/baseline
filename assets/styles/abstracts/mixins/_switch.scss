@@ -1,0 +1,113 @@
+@use '../mixins/media-queries' as *;
+
+@mixin switch() {
+    --_switch-direction:                        var(--switch-direction, 1);
+    --_switch-flex-direction:                   var(--switch-flex-direction, row);
+    --_switch-gap:                              var(--switch-gap, 2ch);
+    --_switch-label-color:                      var(--switch-label-color, var(--theme-color-text));
+    --_switch-padding-track:                    calc(var(--_switch-thumb-size) * 0.24);
+    --_switch-size-highlight:                   0;
+    --_switch-thumb-color-active:               var(--switch-thumb-color-active, hsl( var(--theme-color-text-neutral-hsl, var(--color-neutral-1000-hsl)) / 100% ));
+    --_switch-thumb-color-disabled:             var(--switch-thumb-color-disabled, hsl( var(--theme-color-background-neutral-hsl, var(--color-neutral-0-hsl)) / 50% ));
+    --_switch-thumb-color-highlight:            var(--switch-thumb-color-highlight, hsl( var(--theme-color-text-neutral-hsl, var(--color-neutral-1000-hsl)) / 15% ));
+    --_switch-thumb-color-inactive:             var(--switch-thumb-color-inactive, hsl( var(--theme-color-text-neutral-hsl, var(--color-neutral-1000-hsl)) / 60% ));
+    --_switch-thumb-duration:                   var(--switch-thumb-duration, var(--duration-quick));
+    --_switch-thumb-size:                       var(--switch-thumb-size, 1.375rem); // Adjusting this value will scale the entire element.
+    --_switch-track-color-active:               var(--switch-track-color-active, var(--color-action-600));
+    --_switch-track-color-inactive:             var(--switch-track-color-inactive, var(--color-neutral-100));
+    --_switch-track-size:                       calc(var(--_switch-thumb-size) * 2.5);
+
+    -webkit-tap-highlight-color: transparent;
+    align-items: center;
+    color: var(--_switch-label-color);
+    cursor: pointer;
+    display: flex;
+    flex-direction: var(--_switch-flex-direction);
+    font-family: var(--switch-font-family, var(--font-sans));
+    font-size: var(--switch-font-size, var(--size-1));
+    font-weight: var(--switch-font-weight, var(--font-weight-regular));
+    gap: var(--_switch-gap);
+    justify-content: space-between;
+    line-height: var(--switch-line-height, var(--leading-loose));
+    user-select: none;
+
+    &[dir='rtl'] {
+        --_switch-direction: -1;
+    }
+
+    &[switch-layout='vertical'] {
+        min-block-size: calc(var(--_switch-track-size) + (var(--_switch-padding-track) * 2));
+
+        & > input {
+            rotate: calc(90deg * var(--_switch-direction) * -1);
+        }
+    }
+
+    > input {
+        --_track-color: var(--_switch-track-color-inactive);
+        --_thumb-color: var(--_switch-thumb-color-inactive);
+        --_thumb-position: 0%;
+
+        // Track
+        align-items: center;
+        appearance: none;
+        background: var(--_track-color);
+        block-size: var(--_switch-thumb-size);
+        block-size: var(--_switch-thumb-size);
+        border-radius: var(--_switch-track-size);
+        border: none;
+        box-sizing: content-box;
+        display: grid;
+        flex-shrink: 0;
+        grid: [track] 1fr / [track] 1fr;
+        inline-size: var(--_switch-track-size);
+        outline-offset: calc(var(--_switch-thumb-size) * 0.2);
+        padding: var(--_switch-padding-track);
+        transition: background var(--duration-quick) var(--ease-in);
+
+        // Thumb
+        &::before {
+            background: var(--_thumb-color);
+            block-size: var(--_switch-thumb-size);
+            border-radius: var(--radius-round);
+            box-shadow: 0 0 0 var(--_switch-size-highlight) var(--_switch-thumb-color-highlight);
+            content: '';
+            grid-area: track;
+            inline-size: var(--_switch-thumb-size);
+            translate: var(--_thumb-position);
+
+            @include prefers-reduced-motion('no-preference') {
+                transition:
+                    background var(--duration-quick) var(--ease-in),
+                    box-shadow var(--duration-quick) var(--ease-out),
+                    translate var(--_switch-thumb-duration) var(--ease-in);
+            }
+        }
+
+        &:checked {
+            --_track-color: var(--_switch-track-color-active);
+            --_thumb-color: var(--_switch-thumb-color-active);
+            --_thumb-position: calc((var(--_switch-track-size) - 100%) * var(--_switch-direction));
+        }
+
+        &:indeterminate {
+            --_thumb-position: calc(((var(--_switch-track-size) / 2) - (var(--_switch-thumb-size) / 2) * var(--_switch-direction)));
+        }
+
+        &:disabled {
+            --_thumb-color: transparent;
+            cursor: not-allowed;
+
+            &::before {
+                cursor: not-allowed;
+                box-shadow: inset 0 0 0 calc(var(--_switch-thumb-size) * 0.1) var(--_switch-thumb-color-disabled);
+            }
+        }
+
+        @include hover() {
+            &::before {
+                --_switch-size-highlight: calc(var(--_switch-thumb-size) * 0.25);
+            }
+        }
+    }
+}

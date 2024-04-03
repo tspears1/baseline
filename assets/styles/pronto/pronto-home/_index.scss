@@ -1,0 +1,32 @@
+.prontoHome {
+    background: var(--color-pronto-darkest);
+}
+
+.prontoHome__graphic {
+    --viewport-block-size: 100vb;
+    block-size: calc(var(--viewport-block-size) - var(--header-height, 0px) - var(--footer-height, 0px));
+    position: relative;
+
+    @supports (block-size: 1dvb) {
+        --viewport-block-size: 100dvb;
+    }
+
+    &::before {
+        background: radial-gradient(circle, var(--color-pronto-darkish) 0%, var(--color-pronto-darkest) 65%, var(--color-pronto-black) 100%);
+        content: '';
+        inset: 0;
+        opacity: 0.8;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    &::after {
+        background: repeating-linear-gradient(var(--color-pronto-light), var(--color-pronto-light) 0.125rem, transparent 0.125rem, transparent 0.25rem);
+        content: '';
+        inset: 0;
+        mix-blend-mode: soft-light;
+        opacity: 0.4;
+        pointer-events: none;
+        position: absolute;
+    }
+}

@@ -1,0 +1,54 @@
+@use '../config' as config;
+@use '../functions/lists' as *;
+@use '../mixins/container-queries' as *;
+@use '../mixins/media-queries' as *;
+@use 'sass:map';
+
+// Breakpoint CSS Variable mixins.
+@mixin generate-breakpoint-widths($breakpoints, $variable: breakpoint) {
+    @each $bp in map-keys($breakpoints) {
+        --#{$variable}-#{ $bp }: #{map.get($breakpoints, $bp, width)};
+    }
+}
+
+@mixin generate-breakpoint-gaps($breakpoints, $variable: breakpoint) {
+    @each $bp in map-keys($breakpoints) {
+        --#{$variable}-#{ $bp }-gap: #{map.get($breakpoints, $bp, gap)};
+    }
+}
+
+@mixin generate-active-breakpoint-variables($breakpoints) {
+    $keys: map-keys($breakpoints);
+
+    @each $bp in $keys {
+        $next: next-key($bp, $keys);
+
+        @include breakpoint($bp) {
+            --breakpoint-min-width: #{map.get($breakpoints, $bp, width)};
+            @if $next {
+                --breakpoint-max-width: #{map.get($breakpoints, $next, width) - 1};
+            } @else {
+                --breakpoint-max-width: none;
+            }
+            --breakpoint-gap: #{map.get($breakpoints, $bp, gap)};
+        }
+    }
+}
+
+@mixin generate-active-container-variables($breakpoints) {
+    $keys: map-keys($breakpoints);
+
+    @each $bp in $keys {
+        $next: next-key($bp, $keys);
+
+        @include container($bp) {
+            --container-min-width: #{map.get($breakpoints, $bp, width)};
+            @if $next {
+                --container-max-width: #{map.get($breakpoints, $next, width) - 1};
+            } @else {
+                --container-max-width: none;
+            }
+            --container-gap: #{map.get($breakpoints, $bp, gap)};
+        }
+    }
+}

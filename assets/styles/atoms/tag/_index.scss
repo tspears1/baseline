@@ -1,0 +1,178 @@
+@use '@styles/abstracts/mixins/links' as links;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+/**
+ * For use on checkboxes, radio switches, buttons, anchors or spans.
+ * when used with checkboxs and radio the markup should be the following:
+ *
+ * @example
+ * <label for="checkbox-id">
+ *    Checkbox Label
+ *    <input type="checkbox" id="checkbox-id" class="tag" />
+ * </label>
+ */
+
+tag,
+.tag {
+    --_tag-border-radius:                           var(--tag-border-radius, var(--radius-2));
+    --_tag-border-width:                            var(--tag-border-width, var(--border-size-1));
+    --_tag-color-background-active:                 var(--tag-color-background-active, var(--color-action-700));
+    --_tag-color-background-hover:                  var(--tag-color-background-hover, transparent);
+    --_tag-color-background-inactive:               var(--tag-color-background-inactive, transparent);
+    --_tag-color-border-active:                     var(--tag-color-border-active, var(--color-action-700));
+    --_tag-color-border-hover:                      var(--tag-color-border-hover, var(--color-action-700));
+    --_tag-color-border-inactive:                   var(--tag-color-border-inactive, var(--color-action-600));
+    --_tag-color-highlight:                         var(--tag-color-highlight, hsl( var(--theme-color-text-neutral-hsl) / 10% ));
+    --_tag-color-icon-active:                       var(--tag-color-icon-active, var(--color-neutral-0));
+    --_tag-color-icon-hover:                        var(--tag-color-icon-hover, var(--color-action-700));
+    --_tag-color-icon-inactive:                     var(--tag-color-icon-inactive, var(--color-action-600));
+    --_tag-color-text-active:                       var(--tag-color-text-active, var(--color-neutral-0));
+    --_tag-color-text-hover:                        var(--tag-color-text-hover, var(--color-action-700));
+    --_tag-color-text-inactive:                     var(--tag-color-text-inactive, var(--color-action-700));
+    --_tag-flex-direction:                          var(--tag-flex-direction, row);
+    --_tag-font-family:                             var(--tag-font-family, var(--font-sans));
+    --_tag-font-size:                               var(--tag-font-size, 0.75rem);
+    --_tag-font-weight:                             var(--tag-font-weight, var(--font-weight-regular));
+    --_tag-gap:                                     var(--tag-gap, var(--size-0));
+    --_tag-line-height:                             var(--tag-line-height, var(--leading-normal));
+    --_tag-padding-x:                               var(--tag-padding-x, var(--size-1));
+    --_tag-padding-y:                               var(--tag-padding-y, var(--size-0));
+    --_tag-size-highlight:                          0;
+    --_tag-transition:                              var(--tag-transition, var(--transition));
+
+    --_tag-block-size:                              calc(var(--_tag-font-size) * var(--_tag-line-height) + var(--_tag-padding-y) * 2);
+
+    // default state.
+    --_tag-color-background:                        var(--_tag-color-background-inactive);
+    --_tag-color-border:                            var(--_tag-color-border-inactive);
+    --_tag-color-icon:                              var(--_tag-color-icon-inactive);
+    --_tag-color-text:                              var(--_tag-color-text-inactive);
+
+    // forced inactive state.
+    &:is([tag-inactive]),
+    :is([tag-inactive]) {
+        --_tag-color-background:                    var(--_tag-color-background-inactive);
+        --_tag-color-border:                        var(--_tag-color-border-inactive);
+        --_tag-color-icon:                          var(--_tag-color-icon-inactive);
+        --_tag-color-text:                          var(--_tag-color-text-inactive);
+    }
+
+    &:where(button, :has(input), [tag-input]) {
+
+        &:where(:not([disabled])) {
+            @include mq.hover() {
+                --_tag-size-highlight:                  calc(var(--_tag-block-size) * 0.25);
+            }
+        }
+
+        // hover for interactive elements not currently active.
+        &:where(:not(:has(input:checked), [tag-active], [disabled] )) {
+            @include mq.hover() {
+                --_tag-color-background:                var(--_tag-color-background-hover);
+                --_tag-color-border:                    var(--_tag-color-border-hover);
+                --_tag-color-icon:                      var(--_tag-color-icon-hover);
+                --_tag-color-text:                      var(--_tag-color-text-hover);
+            }
+        }
+    }
+
+    // non-interactive elements or active inputs
+    &:where(tag, .tag, span, [tag-active]):where(:not(:has(input))),
+    &:is(:has(input:checked)) {
+        --_tag-color-background:                    var(--_tag-color-background-active);
+        --_tag-color-border:                        var(--_tag-color-border-active);
+        --_tag-color-icon:                          var(--_tag-color-icon-active);
+        --_tag-color-text:                          var(--_tag-color-text-active);
+    }
+
+    align-items: center;
+    background: var(--_tag-color-background);
+    border: var(--_tag-border-width) solid var(--_tag-color-border);
+    border-radius: var(--_tag-border-radius);
+    color: var(--_tag-color-text);
+    display: inline-flex;
+    flex-direction: var(--_tag-flex-direction);
+    font-family: var(--_tag-font-family);
+    font-size: var(--_tag-font-size);
+    font-weight: var(--_tag-font-weight);
+    gap: var(--_tag-gap);
+    justify-content: space-between;
+    line-height: var(--_tag-line-height);
+    margin: 0;
+    padding: var(--_tag-padding-y) var(--_tag-padding-x);
+    position: relative;
+
+    &:where(button, :has(input), [tag-input]) {
+        box-shadow: 0 0 0 var(--_tag-size-highlight) var(--_tag-color-highlight);
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition:
+                background var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+        }
+
+        @include mq.hover() {
+            cursor: pointer;
+        }
+    }
+
+    > * {
+        flex-shrink: 0;
+    }
+
+    > label {
+        @include links.pseudo-link();
+        cursor: pointer;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        margin: 0;
+    }
+
+    input {
+        appearance: none;
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    svg,
+    .tag__icon {
+        aspect-ratio: var(--tag-icon-ratio, 1);
+        block-size: var(--tag-icon-block-size, var(--_tag-font-size));
+        color: var(--_tag-color-icon);
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition:
+                color var(--duration-fast) var(--ease-out);
+        }
+
+        > use {
+            @include mq.prefers-reduced-motion('no-preference') {
+                transition: opacity var(--duration-fast) var(--ease-out)
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+            }
+        }
+    }
+
+    &:is([tag-active], :has(input:checked)):where([tag-dismissable]) {
+        svg,
+        .tag__icon {
+            > use:nth-child(1) {
+                opacity: 0;
+            }
+
+            > use:nth-child(2) {
+                opacity: 1;
+            }
+        }
+    }
+
+}

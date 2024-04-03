@@ -1,0 +1,129 @@
+@mixin list() {
+    &:where(ul, ol) {
+        --_list-row-gap:            var(--list-row-gap, var(--size-1));
+
+        display: grid;
+        gap: var(--_list-row-gap);
+        list-style: none;
+        padding-inline-start: var(--_list-padding-inline-start);
+
+        &[svg-marker] li,
+        li[svg-marker] {
+            --icon-fill-color: var(--color-primary-500);
+            --list-marker-block-size: 1.2em;
+            --list-marker-inline-size: 1.2em;
+            &::before {
+                content: none;
+            }
+
+            svg {
+                block-size: var(--_list-marker-block-size);
+                object-fit: contain;
+                inline-size: var(--_list-marker-inline-size);
+                margin-block-start: var(--_list-icon-offset);
+            }
+        }
+
+        :where(li) {
+            --_list-icon-offset: calc( ( var(--_text-font-size, var(--paragraph-size-md)) * var(--_text-line-height, var(--leading-paragraph)) - var(--_list-marker-block-size) ) / 2 );
+            display: grid;
+            gap: var(--size-1);
+            grid-template-columns: var(--_list-marker-inline-size) auto;
+            position: relative;
+
+            &::marker {
+                font-size: 0; // Safari doesn't recognize display: none on ::marker elements.
+            }
+
+            > :where(ul, ol) {
+                grid-column-start: 2;
+                padding-inline-start: 0;
+            }
+
+        }
+    }
+
+    &:where(ul) {
+        &[icon-marker] li,
+        li[icon-marker] {
+            --list-marker-block-size: 1.2em;
+            --list-marker-inline-size: 1.2em;
+            --list-marker-color-background: transparent;
+
+            &::before {
+                background-image: var(--list-background-image);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+        }
+
+        &[icon-marker='check'] li,
+        li[icon-marker='check'] {
+            --list-background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='24' height='24' rx='12' fill='%23E6CCFF'/%3E%3Cpath d='M6 12L10 16L18 8' stroke='%238000FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+        }
+
+        &[icon-marker='positive'] li,
+        li[icon-marker='positive'] {
+            --list-background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='24' height='24' rx='12' fill='%2328C642'/%3E%3Cpath d='M6 12L10 16L18 8' stroke='%23EBFFEE' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E ");
+        }
+
+        &[icon-marker='negative'] li,
+        li[icon-marker='negative'] {
+            --list-background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='24' height='24' rx='12' fill='%23E53411'/%3E%3Cpath d='M6 12H18' stroke='%23FFF3F1' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E ");
+        }
+
+        :where(li) {
+            --_list-marker-block-size:              var(--list-marker-block-size, 0.5em);
+            --_list-marker-inline-size:             var(--list-marker-inline-size, 1em);
+            --_list-marker-color-background:        var(--list-marker-color-background, var(--theme-color-accent, var(--color-primary-500)));
+
+            &::before {
+                background: var(--_list-marker-color-background);
+                block-size: var(--_list-marker-block-size);
+                border-radius: 1em;
+                content: var( --list-marker-content, '');
+                inline-size: var(--_list-marker-inline-size);
+                margin-block-start: var(--_list-icon-offset);
+            }
+
+            li {
+                --list-marker-color-background: var(--theme-color-highlight, var(--color-primary-200));
+                --list-marker-block-size: 0.25em;
+            }
+        }
+
+    }
+
+    &:where(ol) {
+        counter-reset: list-counter;
+
+        :where(li) {
+            --_list-marker-block-size:              var(--list-marker-block-size, 2.5em);
+            --_list-marker-color-background:        var(--list-marker-color-background, var(--theme-color-accent, var(--color-primary-500)));
+            --_list-marker-color-text:              var(--list-marker-color-text, var(--theme-color-background-neutral, var(--color-neutral-0)));
+            --_list-marker-font-size:               var(--list-marker-font-size, 0.75em);
+            --_list-marker-inline-size:             var(--list-marker-inline-size, var(--_list-marker-block-size));
+            counter-increment: list-counter;
+
+            &::before {
+                background: var(--_list-marker-color-background);
+                block-size: var(--_list-marker-block-size);
+                border-radius: var(--radius-round);
+                color: var(--_list-marker-color-text);
+                content: var( --list-marker-content, counters(list-counter, "."));
+                display: grid;
+                font-size: var(--_list-marker-font-size);
+                font-weight: var(--font-weight-bold);
+                inline-size: var(--_list-marker-inline-size);
+                margin-block-start: var(--_list-icon-offset);
+                place-items: center;
+            }
+
+            li {
+                --list-marker-color-background:     var(--theme-color-highlight, var(--color-primary-200));
+                --list-marker-color-text:           var(--theme-color-accent, var(--color-primary-500));
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+//=================================
+// Breakpoints
+//=================================
+$breakpoints: (
+    base: (width:    0px, gap: 16px),
+    xs:   (width:  360px, gap: 16px),
+    sm:   (width:  480px, gap: 16px),
+    md:   (width:  768px, gap: 24px),
+    lg:   (width: 1024px, gap: 32px),
+    xl:   (width: 1440px, gap: 32px),
+    xxl:  (width: 1920px, gap: 48px),
+) !default;

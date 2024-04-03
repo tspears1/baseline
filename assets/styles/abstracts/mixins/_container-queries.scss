@@ -1,0 +1,25 @@
+@use '../config' as config;
+@use '../functions/types' as types;
+@use 'sass:map';
+/* === @container query mixin ============================================ */
+// $bp ([string or number]): The breakpoint to query.
+// $name (string): The name of the container. Default is null.
+// $rule (string): The rule to query. Options: 'min-width' or 'max-width'. Default is 'min-width'.
+// $breakpoints (map): The breakpoints map. Default is $breakpoints.
+@mixin container($bp, $name: null, $rule: 'min-width', $breakpoints: config.$breakpoints) {
+    @if map.has-key($breakpoints, $bp) {
+        $bp: map.get($breakpoints, $bp, width);
+
+        @if $rule == 'max-width' {
+            $bp: $bp - 1;
+        }
+
+    } @else {
+        $bp: $bp;
+    }
+
+    @container #{$name} (#{$rule}: #{$bp}) {
+        @content;
+    }
+}
+

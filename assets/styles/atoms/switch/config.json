@@ -1,0 +1,6 @@
+{
+    "switch": {
+        "path": "assets/styles/abstracts/mixins/_switch.scss",
+        "type": "mixin"
+    }
+}

@@ -1,0 +1,67 @@
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+select:where(:not([class])),
+.select {
+    // block-size = ( font-size * line-height ) + ( padding-block * 2 ) + ( border-width * 2 )
+    --_select-block-size:                       var(--select-block-size, calc((var(--_select-font-size) * var(--_select-line-height)) + (var(--_select-padding-block) * 2) + (var(--_select-border-width) * 2)));
+    --_select-border-color:                     var(--select-border-color, var(--color-neutral-500));
+    --_select-border-radius:                    var(--select-border-radius, var(--radius-2));
+    --_select-border-width:                     var(--select-border-width, var(--border-size-2));
+    --_select-caret-color:                      var(--select-caret-color, var(--color-action-600));
+    --_select-caret-ratio:                      var(--select-caret-ratio, var(--ratio-widescreen));
+    --_select-caret-size:                       var(--select-caret-size, var(--size-1));
+    --_select-color-background:                 var(--select-color-background, var(--color-neutral-0));
+    --_select-color-highlight:                  var(--select-color-highlight, hsl( var(--theme-color-text-neutral-hsl, var(--color-neutral-1000-hsl)) / 25% ));
+    --_select-color-text:                       var(--select-color-text, var(--color-neutral-800));
+    --_select-font-size:                        var(--select-font-size, var(--size-1));
+    --_select-gap:                              var(--select-gap, var(--size-1));
+    --_select-inline-size:                      var(--select-inline-size, fit-content);
+    --_select-line-height:                      var(--select-line-height, var(--leading-none));
+    --_select-padding-block:                    var(--select-padding-block, var(--size-1));
+    --_select-padding-inline:                   var(--select-padding-inline, var(--size-1));
+    --_select-size-highlight:                   0;
+}
+
+select {
+    background-color: var(--_select-color-background);
+    border: var(--_select-border-width) solid var(--_select-border-color);
+    border-radius: var(--_select-border-radius);
+    box-shadow: 0 0 0 var(--_select-size-highlight) var(--_select-color-highlight);
+    color: var(--_select-color-text);
+    font-size: var(--_select-font-size);
+    inline-size: var(--_select-inline-size);
+    line-height: var(--_select-line-height);
+    padding: var(--_select-padding-block) var(--_select-padding-inline);
+
+    @include mq.prefers-reduced-motion('no-preference') {
+        transition: box-shadow var(--duration-quick) var(--ease-out);
+    }
+
+    @include mq.hover() {
+        &:where(:not(:disabled)) {
+            --_select-size-highlight: calc(var(--_select-block-size) * 0.15);
+        }
+    }
+}
+
+/** [ .select ] --- wrapper class to allow custom icon for <select> ------------------------------ */
+.select {
+    border-radius: var(--_select-border-radius);
+    inline-size: fit-content;
+    position: relative;
+
+    select {
+        appearance: none;
+        padding-inline-end: calc(var(--_select-gap) + var(--_select-caret-size) + var(--_select-padding-inline));
+    }
+
+    &__icon {
+        aspect-ratio: var(--_select-caret-ratio);
+        color: var(--_select-caret-color);
+        inset-block-start: calc(50% - ((var(--_select-caret-size) / var(--_select-caret-ratio)) / 2));
+        inset-inline-end: var(--_select-padding-inline);
+        inline-size: var(--_select-caret-size);
+        pointer-events: none;
+        position: absolute;
+    }
+}

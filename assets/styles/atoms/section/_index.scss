@@ -1,0 +1,36 @@
+.section {
+    --_section-padding-y:                                   var(--section-padding-y, var(--size-fluid-4));
+
+    background: var(--theme-color-background);
+    color: var(--theme-color-text, var(--color-text));
+    padding: var(--_section-padding-y) 0;
+
+    &__header {
+        display: grid;
+
+        &--center {
+            justify-items: center;
+        }
+
+        > *:where(:last-child) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__heading {
+        color: var(--theme-color-heading, var(--color-heading));
+        max-inline-size: var(--size-header-3);
+    }
+
+    &__content {
+        --_section-content-align:                               var(--section-content-align, start);
+        --_section-content-gap:                                 var(--section-content-gap, var(--size-fluid-1));
+        --_section-content-justify:                             var(--section-content-justify, start);
+
+        align-items: var(--_section-content-align);
+        display: grid;
+        gap: var(--_section-content-gap);
+        grid-template-columns: 1fr;
+        justify-items: var(--_section-content-justify);
+    }
+}

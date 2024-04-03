@@ -1,0 +1,33 @@
+@use 'sass:meta';
+
+// Set BASE cascade layer order ===================================
+@layer reset, custom-properties, fonts, base, forms, typography, rich-text;
+
+// Import layers ---------------------------------------------------
+@layer base {
+    @include meta.load-css('base');
+}
+
+@layer custom-properties {
+    @include meta.load-css('custom-properties');
+}
+
+@layer fonts {
+    @include meta.load-css('fonts');
+}
+
+@layer forms {
+    @include meta.load-css('forms');
+}
+
+@layer reset {
+    @include meta.load-css('reset');
+}
+
+@layer typography {
+    @include meta.load-css('typography');
+}
+
+@layer rich-text {
+    @include meta.load-css('rich-text');
+}

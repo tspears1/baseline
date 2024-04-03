@@ -1,0 +1,141 @@
+@use '@styles/abstracts/mixins/button' as button;
+@use '@styles/abstracts/mixins/links' as link;
+@use '@styles/abstracts/mixins/media' as media;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.media {
+    --_media-aspect-ratio:                  var(--media-aspect-ratio, var(--ratio-photo));
+    --_media-border-radius:                 var(--media-border-radius, var(--radius-2));
+    --_media-color-background:              var(--media-color-background, var(--theme-color-text, var(--color-neutral-500)));
+    --_media-fit:                           var(--media-fit, cover);
+    --_media-position:                      var(--media-position, center);
+
+    --_media-trigger-color-fill:            var(--media-trigger-color-fill, var(--color-neutral-100));
+    --_media-trigger-color-highlight:       var(--media-trigger-color-highlight, hsl( var(--theme-color-background-hsl, var(--color-action-600-hsl)) / 80% ));
+    --_media-trigger-color-stroke:          var(--media-trigger-color-stroke, var(--color-neutral-600));
+    --_media-trigger-size:                  var(--media-trigger-size, max(5cqi, 1.5rem));
+    --_media-trigger-size-highlight:        var(--media-trigger-size-highlight, 0);
+
+    aspect-ratio: var(--_media-aspect-ratio);
+    background: var(--_media-color-background);
+    border-radius: var(--_media-border-radius);
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    > * {
+        grid-area: 1 / 1 / 1 / 1;
+    }
+
+    &--square {
+        --_media-aspect-ratio: var(--ratio-square);
+    }
+
+    &--photo {
+        --_media-aspect-ratio: var(--ratio-photo);
+    }
+
+    &--widescreen {
+        --_media-aspect-ratio: var(--ratio-widescreen);
+    }
+
+    &__mask {
+        background: var(--_media-color-background);
+        border-radius: var(--_media-border-radius);
+        z-index: 2;
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition: opacity var(--duration-moderate) var(--ease-out);
+        }
+    }
+
+    &__mask,
+    &__video,
+    &__image {
+        block-size: 100%;
+        inline-size: 100%;
+        inset: 0;
+        position: absolute;
+    }
+
+    &__video {
+        display: grid;
+        opacity: 0;
+        place-items: center;
+        z-index: 1;
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition: opacity var(--duration-moderate) var(--ease-out);
+        }
+
+        .loaded & {
+            opacity: 1;
+        }
+    }
+
+    &__trigger {
+        @include button.button-reset();
+        @include link.pseudo-link();
+
+        --icon-fill-color: var(--_media-trigger-color-fill);
+        --icon-stroke-color: var(--_media-trigger-color-stroke);
+        aspect-ratio: var(--ratio-square);
+        block-size: var(--_media-trigger-size);
+        box-shadow: 0 0 0 var(--_media-trigger-size-highlight) var(--_media-trigger-color-highlight);
+        border-radius: var(--radius-round);
+        z-index: 3;
+
+        @include mq.prefers-reduced-motion('no-preference') {
+            transition:
+                box-shadow var(--duration-quick) var(--ease-out),
+                opacity var(--duration-moderate) var(--ease-out);
+        }
+
+        @include mq.hover() {
+            --_media-trigger-size-highlight: 0.5rem;
+            cursor: pointer;
+        }
+
+        &:focus-visible {
+            --_media-trigger-size-highlight: 0.5rem;
+        }
+
+        svg {
+            @include media.image-fit(contain);
+            max-inline-size: none;
+        }
+    }
+
+    &__mask,
+    &__trigger {
+
+        .loaded & {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    iframe,
+    video,
+    img {
+        @include media.image-fit(var(--_media-fit), var(--_media-position));
+        aspect-ratio: var(--_media-aspect-ratio);
+        border-radius: var(--_media-border-radius);
+        display: block;
+        inset: 0;
+        position: absolute;
+    }
+}
+
+.mediaFit {
+    block-size: 100%;
+    inline-size: 100%;
+
+    &--contain {
+        @include media.image-fit(contain);
+    }
+
+    &--cover {
+        @include media.image-fit(cover);
+    }
+}

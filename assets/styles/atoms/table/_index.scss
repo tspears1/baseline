@@ -1,0 +1,141 @@
+@use '@styles/abstracts/mixins/container-queries' as cq;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+table,
+.table {
+    --_table-border-color:              var(--table-border-color, var(--color-neutral-200));
+    --_table-border-width:              var(--table-border-width, 1px);
+    --_table-color-th-bg:               var(--table-color-th-bg, var(--color-neutral-100));
+    --_table-color-tr-th-bg:            var(--table-color-tr-th-bg, var(--color-neutral-50));
+    --_table-color-tr-th-bg-hover:      var(--table-color-tr-th-bg-hover, var(--color-primary-100));
+    --_table-color-th-text:             var(--table-color-th-text, var(--color-heading));
+    --_table-color-tr-bg:               var(--table-color-tr-bg, var(--color-neutral-0));
+    --_table-color-tr-text:             var(--table-color-tr-text, var(--color-text));
+    --_table-color-tr-bg-stripe:        var(--table-color-tr-bg-stripe, var(--color-neutral-50));
+    --_table-color-tr-text-stripe:      var(--table-color-tr-text-stripe, var(--_table-color-tr-text));
+    --_table-color-tr-bg-hover:         var(--table-color-tr-bg-hover, var(--color-primary-50));
+    --_table-color-tr-text-hover:       var(--table-color-tr-text-hover, var(--color-heading));
+    --_table-padding-x:                 var(--table-padding-x, var(--size-2));
+    --_table-padding-y:                 var(--table-padding-y, var(--size-1));
+
+    --_table-transition:                var(--table-transition, background-color var(--ease-out) var(--duration-fast), color var(--ease-out) var(--duration-fast));
+
+    // If device doesn't hover, bump the text to a darker color.
+    @include mq.hover($value: none) {
+        --_table-color-tr-text:             var(--table-color-tr-text, var(--color-heading));
+    }
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    inline-size: 100%;
+    margin-block-end: var(--size-3);
+
+    &[table-striped] {
+        :where(tr:nth-child(even)) {
+            background-color: var(--_table-color-tr-bg-stripe);
+            color: var(--_table-color-tr-text-stripe);
+        }
+    }
+
+    &__container {
+        border-collapse: collapse;
+        border-spacing: 0;
+        inline-size: 100%;
+        margin-block-end: var(--size-3);
+    }
+
+    caption {
+        font-size: var(--paragraph-size-sm);
+        margin-block-end: 0.75em;
+    }
+
+    td,
+    th {
+        padding: var(--_table-padding-y) var(--_table-padding-x);
+        text-align: start;
+        vertical-align: top;
+    }
+
+    th {
+        background-color: var(--_table-color-th-bg);
+        color: var(--_table-color-th-text);
+        white-space: nowrap;
+
+        &[scope="row"] {
+            background-color: var(--_table-color-tr-th-bg);
+            transition: var(--_table-transition);
+        }
+    }
+
+    tr {
+        background-color: var(--_table-color-tr-bg);
+        border-block-end: var(--_table-border-width) solid var(--_table-border-color);
+        color: var(--_table-color-tr-text);
+        transition: var(--_table-transition);
+
+        @include mq.hover() {
+            background-color: var(--_table-color-tr-bg-hover);
+            color: var(--_table-color-tr-text-hover);
+
+            th[scope="row"] {
+                background-color: var(--_table-color-tr-th-bg-hover);
+            }
+        }
+    }
+
+    &[responsive-table='scrollable'],
+    &[responsive-table]:where(:not([responsive-table='stacked'])) {
+        display: flex;
+        inline-size: calc(100% + (var(--_table-border-width) * 2) * var(--breakpoint-gap));
+        margin-inline-start: calc(-1 * var(--breakpoint-gap));
+        margin-inline-end: calc(-1 * var(--breakpoint-gap));
+        overflow-x: auto;
+
+        &::before,
+        &::after {
+            content: '';
+            min-inline-size: var(--breakpoint-gap);
+        }
+    }
+
+    &[responsive-table='stacked'] {
+
+        @include cq.container(md, $name: content, $rule: max-width) {
+            thead,
+            th {
+                display: none;
+            }
+
+            tr {
+                display: block;
+
+                @include mq.hover() {
+                    td {
+                        border-block-end-color: var(--_table-border-color);
+                    }
+                }
+
+                &:where(:first-child) {
+                    border-block-start: var(--_table-border-width) solid var(--_table-border-color);
+
+                }
+            }
+
+            td {
+                align-items: center;
+                border-block-end: var(--_table-border-width) solid var(--_table-color-tr-bg-hover);
+                display: flex;
+                gap: var(--_table-padding-x);
+                justify-content: space-between;
+                text-align: end;
+
+                &::before {
+                    content: attr(data-label);
+                    font-size: 0.8em;
+                    font-weight: var(--font-weight-bold);
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}

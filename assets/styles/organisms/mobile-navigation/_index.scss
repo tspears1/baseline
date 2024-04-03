@@ -1,0 +1,119 @@
+@use '@styles/abstracts/mixins/button' as button;
+@use '@styles/abstracts/config/colors' as *;
+@use "sass:map";
+@use "node_modules/hamburgers/_sass/hamburgers/hamburgers.scss" with (
+    $hamburger-layer-width: 2rem,
+    $hamburger-layer-height: 2px,
+    $hamburger-layer-color: map.get($colors, 'color-action-600'),
+    $hamburger-padding-x: 0,
+    $hamburger-padding-y: 0
+);
+
+.mobileNavigation {
+    $b: &;
+
+    --_mobile-navigation-list-right-offset: var(--mobile-navigation-right-offset, 4.5rem);
+    --_mobile-navigation-list-background-color: var(--mobile-navigation-background-color, var(--color-neutral-0));
+    --_mobile-navigation-list-box-shadow: var(--mobile-navigation-box-shadow, 0 1rem 2rem 0 rgba(0, 0, 0, 0.1));
+    --_mobile-navigation-trigger-padding-x: var(--mobile-navigation-trigger-padding-x, var(--size-2));
+    --_mobile-navigation-trigger-padding-y: var(--mobile-navigation-trigger-padding-y, var(--size-1));
+    --_mobile-navigation-trigger-line-height: var(--mobile-navigation-trigger-line-height, var(--leading-loose));
+    --_mobile-navigation-trigger-color: var(--mobile-navigation-trigger-color, var(--color-link-500));
+    --_mobile-navigation-trigger-border-bottom: var(--mobile-navigation-trigger-border-bottom, 1px solid var(--color-neutral-100));
+    --_mobile-navigation-trigger-icon-wrapper-size: var(--mobile-navigation-trigger-icon-wrapper-size, var(--size-5));
+    --_mobile-navigation-trigger-icon-wrapper-background-color: var(--mobile-navigation-trigger-icon-wrapper-background-color, var(--color-neutral-50));
+    --_mobile-navigation-trigger-icon-wrapper-border-radius: var(--mobile-navigation-trigger-icon-wrapper-border-radius, var(--radius-round));
+    --_mobile-navigation-trigger-icon-wrapper-margin-offset: var(--mobile-navigation-trigger-icon-wrapper-margin-offset, -0.5rem -1rem -0.5rem 0);
+    --_mobile-navigation-trigger-icon-color: var(--mobile-navigation-trigger-icon-color, var(--color-action-600));
+    --_mobile-navigation-trigger-icon-width: var(--mobile-navigation-trigger-icon-width, 0.75rem);
+    --_mobile-navigation-trigger-icon-height: var(--mobile-navigation-trigger-icon-height, 1.25rem);
+    --_mobile-navigation-list-header-font-size: var(--mobile-navigation-list-header-font-size, var(--size-1));
+    --_mobile-navigation-list-header-font-weight: var(--mobile-navigation-list-header-font-weight, var(--font-weight-regular));
+    --_mobile-navigation-list-header-line-height: var(--mobile-navigation-list-header-line-height, var(--leading-loose));
+    --_mobile-navigation-list-header-padding-x: var(--mobile-navigation-list-header-padding-x, var(--size-2));
+    --_mobile-navigation-list-header-padding-y: var(--mobile-navigation-list-header-padding-y, var(--size-1));
+    --_mobile-navigation-list-header-border-bottom: var(--mobile-navigation-list-header-border-bottom, 2px solid var(--color-neutral-500));
+    --_mobile-navigation-list-transform: var(--mobile-navigation-list-transform, translateX(-100%));
+    --_mobile-navigation-back-margin-offest: var(--mobile-navigation-back-margin-offest, -0.25rem 0 -0.25rem -1rem);
+
+    &__list {
+        display: none;
+        background-color: var(--_mobile-navigation-list-background-color);
+        position: fixed;
+        top: 0;
+        right: var(--_mobile-navigation-list-right-offset);
+        bottom: 0;
+        left: 0;
+        box-shadow: var(--_mobile-navigation-list-box-shadow);
+        transform: var(--_mobile-navigation-list-transform);
+        transition: transform var(--duration-fast) var(--ease-out);
+        z-index: var(--z-max);
+    }
+
+    &__list #{$b}__list {
+        --_mobile-navigation-list-right-offset: 0;
+    }
+
+    &__list[aria-hidden="false"] {
+        display: block;
+    }
+
+    &__list--active {
+        transform: translateX(0);
+    }
+
+    &__triggerIconWrapper {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        margin: var(--_mobile-navigation-trigger-icon-wrapper-margin-offset);
+        background-color: var(--_mobile-navigation-trigger-icon-wrapper-background-color);
+        block-size: var(--_mobile-navigation-trigger-icon-wrapper-size);
+        inline-size: var(--_mobile-navigation-trigger-icon-wrapper-size);
+        border-radius: var(--_mobile-navigation-trigger-icon-wrapper-border-radius);
+    }
+
+    &__heading {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        font-size: var(--_mobile-navigation-list-header-font-size);
+        font-weight: var(--_mobile-navigation-list-header-font-weight);
+        padding: var(--_mobile-navigation-list-header-padding-y) var(--_mobile-navigation-list-header-padding-x);
+        border-bottom: var(--_mobile-navigation-list-header-border-bottom);
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    &__headingText {
+        align-self: center;
+        grid-column: 2 / 3;
+    }
+
+    &__back {
+        @include button.button-reset;
+        grid-column: 1 / 2;
+        justify-self: start;
+        margin: var(--_mobile-navigation-back-margin-offest);
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include button.button-reset;
+        text-decoration: none;
+        cursor: pointer;
+        width: 100%;
+        color: var(--_mobile-navigation-trigger-color);
+        padding: var(--_mobile-navigation-trigger-padding-y) var(--_mobile-navigation-trigger-padding-x);
+        line-height: var(--_mobile-navigation-trigger-line-height);
+        border-bottom: var(--_mobile-navigation-trigger-border-bottom);
+    }
+
+    &__triggerIcon {
+        --icon-fill-color: var(--_mobile-navigation-trigger-icon-color);
+
+        width: var(--_mobile-navigation-trigger-icon-width);
+        height: var(--_mobile-navigation-trigger-icon-height);
+    }
+}

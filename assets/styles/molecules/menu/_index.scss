@@ -1,0 +1,24 @@
+.menu {
+    --_menu-background: var(--menu-background, var(--color-neutral-0));
+    --_menu-border-radius: var(--menu-border-radius, var(--size-0));
+    --_menu-box-shadow: var(--menu-box-shadow, 0 1rem 4rem 0 rgba(0, 0, 0, 0.05));
+    --_menu-list-gap: var(--menu-list-gap, var(--size-1));
+    --_menu-list-item-padding-y: var(--menu-list-item-padding-y, 0.25rem);
+    --_menu-padding: var(--menu-padding, var(--size-2));
+
+    background: var(--_menu-background);
+    border-radius: var(--_menu-border-radius);
+    box-shadow: var(--_menu-box-shadow);
+    padding: var(--_menu-padding);
+    z-index: var(--z-drawer);
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--_menu-list-gap);
+    }
+
+    &__listItem {
+        padding: var(--_menu-list-item-padding-y) 0;
+    }
+}

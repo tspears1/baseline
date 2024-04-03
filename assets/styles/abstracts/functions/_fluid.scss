@@ -1,0 +1,94 @@
+@use 'sass:math';
+@use "sass:map";
+@use "../config/breakpoints" as config;
+@use "../functions/strip-units" as *;
+@use '../functions/types' as type;
+
+
+@function rnd($number, $places: 0) {
+    $n: 1;
+    @if $places > 0 {
+        @for $i from 1 through $places {
+            $n: $n * 10;
+        }
+    }
+    @return math.div(math.round($number * $n), $n);
+}
+
+@function to-rems($px) {
+    $rems: math.div($px, 16px) * 1rem;
+    @return $rems;
+}
+
+@function raw-px-to-rems($px) {
+    $rems: math.div($px, 16) * 1rem;
+    @return $rems;
+}
+
+@function to-pxs($rem) {
+    $pxs: $rem * 16px;
+    @return $pxs;
+}
+
+@function raw-px($value) {
+    @if type.is-relative-length($value) {
+        @return strip-units( to-pxs( $value ) );
+    } @else {
+        @return strip-units( $value );
+    }
+}
+
+// add support for min, max, clamp or full-fluid
+@function fluid($min, $max, $clamp: true, $default-min-bp: xs, $default-max-bp: xl) {
+    $min-bp: map.get(config.$breakpoints, $default-min-bp, width);
+    $max-bp: map.get(config.$breakpoints, $default-max-bp, width);
+
+    $min-rem: strip-units($min);
+    $max-rem: strip-units($max);
+
+    $min-px: to-pxs($min-rem);
+    $max-px: to-pxs($max-rem);
+
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+    $slope-vw: rnd($slope * 100, 2);
+
+    $intercept-rems: rnd(to-rems( $max-px - $max-bp * $slope ), 2);
+
+    @if $clamp {
+        @return clamp(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rem}rem);
+    } @else {
+        @return max(#{$min-rem}rem, #{$slope-vw}vw + #{$intercept-rems});
+    }
+}
+
+@function c-fluid($min, $max, $c-min, $c-max, $clamp: true) {
+    $-min: raw-px($min);
+    $-max: raw-px($max);
+
+    $-c-min: null;
+    $-c-max: null;
+
+    @if type.is-breakpoint($c-min) {
+        $-c-min: raw-px(map.get(config.$breakpoints, $c-min, width));
+    } @else {
+        $-c-min: raw-px($c-min);
+    }
+
+    @if type.is-breakpoint($c-max) {
+        $-c-max: raw-px(map.get(config.$breakpoints, $c-max, width));
+    } @else {
+        $-c-max: raw-px($c-max);
+    }
+
+    $slope: math.div($-max - $-min, $-c-max - $-c-min);
+    $slope-cqw: rnd($slope * 100, 2);
+
+    $intercept-rems: rnd(math.div($-min - $slope * $-c-min, 16), 2) * 1rem;
+
+    @if $clamp {
+        @return clamp(#{raw-px-to-rems($-min)}, #{$slope-cqw}cqw + #{$intercept-rems}, #{raw-px-to-rems($-max)});
+    } @else {
+        @return max(#{raw-px-to-rems($-min)}, #{$slope-cqw}cqw + #{$intercept-rems});
+    }
+
+}

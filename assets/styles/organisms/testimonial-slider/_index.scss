@@ -1,0 +1,147 @@
+@use '@styles/abstracts/mixins/media-queries' as *;
+@use '@styles/abstracts/mixins/container-queries' as cq;
+@use '@styles/abstracts/mixins/grid' as grid;
+
+.testimonialSlider {
+    --_testimonial-slider-row-gap: var(--testimonial-slider-row-gap, var(--size-1));
+    --_testimonial-slider-column-gap: var(--testimonial-slider-column-gap, var(--size-1));
+    --_testimonial-slider-padding-y: var(--testimonial-slider-padding-y, clamp(3rem, 5vw, 6rem));
+    --_testimonial-slider-slide-opacity: var(--testimonial-slider-slide-opacity, 0.5);
+    --_testimonial-slider-slide-opacity-active: var(--testimonial-slider-slide-opacity-active, 1);
+    --_testimonial-icon-color: var(--testimonial-icon-color, var(--color-primary-500));
+    --_testimonial-title-font-size: var(--testimonial-title-font-size, var(--size-fluid-3));
+    --_testimonial-icon-margin-bottom: var(--testimonial-icon-margin-bottom, var(--size-fluid-3));
+    --_testimonial-icon-width: var(--testimonial-icon-width, 3.875rem);
+    --_testimonial-icon-height: var(--testimonial-icon-height, 3.875rem);
+
+    $b: &;
+
+    container: testimonialSlider / inline-size;
+    inline-size: 100%;
+
+    &__container {
+        @include grid.fluid-container-grid;
+
+        --row-gap: 1rem;
+
+        overflow-x: hidden;
+        padding: var(--_testimonial-slider-padding-y) 0;
+
+        @include cq.container('md', testimonialSlider) {
+            --column-gap: 2rem;
+            --row-gap: 2.5rem;
+        }
+    }
+
+    &__title {
+        font-size: var(--_testimonial-title-font-size);
+        grid-column: main-start / main-end;
+        grid-row: 1 / 2;
+        height: min-content;
+
+        @include cq.container('md', testimonialSlider) {
+            grid-column: 4 / 11;
+        }
+
+        @include cq.container('lg', testimonialSlider) {
+            grid-column: main-start / 6;
+        }
+    }
+
+    &__titleIcon {
+        --icon-fill-color: var(--_testimonial-icon-color);
+
+        block-size: var(--_testimonial-icon-height);
+        inline-size: var(--_testimonial-icon-width);
+        margin-bottom: var(--_testimonial-icon-margin-bottom);
+    }
+
+    &__tray {
+        grid-row: 3 / 4;
+        grid-column: main-start / main-end;
+
+        @include cq.container('md', testimonialSlider) {
+            grid-row: 2 / 3;
+            grid-column: 4 / 11;
+        }
+
+        @include cq.container('lg', testimonialSlider) {
+            grid-row: 1 / 2;
+            grid-column: 6 / 11;
+        }
+    }
+
+    &__sliderPagination {
+        --pagination-padding-block: 0;
+        --pagination-padding-inline: 0;
+
+        display: none;
+        align-self: center;
+        height: max-content;
+        grid-column: 3 / 13;
+        grid-row: 3 / 4;
+
+        @include cq.container('md', testimonialSlider) {
+            display: block;
+            grid-column: 5 / 10;
+            grid-row: 3 / 4;
+        }
+
+        @include cq.container('lg', testimonialSlider) {
+            grid-column: 7 / 10;
+            grid-row: 2 / 3;
+        }
+    }
+
+    &__sliderButton {
+        grid-row: 2 / 3;
+
+        @include cq.container('md', testimonialSlider) {
+            grid-row: 3 / 4;
+        }
+
+        @include cq.container('lg', testimonialSlider) {
+            grid-row: 2 / 3;
+        }
+    }
+
+    &__sliderButton--prev {
+        grid-column: 11 / 11;
+        align-self: center;
+        justify-self: start;
+
+        @include cq.container('lg', testimonialSlider) {
+            grid-column: 6 / 7;
+        }
+    }
+
+    &__sliderButton--next {
+        grid-column: 11 / main-end;
+        align-self: center;
+        justify-self: end;
+
+        @include cq.container('md', testimonialSlider) {
+            grid-column: 10 / 11;
+        }
+    }
+
+    &__testimonial {
+        opacity: var(--_testimonial-slider-slide-opacity);
+        transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    &__slide--active #{$b}__testimonial {
+        opacity: var(--_testimonial-slider-slide-opacity-active);
+    }
+
+    &:has(#{$b}__title) #{$b}__slide--prev #{$b}__testimonial {
+        opacity: 0;
+    }
+
+    // Fallback for browsers that don't support :has() selector.
+    @supports not (selector(:has(*))) {
+        &.has--testimonialSlider__title #{$b}__slide--prev #{$b}__testimonial {
+            opacity: 0;
+        }
+    }
+}

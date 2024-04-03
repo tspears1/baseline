@@ -1,0 +1,50 @@
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.sliderPagination {
+    --_pagination-bullet-color-background:                  var(--pagination-bullet-color-background, var(--color-action-600));
+    --_pagination-bullet-color-background-current:          var(--pagination-bullet-color-background-current, var(--theme-color-text-neutral, var(--color-neutral-1000)));
+    --_pagination-bullet-color-background-hover:            var(--pagination-bullet-color-background-hover, var(--color-action-700));
+    --_pagination-bullet-scale:                             var(--pagination-bullet-scale, 1);
+    --_pagination-bullet-scale-current:                     var(--pagination-bullet-scale-current, 1.5);
+    --_pagination-bullet-size:                              var(--pagination-bullet-size, clamp(0.75rem, 1vw, 1rem));
+    --_pagination-item-padding:                            var(--pagination-item-padding, 0.375rem);
+
+    &__list {
+        display: grid;
+        gap: var(--pagination-gap, var(--size-fluid-1));
+        grid-auto-flow: column;
+        max-inline-size: 100%;
+        padding-block: var(--pagination-padding-block, var(--size-2));
+        padding-inline: var(--pagination-padding-inline, var(--size-4));
+        place-content: center;
+    }
+
+    &__item {
+        aspect-ratio: 1;
+        padding: var(--_pagination-item-padding);
+    }
+
+    &__bullet {
+        display: block;
+        background: var(--_pagination-bullet-color-background);
+        block-size: var(--_pagination-bullet-size);
+        border: none;
+        border-radius: var(--radius-round);
+        cursor: pointer;
+        inline-size: var(--_pagination-bullet-size);
+        scale: var(--_pagination-bullet-scale);
+        transition:
+            background var(--duration-fast) var(--ease-out),
+            scale var(--duration-fast) var(--ease-out);
+
+        @include mq.hover() {
+            --_pagination-bullet-color-background: var(--_pagination-bullet-color-background-hover);
+        }
+
+        &:where([aria-selected='true']) {
+            --_pagination-bullet-color-background: var(--_pagination-bullet-color-background-current);
+            --_pagination-bullet-scale: var(--_pagination-bullet-scale-current);
+            pointer-events: none;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+// Toasts are a way to display information to the user in a non-intrusive way.
+// They are used to display information that is not critical to the user experience and can be dismissed, eitehr from a timeout or by the user.
+// The '.toasts' container is fixed to fill the viewport and is positioned at the top of the z-index stack.
+
+.toasts {
+    display: grid;
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    z-index: var(--z-alert);
+
+    &__stack {
+        align-self: var(--stack-align, start);
+        display: grid;
+        gap: var(--stack-gap, var(--size-fluid-1));
+        grid-area: 1 / 1 / 1 / 1;
+        justify-self: var(--stack-justify, end);
+        padding: var(--stack-padding, var(--size-fluid-2));
+
+        &[stack-position='start-start'],
+        &--start-start {
+            --stack-align: start;
+            --stack-justify: start;
+        }
+
+        &[stack-position='start-center'],
+        &--start-center {
+            --stack-align: start;
+            --stack-justify: center;
+        }
+
+        &[stack-position='start-end'],
+        &--start-end {
+            --stack-align: start;
+            --stack-justify: end;
+        }
+
+        &[stack-position='center-start'],
+        &--center-start {
+            --stack-align: center;
+            --stack-justify: start;
+        }
+
+        &[stack-position='center-center'],
+        &--center-center {
+            --stack-align: center;
+            --stack-justify: center;
+        }
+
+        &[stack-position='center-end'],
+        &--center-end {
+            --stack-align: center;
+            --stack-justify: end;
+        }
+
+        &[stack-position='end-start'],
+        &--end-start {
+            --stack-align: end;
+            --stack-justify: start;
+        }
+
+        &[stack-position='end-center'],
+        &--end-center {
+            --stack-align: end;
+            --stack-justify: center;
+        }
+
+        &[stack-position='end-end'],
+        &--end-end {
+            --stack-align: end;
+            --stack-justify: end;
+        }
+
+        > * {
+            pointer-events: auto;
+        }
+
+    }
+}

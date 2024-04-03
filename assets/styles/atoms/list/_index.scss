@@ -1,0 +1,6 @@
+@use '@styles/abstracts/mixins/list' as list;
+
+.list {
+    --_list-padding-inline-start:                   var(--list-padding-inline-start, var(--size-fluid-4));
+    @include list.list();
+}

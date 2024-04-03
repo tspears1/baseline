@@ -1,0 +1,6 @@
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--actions-gap, var(--size-fluid-2));
+    justify-content: var(--actions-justify, auto);
+}

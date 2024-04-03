@@ -1,0 +1,26 @@
+@use '@styles/abstracts/mixins/media-queries' as *;
+
+.socialNav {
+    --_social-nav-list-gap: var(--social-nav-list-gap, 2.25rem);
+    --_social-nav-icon-size: var(--social-nav-icon-size, 2.25rem);
+    --_social-nav-icon-color: var(--social-nav-icon-color, var(--color-link-500));
+    --_social-nav-icon-color-hover: var(--social-nav-icon-color-hover, var(--color-link-700));
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_social-nav-list-gap);
+    }
+
+    &__link {
+        --icon-fill-color: var(--_social-nav-icon-color);
+
+        display: block;
+        block-size: var(--_social-nav-icon-size);
+        inline-size: var(--_social-nav-icon-size);
+
+        @include hover {
+            --icon-fill-color: var(--_social-nav-icon-color-hover);
+        }
+    }
+}

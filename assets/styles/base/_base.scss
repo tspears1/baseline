@@ -1,0 +1,43 @@
+@use '../abstracts/' as *;
+
+:root {
+    color-scheme: light;
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+}
+
+:where(body) {
+    background: var(--color-neutral-0);
+    color: var(--color-neutral-950);
+    font-family: var(--font-sans);
+    font-size: var(--paragraph-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-paragraph);
+}
+
+:where(:focus:not(:focus-visible)) {
+    outline: none;
+}
+
+:where(:focus-visible) {
+    outline: 3px solid var(--focus-outline);
+    outline-offset: 3px;
+}
+
+:where(a):where(:not([class])) {
+    @include inline-link();
+}
+
+path {
+    transition: fill var(--duration-fast) var(--ease-out);
+}
+
+::selection {
+    background: var(--theme-color-highlight, var(--color-primary-100));
+}
+
+:where(input) {
+    accent-color: var(--theme-color-accent);
+}

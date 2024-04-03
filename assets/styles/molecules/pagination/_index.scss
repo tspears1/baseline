@@ -1,0 +1,84 @@
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.pagination {
+    --_pagination-button-color-background:                  var(--pagination-button-color-background, var(--color-link-700));
+    --_pagination-button-color-background-hover:            var(--pagination-button-color-background-hover, var(--color-link-500));
+    --_pagination-button-color-text:                        var(--pagination-button-color-text, var(--_pagination-link-color-text));
+    --_pagination-button-color-text-hover:                  var(--pagination-button-color-text-hover, var(--_pagination-link-color-text-hover));
+    --_pagination-link-color-background:                    var(--pagination-link-color-background, var(--color-link-500));
+    --_pagination-link-color-background-current:            var(--pagination-link-color-background-current, var(--color-neutral-100));
+    --_pagination-link-color-background-hover:              var(--pagination-link-color-background-hover, var(--color-link-700));
+    --_pagination-link-color-background-skip:               var(--pagination-link-color-background-skip, var(--color-neutral-200));
+    --_pagination-link-color-text:                          var(--pagination-link-color-text, var(--color-neutral-0));
+    --_pagination-link-color-text-current:                  var(--pagination-link-color-text-current, var(--color-link-700));
+    --_pagination-link-color-text-hover:                    var(--pagination-link-color-text-hover, var(--_pagination-link-color-text));
+    --_pagination-link-color-text-skip:                     var(--pagination-link-color-text-skip, var(--_pagination-link-color-text-current));
+    --_pagination-link-font-size:                           var(--pagination-link-font-size, var(--size-fluid-1));
+    --_pagination-link-padding-block:                       var(--pagination-link-padding-block, clamp(0.75rem, 1.5vw, 1.25rem));
+
+    container-name: pagination;
+    container-type: inline-size;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+
+    &__list {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--size-fluid-1);
+        inline-size: fit-content;
+    }
+
+    &__button {
+        --button-color-background: var(--_pagination-button-color-background);
+        --button-color-background-hover: var(--_pagination-button-color-background-hover);
+        --button-color-text: var(--_pagination-button-color-text);
+        --button-color-text-hover: var(--_pagination-button-color-text-hover);
+    }
+
+    &__icon {
+        aspect-ratio: var(--icon-ratio, var(--ratio-film));
+        block-size: var(--size-fluid-1);
+        color: var(--_button-color-icon);
+    }
+
+    &__link,
+    &__current,
+    &__skip {
+        aspect-ratio: var(--ratio-square);
+        background: var(--_pagination-link-color-background);
+        block-size: calc(var(--_pagination-link-font-size) + var(--_pagination-link-padding-block) * 2);
+        border-radius: var(--radius-2);
+        color: var(--_pagination-link-color-text);
+        display: grid;
+        font-size: var(--_pagination-link-font-size);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--leading-none);
+        padding-block: var(--_pagination-link-padding-block);
+        padding-inline: calc(var(--_pagination-link-padding-block) * 0.5);
+        place-items: center;
+    }
+
+    &__link {
+        text-decoration: none;
+        transition:
+            background-color var(--duration-fast) var(--ease-out),
+            color var(--duration-fast) var(--ease-out);
+
+        @include mq.hover() {
+            background: var(--_pagination-link-color-background-hover);
+            color: var(--_pagination-link-color-text-hover);
+        }
+    }
+
+    &__current {
+        --_pagination-link-color-background: var(--_pagination-link-color-background-current);
+        --_pagination-link-color-text: var(--_pagination-link-color-text-current);
+    }
+
+    &__skip {
+        --_pagination-link-color-background: var(--_pagination-link-color-background-skip);
+        --_pagination-link-color-text: var(--_pagination-link-color-text-skip);
+    }
+}

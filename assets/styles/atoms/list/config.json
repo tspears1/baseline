@@ -1,0 +1,6 @@
+{
+    "list" : {
+        "path": "assets/styles/abstracts/mixins/_list.scss",
+        "type": "mixin"
+    }
+}

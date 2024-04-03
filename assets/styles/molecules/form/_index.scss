@@ -1,0 +1,153 @@
+@use '@styles/abstracts/mixins/container-queries' as cq;
+
+.form {
+    --_form-grid-columns:                                   var(--form-grid-columns, 6);
+    --_form-grid-gap:                                       var(--form-grid-gap, var(--size-2));
+    --_form-field-columns-xs:                               var(--form-field-columns-xs, 1);
+    --_form-field-columns-sm:                               var(--form-field-columns-sm, 2);
+    --_form-field-columns-md:                               var(--form-field-columns-md, 3);
+    --_form-field-columns-lg:                               var(--form-field-columns-lg, 4);
+    --_form-field-columns-xl:                               var(--form-field-columns-xl, 5);
+    --_form-field-columns-xxl:                              var(--form-field-columns-xxl, var(--_form-grid-columns));
+    --_form-field-columns:                                  var(--form-field-columns, var(--_form-field-columns-xxl));
+    --_form-field-flex-xs:                                  var(--form-field-flex-xs, 8%);
+    --_form-field-flex-sm:                                  var(--form-field-flex-sm, 18%);
+    --_form-field-flex-md:                                  var(--form-field-flex-md, 48%);
+    --_form-field-flex-lg:                                  var(--form-field-flex-lg, 64%);
+    --_form-field-flex-xl:                                  var(--form-field-flex-xl, 80%);
+    --_form-field-flex-xxl:                                 var(--form-field-flex-xxl, 100%);
+    --_form-field-flex:                                     var(--form-field-flex, auto);
+    --_form-field-flex-grow:                                var(--form-field-flex-grow, 1);
+    --_form-field-flex-shrink:                              var(--form-field-flex-shrink, 1);
+    --_form-field-content-align:                            var(--form-field-content-align, start);
+    --_form-field-items-justify:                            var(--form-field-items-justify, start);
+
+    container-name: form;
+    container-type: inline-size;
+    inline-size: 100%;
+
+    &__legend {
+        margin-block-end: var(--size-fluid-2);
+    }
+
+    &__title {
+        color: var(--theme-color-heading, var(--color-neutral-900));
+        margin: 0;
+    }
+
+    &__grid {
+        display: grid;
+        gap: var(--_form-grid-gap);
+        grid-template-columns: repeat(var(--_form-grid-columns), 1fr);
+    }
+
+    &__flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_form-grid-gap);
+    }
+
+    &__field {
+        --input-inline-size: 100%;
+        align-content: var(--_form-field-content-align);
+        display: grid;
+        flex: var(--_form-field-flex-grow) var(--_form-field-flex-shrink) var(--_form-field-flex);
+        grid-column: auto / span var(--_form-field-columns);
+        justify-items: var(--_form-field-items-justify);
+    }
+
+    &__field--block-end {
+        --_form-field-content-align: end;
+    }
+
+    &__field--inline-end {
+        --_form-field-items-justify: end;
+    }
+
+    &__field--xs {
+
+        @include cq.container(32rem, form) {
+            --_form-field-columns: var(--_form-field-columns-md);
+            --_form-field-flex: var(--_form-field-flex-md);
+        }
+
+        @include cq.container(51rem, form) {
+            --_form-field-columns: var(--_form-field-columns-sm);
+            --_form-field-flex: var(--_form-field-flex-sm);
+        }
+
+        @include cq.container(70rem, form) {
+            --_form-field-columns: var(--_form-field-columns-xs);
+            --_form-field-flex: var(--_form-field-flex-xs);
+        }
+    }
+
+    &__field--sm {
+
+        @include cq.container(32rem, form) {
+            --_form-field-columns: var(--_form-field-columns-md);
+            --_form-field-flex: var(--_form-field-flex-md);
+        }
+
+        @include cq.container(51rem, form) {
+            --_form-field-columns: var(--_form-field-columns-sm);
+            --_form-field-flex: var(--_form-field-flex-sm);
+        }
+    }
+
+    &__field--md {
+
+        @include cq.container(32rem, form) {
+            --_form-field-columns: var(--_form-field-columns-md);
+            --_form-field-flex: var(--_form-field-flex-md);
+        }
+    }
+
+    &__field--lg {
+
+        @include cq.container(32rem, form) {
+            --_form-field-columns: var(--_form-field-columns-md);
+            --_form-field-flex: var(--_form-field-flex-md);
+        }
+
+        @include cq.container(51rem, form) {
+            --_form-field-columns: var(--_form-field-columns-lg);
+            --_form-field-flex: var(--_form-field-flex-lg);
+        }
+    }
+
+    &__field--xl {
+
+        @include cq.container(32rem, form) {
+            --_form-field-columns: var(--_form-field-columns-md);
+            --_form-field-flex: var(--_form-field-flex-md);
+        }
+
+        @include cq.container(51rem, form) {
+            --_form-field-columns: var(--_form-field-columns-lg);
+            --_form-field-flex: var(--_form-field-flex-lg);
+        }
+
+        @include cq.container(70rem, form) {
+            --_form-field-columns: var(--_form-field-columns-xl);
+            --_form-field-flex: var(--_form-field-flex-xl);
+        }
+    }
+
+    &__field--xxl {
+        --_form-field-columns: var(--_form-field-columns-xxl);
+        --_form-field-flex: var(--_form-field-flex-xxl);
+    }
+
+    &__label {
+        font-size: var(--size-1);
+        font-weight: var(--font-weight-regular);
+    }
+
+    &__hint {
+        color: var(--theme-color-text, var(--color-neutral-500));
+        font-size: var(--paragraph-size-sm);
+        line-height: var(--leading-tight);
+        margin-block-start: var(--size-0);
+    }
+}

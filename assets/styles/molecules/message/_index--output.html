@@ -1,0 +1,27 @@
+<!-- =============================================================================
+    The <output> element is a good choice for announcement messaging because it is
+    announced to screen readers. It can be more inclusive by adding role="status".
+    This provides afallback if the browser doesn't give <output> elements the
+    implicit role per the spec.
+============================================================================== -->
+<div class="actions">
+    <output role="status" class="message" message-theme="light">
+        <div class="message__grid">
+            <div class="message__content">
+                <div class="message__text">
+                    Message content neque tincidunt, rhoncus sapien ac, volutpat enim.
+                </div>
+            </div>
+        </div>
+    </output>
+
+    <output role="status" class="message" message-theme="dark">
+        <div class="message__grid">
+            <div class="message__content">
+                <div class="message__text">
+                    Message content neque tincidunt, rhoncus sapien ac, volutpat enim.
+                </div>
+            </div>
+        </div>
+    </output>
+</div>

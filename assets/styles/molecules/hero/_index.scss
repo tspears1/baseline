@@ -1,0 +1,87 @@
+@use '@styles/abstracts/functions/fluid' as fluid;
+@use '@styles/abstracts/mixins/container-queries' as cq;
+
+.hero {
+    $b: &;
+
+    --_hero-content-align:                               var(--hero-content-align, start);
+    --_hero-content-padding:                             var(--hero-content-padding, #{fluid.fluid(3rem, 4rem)} 0);
+    --_hero-media-padding:                               var(--hero-media-padding, 0);
+    --_hero-padding-x:                                   var(--hero-padding-x, 0);
+    --_hero-padding-y:                                   var(--hero-padding-y, 0);
+
+    --split-columns: 6fr 4fr;
+    --split-gap: 0;
+
+    @include cq.container(md) {
+        --split-gap: var(--size-fluid-3);
+    }
+
+    background: var(--theme-color-background, transparent);
+    display: grid;
+    inline-size: 100%;
+    padding: var(--_hero-padding-y) var(--_hero-padding-x);
+
+    &--center {
+        --_hero-content-align: center;
+    }
+
+    &--end {
+        --_hero-content-align: end;
+    }
+
+    &__content {
+        --split-area-align: var(--_hero-content-align);
+        align-content: start;
+        background: var(--hero-content-color-background);
+        container-type: inline-size;
+        display: grid;
+        gap: var(--size-fluid-1);
+        justify-content: var(--split-area-align, var(--_hero-content-align));
+        justify-items: var(--split-area-align, var(--_hero-content-align));
+        padding: var(--_hero-content-padding);
+    }
+
+    &__title {
+        color: var(--theme-color-heading, var(--color-neutral-900));
+        font-size: fluid.c-fluid(1.5rem, 3rem, 'xs', 'xl');
+        font-weight: var(--font-weight-bold);
+        line-height: var(--leading-tight);
+        margin: 0;
+        max-inline-size: var(--size-header-3);
+        text-align: var(--split-area-align, var(--_hero-content-align));
+    }
+
+    &__text {
+        --text-color: var(--theme-color-text, var(--color-neutral-700));
+        text-align: var(--split-area-align, var(--_hero-content-align));
+    }
+
+    &__media {
+        --hero-media-color-background: var(--theme-color-text, var(--color-neutral-0));
+        --media-border-radius: 0;
+        --split-area-margin-outer: calc(-1 * var(--content-offset));
+        background: var(--hero-media-color-background);
+        padding: var(--_hero-media-padding);
+
+        @include cq.container(md) {
+            &:where(:not(.hero__media--wide)) {
+                --split-area-margin-outer: 0;
+            }
+        }
+
+        &:where(:not(.media--block)) {
+            --media-aspect-ratio: var(--ratio-photo);
+            padding: 0;
+            position: relative;
+
+            @include cq.container(md) {
+                --media-aspect-ratio: auto;
+            }
+        }
+    }
+
+    &__actions {
+        --actions-justify: var(--_hero-content-align);
+    }
+}

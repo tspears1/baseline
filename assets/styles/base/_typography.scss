@@ -1,0 +1,46 @@
+@use '../abstracts/' as *;
+
+:where(h1, .h1) {
+    @include heading-1();
+    margin-block-end: fluid(1rem, 2rem); // 16px - 32px
+}
+
+:where(h2, .h2) {
+    @include heading-2();
+    margin-block-end: var(--size-fluid-2);
+}
+
+:where(h3, .h3) {
+    @include heading-3();
+    margin-block-end: var(--size-1);
+}
+
+:where(h4, .h4) {
+    @include heading-4();
+    margin-block-end: var(--size-1);
+}
+
+:where(h5, .h5) {
+    @include heading-5();
+    margin-block-end: var(--size-1);
+}
+
+:where(p) {
+    @include paragraph-md();
+
+    &.text-intro {
+        @include paragraph-lg();
+    }
+
+    &.text-small {
+        @include paragram-sm();
+    }
+
+    &.text-tight {
+        @include paragraph-tight();
+    }
+
+    + * {
+        margin-block-start: var(--size-3);
+    }
+}

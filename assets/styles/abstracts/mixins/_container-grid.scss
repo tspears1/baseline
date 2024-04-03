@@ -1,0 +1,151 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../config/breakpoints' as _;
+@use '../mixins/breakpoints' as bp;
+@use '../mixins/container-queries' as cq;
+@use '../functions/lists' as list;
+
+$-cq-columns: 12 !default;
+$-cq-row-gap: 1.5rem !default;
+
+$last-cq-bp: list.last(map-keys(_.$breakpoints));
+
+// Grid Variables used in all Grid Container types.
+@mixin cq-grid-variables($columns, $row-gap, $gutters: true ) {
+    @include bp.generate-active-container-variables(_.$breakpoints);
+
+    --grid-columns: #{$columns};
+    --grid-column-gap: var(--column-gap, 0px);
+    --grid-row-gap: var(--row-gap, #{$row-gap});
+
+    @if $gutters {
+        --grid-gutter-width: var(--container-gap);
+        --grid-column-width: calc( ( 100cqi - 2 * var(--grid-gutter-width) - #{$columns - 1} * var(--grid-column-gap) ) / #{$columns} );
+
+        @include cq.container($last-cq-bp) {
+            --grid-gutter-width: calc( ( 100cqi - var(--grid-max-width-main) ) / 2 );
+        }
+    } @else {
+        --grid-column-width: calc( ( 100cqi - #{$columns - 1} * var(--grid-column-gap) ) / #{$columns} );
+    }
+
+    --grid-max-width-main: calc(var(--container-max-width) - var(--grid-gutter-width, 0px) * 2);
+    --grid-max-width-column: calc((var(--grid-max-width-main) - #{$columns - 1} * var(--grid-column-gap)) / #{$columns});
+
+    @include cq.container($last-cq-bp) {
+        --grid-max-width-main: calc(var(--container-min-width) - 2 * var(--container-gap));
+    }
+}
+
+// Container Grid.
+// Main container has a max-width to match current breakpoint. Has gutters.
+@mixin cq-container-grid( $columns: $-cq-columns, $row-gap: $-cq-row-gap ) {
+    @include cq-grid-variables($columns, $row-gap);
+    column-gap: var(--grid-column-gap);
+    display: grid;
+    row-gap: var(--grid-row-gap);
+
+    @if $columns % 2 == 0 {
+        grid-template-columns:
+            [wide-start]
+            var(--grid-gutter-width)
+            [main-start]
+            repeat(#{math.div($columns, 2)}, minmax(0, var(--grid-max-width-column)))
+            [center]
+            repeat(#{math.div($columns, 2)}, minmax(0, var(--grid-max-width-column)))
+            [main-end]
+            var(--grid-gutter-width)
+            [wide-end];
+    } @else if $columns > 1 {
+        grid-template-columns:
+            [wide-start]
+            var(--grid-gutter-width)
+            [main-start]
+            repeat(#{$columns}, minmax(0, var(--grid-max-width-column)))
+            [main-end]
+            var(--grid-gutter-width)
+            [wide-end];
+    } @else {
+        grid-template-columns:
+            [wide-start]
+            var(--grid-gutter-width)
+            [main-start]
+            minmax(0, var(--grid-max-width-column))
+            [main-end]
+            var(--grid-gutter-width)
+            [wide-end];
+    }
+}
+
+// Fluid Container Grid.
+// Main container is always 100cqi - gutters. Has gutters.
+@mixin cq-fluid-container-grid($columns: $-cq-columns, $row-gap: $-cq-row-gap) {
+    @include cq-grid-variables($columns, $row-gap);
+    column-gap: var(--grid-column-gap);
+    display: grid;
+    row-gap: var(--grid-row-gap);
+
+    @include cq.container($last-cq-bp) {
+        --grid-gutter-width: var(--container-gap);
+    }
+
+    @if $columns % 2 == 0 {
+        grid-template-columns:
+            [wide-start]
+            var(--gutter-width, var(--container-gap))
+            [main-start]
+            repeat(#{math.div($columns, 2)}, 1fr)
+            [center]
+            repeat(#{math.div($columns, 2)}, 1fr)
+            [main-end]
+            var(--gutter-width, var(--container-gap))
+            [wide-end];
+    } @else if $columns > 1 {
+        grid-template-columns:
+            [wide-start]
+            var(--gutter-width, var(--container-gap))
+            [main-start]
+            repeat(#{$columns}, 1fr)
+            [main-end]
+            var(--gutter-width, var(--container-gap))
+            [wide-end];
+    } @else {
+        grid-template-columns:
+            [wide-start]
+            var(--gutter-width, var(--container-gap))
+            [main-start]
+            1fr
+            [main-end]
+            var(--gutter-width, var(--container-gap))
+            [wide-end];
+    }
+}
+
+// Inner Grid.
+// Main container has a max-width to match current breakpoint. No gutters. Used for nested grids.
+@mixin cq-inner-grid($columns: $-cq-columns, $row-gap: $-cq-row-gap) {
+    @include cq-grid-variables($columns, $row-gap, false);
+    column-gap: var(--grid-column-gap);
+    display: grid;
+    row-gap: var(--grid-row-gap);
+
+    @if $columns % 2 == 0 {
+        grid-template-columns:
+            [main-start]
+            repeat(#{math.div($columns, 2)}, minmax(0, var(--grid-max-width-column)))
+            [center]
+            repeat(#{math.div($columns, 2)}, minmax(0, var(--grid-max-width-column)))
+            [main-end]
+    } @else if $columns > 1 {
+        grid-template-columns:
+            [main-start]
+            repeat(#{$columns}, minmax(0, var(--grid-max-width-column)))
+            [main-end]
+    } @else {
+        grid-template-columns:
+            [main-start]
+            minmax(0, var(--grid-max-width-column))
+            [main-end]
+    }
+
+}

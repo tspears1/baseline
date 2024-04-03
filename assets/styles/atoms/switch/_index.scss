@@ -1,0 +1,5 @@
+@use '@styles/abstracts/mixins/switch' as switch;
+
+.switch {
+    @include switch.switch();
+}

@@ -1,0 +1,104 @@
+<nav class="mobileNavigation">
+    <button
+        type="button"
+        class="mobileNavigation__menuButton hamburger hamburger--collapse"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-button="mobile-menu"
+        data-open-with-transition="true"
+        data-active-class="is-active"
+        id="mobile-menu-button"
+    >
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+        <span class="sr-only">
+            Mobile Menu
+        </span>
+    </button>
+    <ul
+        class="mobileNavigation__list"
+        data-arrow-navigation
+        data-menu="mobile-menu"
+        aria-hidden="true"
+        aria-labelledby="mobile-menu-button"
+        data-active-class="mobileNavigation__list--active"
+        id="mobile-menu"
+        inert
+    >
+        <h2 class="mobileNavigation__heading">
+            <span class="mobileNavigation__headingText">
+                Menu
+            </span>
+        </h2>
+        <li class="mobileNavigation__item">
+            <button
+                type="button"
+                class="mobileNavigation__trigger"
+                aria-expanded="false"
+                aria-controls="submenu"
+                data-menu-button="submenu"
+                data-open-with-transition="true"
+                data-active-class="mobileNavigation__trigger--active"
+                id="submenu-button"
+            >
+                Navigation Item
+                <span class="mobileNavigation__triggerIconWrapper">
+                    <svg class="mobileNavigation__triggerIcon icon icon--chevron-right" aria-hidden="true" role="presentation">
+                        <use href="#icon-chevron-right" />
+                    </svg>
+                </span>
+            </button>
+            <ul
+                class="mobileNavigation__list"
+                data-arrow-navigation
+                data-menu="submenu"
+                aria-hidden="true"
+                aria-labelledby="submenu-button"
+                data-active-class="mobileNavigation__list--active"
+                id="submenu"
+                inert
+            >
+                <h2 class="mobileNavigation__heading">
+                    <button type="button" class="mobileNavigation__back" data-menu-back="submenu">
+                        <span class="sr-only">Back to Parent Menu</span>
+                        <span class="mobileNavigation__triggerIconWrapper">
+                            <svg class="mobileNavigation__triggerIcon icon icon--chevron-right" aria-hidden="true" role="presentation">
+                                <use href="#icon-chevron-left" />
+                            </svg>
+                        </span>
+                    </button>
+                    <span class="mobileNavigation__headingText">
+                        Submenu
+                    </span>
+                </h2>
+                <li class="mobileNavigation__item">
+                </li>
+                <li class="mobileNavigation__item">
+                    <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                </li>
+                <li class="mobileNavigation__item">
+                    <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                </li>
+                <li class="mobileNavigation__item">
+                    <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                </li>
+                <li class="mobileNavigation__item">
+                    <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                </li>
+            </ul>
+        </li>
+        <li class="mobileNavigation__item">
+            <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+        </li>
+        <li class="mobileNavigation__item">
+            <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+        </li>
+        <li class="mobileNavigation__item">
+            <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+        </li>
+        <li class="mobileNavigation__item">
+            <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+        </li>
+    </ul>
+</nav>

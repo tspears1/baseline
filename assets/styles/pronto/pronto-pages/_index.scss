@@ -1,0 +1,132 @@
+.prontoPages {
+    $b: &;
+
+    container: pages / inline-size;
+
+    &__wrapper {
+        --split-columns: 18.75rem 1fr;
+        --split-gap: 0;
+        --tab-button-border-color-hover: var(--color-pronto-medium);
+        --tab-button-border-color-selected: var(--color-pronto-medium);
+        --tab-button-font-color-hover: var(--color-pronto-lightest);
+        --tab-button-font-color-selected: var(--color-neutral-0);
+        --tab-button-font-color: var(--color-pronto-light);
+        --tab-button-font-size: var(--size-fluid-2);
+        --tab-button-padding: 0 1.5rem 0.25rem 0;
+        --tab-list-border: var(--border-size-2) solid var(--color-pronto-light);
+        --tab-list-gap: var(--size-fluid-3);
+        --tab-panel-padding: 0;
+        transition: grid-template-columns var(--duration-fast) var(--ease-out-expo);
+
+        &:has(#hide-tabs:checked) {
+            --split-columns: 0fr 1fr;
+
+            #{$b}__tabs {
+                display: none;
+            }
+
+            #{$b}__sidebar {
+                padding-inline: var(--size-1);
+            }
+        }
+    }
+
+    &__sidebar {
+        align-items: start;
+        background: var(--color-pronto-darkest);
+        display: grid;
+        padding: var(--size-fluid-2) var(--size-fluid-4);
+        justify-items: end;
+    }
+
+    &__switch {
+        --switch-track-color-active: var(--color-pronto-medium);
+        --switch-flex-direction: row-reverse;
+        --switch-label-color: var(--color-pronto-lightest);
+        --switch-thumb-size: 0.75rem;
+
+        font-size: 0.75em;
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: var(--tracking-wider);
+
+        tooltip {
+            --tooltip-font-size: 0.875rem;
+        }
+    }
+
+    &__switchIcon {
+        --icon-aspect-ratio: 1;
+        block-size: 0.75em;
+    }
+
+    &__panels {
+        background: var(--color-pronto-black);
+    }
+
+    &__preview {
+        --code-preview-background-color: var(--color-neutral-50);
+        --code-preview-inline-size: 100cqi;
+        --code-preview-padding-block: 0px;
+        --code-preview-padding-inline: 0px;
+        --code-preview-trigger-background-color: var(--color-pronto-light);
+
+        //Reset Tab defaults
+        --tab-button-border-color-hover:                var(--color-action-600);
+        --tab-button-border-color-selected:             var(--color-action-700);
+        --tab-button-font-color-hover:                  var(--color-neutral-900);
+        --tab-button-font-color-selected:               var(--color-neutral-900);
+        --tab-button-font-color:                        var(--color-neutral-500);
+        --tab-button-font-size:                         var(--size-2);
+        --tab-button-padding:                           0 0 0.25rem 0;
+        --tab-list-border:                              2px solid var(--color-neutral-300);
+        --tab-list-gap:                                 var(--size-5);
+        --tab-panel-padding:                            var(--size-1);
+
+        //Reset Split defaults
+        --split-columns: repeat(2, 1fr);
+        --split-gap: var(--size-fluid-2);
+
+        container-type: inline-size;
+        display: grid;
+        justify-items: center;
+        inline-size:100%;
+    }
+
+    &__previewWindow {
+        padding: var(--code-preview-padding-inline);
+        container: content / inline-size;
+        inline-size: 100%;
+        block-size: calc(100vh - 6rem);
+        min-block-size: 15rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        z-index: 999;
+    }
+
+    &__docs {
+        background: var(--color-pronto-white);
+
+        :where(h1, h2, h3, h4, h5, h6) {
+            color: var(--color-pronto-darkish);
+            font-family: var(--font-mono);
+        }
+
+        .richText {
+
+            :where(li) {
+                display: block;
+
+                &::before {
+                    inset-inline-start: calc(-1 * (var(--_list-icon-offset) + var(--_list-marker-inline-size)));
+                    position: absolute;
+                }
+            }
+        }
+
+        :where(article + article) {
+            border-block-start: var(--border-size-2) solid var(--color-pronto-light);
+            padding-block-start: var(--size-5);
+        }
+    }
+}

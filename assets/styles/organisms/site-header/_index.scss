@@ -1,0 +1,86 @@
+@use '@styles/abstracts/mixins/container-queries' as cq;
+@use '@styles/abstracts/mixins/grid' as grid;
+
+.siteHeader {
+    --_site-header-padding-y: var(--site-header-padding-y, var(--size-1));
+    --_site-header-background-color: var(--site-header-background-color, var(--color-neutral-0));
+
+    @include grid.container-grid;
+
+    position: relative;
+    padding: var(--_site-header-padding-y) 0;
+    background-color: var(--_site-header-background-color);
+
+    &__secondaryNav {
+        display: none;
+    }
+
+    &__home {
+        grid-column: main-start / 4;
+    }
+
+    &__logo {
+        max-height: 8.375rem;
+    }
+
+    &__navigation {
+        display: none;
+        grid-column: 13 / main-end;
+        align-self: center;
+        justify-self: end;
+    }
+
+    &__mobileNavigation {
+        grid-column: 13 / main-end;
+        align-self: center;
+        justify-self: end;
+    }
+
+    @include cq.container('lg') {
+        --column-gap: 2rem;
+        --row-gap: 0;
+        --site-header-padding-y: var(--size-3);
+
+        padding: var(--_site-header-padding-y) 0;
+
+        &__mobileNavigation {
+            display: none;
+        }
+
+        &__secondaryNav {
+            display: block;
+        }
+
+        &__home {
+            display: flex;
+            align-items: center;
+            grid-column: main-start / 5;
+            grid-row: 1 / 3;
+        }
+
+        &__navigation {
+            display: block;
+            justify-self: auto;
+            grid-column: 5 / main-end;
+            grid-row: 2 / 3;
+            height: min-content;
+        }
+
+        &__secondaryNav {
+            grid-column: 6 / main-end;
+            grid-row: 1 / 2;
+            height: min-content;
+            margin-bottom: 1rem;
+        }
+    }
+
+    @include cq.container('xl') {
+        &__navigation {
+            grid-column: 6 / main-end;
+        }
+
+        &__secondaryNav {
+            grid-column: 8 / main-end;
+        }
+    }
+}

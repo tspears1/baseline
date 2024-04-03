@@ -1,0 +1,37 @@
+@use '@styles/abstracts/mixins/button' as button;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.sliderButton {
+    --_slider-button-background-color:    var(--slider-button-background-color, var(--color-action-600));
+    --_slider-button-background-color-hover: var(--slider-button-background-color-hover, var(--color-action-700));
+    --_slider-button-block-size:          var(--slider-button-block-size, var(--size-5));
+    --_slider-button-border-radius:       var(--slider-button-border-radius, var(--radius-round));
+    --_slider-button-icon-block-size:        var(--slider-button-icon-block-size, 1.125rem);
+    --_slider-button-icon-inline-size:         var(--slider-button-icon-inline-size, 0.75rem);
+
+    @include button.button-reset();
+
+    position: relative;
+    z-index: 2;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 1;
+    background-color: var(--_slider-button-background-color);
+    block-size: var(--_slider-button-block-size);
+    border-radius: var(--_slider-button-border-radius);
+    transition: background var(--duration-fast) var(--ease-out);
+
+    @include mq.hover() {
+        --_slider-button-background-color: var(--_slider-button-background-color-hover);
+    }
+
+    &__icon {
+        block-size: var(--_slider-button-icon-block-size);
+        inline-size: var(--_slider-button-icon-inline-size);
+    }
+}

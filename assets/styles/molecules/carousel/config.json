@@ -1,0 +1,6 @@
+{
+    "carousel" : {
+        "path": "assets/js/modules/carousel.js",
+        "type": "module"
+    }
+}

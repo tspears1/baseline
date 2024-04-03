@@ -1,0 +1,55 @@
+@use '@styles/abstracts/mixins/button' as button;
+
+.searchInput {
+    --_search-input-submit-block-size: var(--search-input-submit-block-size, 1.25rem);
+    --_search-input-padding-block: var(--search-input-padding, var(--size-0));
+    --_search-input-padding-inline-start: var(--search-input-padding-inline-start, 2.625rem);
+    --_search-input-padding-inline-end: var(--search-input-padding, var(--size-1));
+    --_search-input-border-radius: var(--search-input-border-radius, var(--radius-round));
+    --_search-input-border: var(--search-input-border, 2px solid var(--color-neutral-300));
+    --_search-input-background-color: var(--search-input-background-color, #fff);
+    --_search-input-submit-color: var(--search-input-submit-color, var(--color-neutral-400));
+    --_search-input-color: var(--search-input-color, var(--color-text));
+    --_search-input-placeholder-color: var(--search-input-color, var(--color-neutral-500));
+    --_search-input-grid-column: var(--search-input-grid-column, 1 / 3);
+    --_search-input-grid-row: var(--search-input-grid-row, 1 / span 1);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &:has(label:where(:not(.sr-only))) {
+        --search-input-grid-row: 2 / span 1;
+    }
+
+    label {
+        grid-column: 1 / -1;
+        grid-row: span 1;
+    }
+
+    &__submit {
+        @include button.button-reset;
+
+        align-self: center;
+        aspect-ratio: 1;
+        block-size: var(--_search-input-submit-block-size);
+        color: var(--_search-input-submit-color);
+        display: block;
+        grid-column: 1 / 2;
+        grid-row: var(--_search-input-grid-row);
+        margin-inline-start: var(--_search-input-padding-inline-end);
+    }
+
+    &__input {
+        background-color: var(--_search-input-background-color);
+        border-radius: var(--_search-input-border-radius);
+        border: var(--_search-input-border);
+        color: var(--_search-input-color);
+        grid-column: 1 / 3;
+        grid-row: var(--_search-input-grid-row);
+        padding: var(--_search-input-padding-block) var(--_search-input-padding-inline-end) var(--_search-input-padding-block) var(--_search-input-padding-inline-start);
+    }
+
+    &__input::placeholder {
+        color: var(--_search-input-placeholder-color);
+    }
+}

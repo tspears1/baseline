@@ -1,0 +1,90 @@
+@use '@styles/abstracts/mixins/links' as links;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.breadcrumbs {
+    $b: &;
+
+    --_breadcrumbs-color-link:                          var(--breadcrumbs-color-link, var(--theme-color-action, var(--color-link-500)));
+    --_breadcrumbs-color-link-hover:                    var(--breadcrumbs-color-link-hover, var(--theme-color-action-hover, var(--color-link-700)));
+    --_breadcrumbs-color-icon:                          var(--breadcrumbs-color-icon, var(--_breadcrumbs-color-link));
+    --_breadcrumbs-color-icon-hover:                    var(--breadcrumbs-color-icon-hover, var(--_breadcrumbs-color-link-hover));
+    --_breadcrumbs-color-divider:                       var(--breadcrumbs-color-divider, var(--_breadcrumbs-color-icon, var(--_breadcrumbs-color-text)));
+    --_breadcrumbs-color-text:                          var(--breadcrumbs-color-text, var(--theme-color-text, var(--color-neutral-500)));
+    --_breadcrumbs-divider:                             var(--breadcrumbs-divider, none);
+    --_breadcrumbs-divider-size:                        var(--breadcrumbs-divider-size, 0.8em);
+    --_breadcrumbs-gap:                                 var(--breadcrumbs-gap, 1.25em);
+    --_breadcrumbs-icon-size:                           var(--breadcrumbs-icon-size, 1em);
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 0.75rem;
+        gap: calc(var(--_breadcrumbs-gap) / 2);
+    }
+
+    &__item {
+        align-items: center;
+        display: flex;
+        gap: calc(var(--_breadcrumbs-gap) / 2);
+        position: relative;
+
+        @include mq.hover() {
+            #{$b}__icon {
+                color: var(--_breadcrumbs-color-icon-hover);
+            }
+        }
+
+        &:where(:last-child) {
+            pointer-events: none;
+
+            #{$b}__icon {
+                color: var(--_breadcrumbs-color-text);
+            }
+        }
+
+        > * {
+            flex: 0 0 auto;
+        }
+    }
+
+    &__link {
+        --link-color: var(--_breadcrumbs-color-link);
+        --link-color-hover: var(--_breadcrumbs-color-link-hover);
+
+        @include links.pseudo-link();
+    }
+
+    &__text {
+        color: var(--_breadcrumbs-color-text);
+    }
+
+    &__icon {
+        color: var(--_breadcrumbs-color-icon);
+        display: grid;
+        grid: [stack] var(--_breadcrumbs-icon-size) / [stack] var(--_breadcrumbs-icon-size);
+        place-items: center;
+        transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    &__item::before,
+    &__divider {
+        display: grid;
+        grid: [stack] var(--_breadcrumbs-divider-size) / [stack] var(--_breadcrumbs-divider-size);
+        opacity: var(--breadcrumbs-divider-alpha, 0.8);
+        place-items: center;
+        position: relative;
+        z-index: 1; // makes divider unclickable.
+    }
+
+    // Pseudo Element Divider
+    &__item:where(:not(:first-child))::before {
+        color: var(--_breadcrumbs-color-divider);
+        content: var(--_breadcrumbs-divider);
+        grid-template-columns: [stack] max-content;
+    }
+
+    // Icon Divider (default)
+    &__divider {
+        --icon-fill-color: var(--_breadcrumbs-color-divider);
+    }
+}

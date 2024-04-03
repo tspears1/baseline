@@ -1,0 +1,65 @@
+.theme--light {
+    --theme-color-background:                                 var(--color-neutral-0);
+    --theme-color-background-hsl:                             var(--color-neutral-0-hsl);
+    --theme-color-heading:                                    var(--color-neutral-900);
+    --theme-color-text:                                       var(--color-neutral-500);
+    --theme-color-text-hsl:                                   var(--color-neutral-500-hsl);
+    --theme-color-action:                                     var(--color-link-500);
+    --theme-color-action-hover:                               var(--color-link-700);
+    --theme-color-accent:                                     var(--color-primary-500);
+    --theme-color-highlight:                                  var(--color-primary-100);
+
+    --theme-color-background-neutral:                         var(--color-neutral-0);
+    --theme-color-background-neutral-hsl:                     var(--color-neutral-0-hsl);
+    --theme-color-text-neutral:                               var(--color-neutral-1000);
+    --theme-color-text-neutral-hsl:                           var(--color-neutral-1000-hsl);
+}
+
+.theme--dark {
+    --theme-color-background:                                 var(--color-neutral-1000);
+    --theme-color-background-hsl:                             var(--color-neutral-1000-hsl);
+    --theme-color-heading:                                    var(--color-neutral-50);
+    --theme-color-text:                                       var(--color-neutral-200);
+    --theme-color-text-hsl:                                   var(--color-neutral-200-hsl);
+    --theme-color-action:                                     var(--color-link-500);
+    --theme-color-action-hover:                               var(--color-link-700);
+    --theme-color-accent:                                     var(--color-primary-300);
+    --theme-color-highlight:                                  var(--color-primary-800);
+
+    --theme-color-background-neutral:                         var(--color-neutral-1000);
+    --theme-color-background-neutral-hsl:                     var(--color-neutral-1000-hsl);
+    --theme-color-text-neutral:                               var(--color-neutral-0);
+    --theme-color-text-neutral-hsl:                           var(--color-neutral-0-hsl);
+}
+
+.theme--primary-light {
+    --theme-color-background:                                 var(--color-primary-100);
+    --theme-color-background-hsl:                             var(--color-primary-100-hsl);
+    --theme-color-heading:                                    var(--color-primary-900);
+    --theme-color-text:                                       var(--color-primary-700);
+    --theme-color-text-hsl:                                   var(--color-primary-700-hsl);
+    --theme-color-action:                                     var(--color-link-500);
+    --theme-color-action-hover:                               var(--color-link-700);
+    --theme-color-highlight:                                  var(--color-primary-200);
+
+    --theme-color-background-neutral:                         var(--color-neutral-0);
+    --theme-color-background-neutral-hsl:                     var(--color-neutral-0-hsl);
+    --theme-color-text-neutral:                               var(--color-neutral-1000);
+    --theme-color-text-neutral-hsl:                           var(--color-neutral-1000-hsl);
+}
+
+.theme--primary-dark {
+    --theme-color-background:                                 var(--color-primary-800);
+    --theme-color-background-hsl:                             var(--color-primary-800-hsl);
+    --theme-color-heading:                                    var(--color-primary-50);
+    --theme-color-text:                                       var(--color-primary-100);
+    --theme-color-text-hsl:                                   var(--color-primary-100-hsl);
+    --theme-color-action:                                     var(--color-link-500);
+    --theme-color-action-hover:                               var(--color-link-700);
+    --theme-color-highlight:                                  var(--color-primary-700);
+
+    --theme-color-background-neutral:                         var(--color-neutral-1000);
+    --theme-color-background-neutral-hsl:                     var(--color-neutral-1000-hsl);
+    --theme-color-text-neutral:                               var(--color-neutral-0);
+    --theme-color-text-neutral-hsl:                           var(--color-neutral-0-hsl);
+}

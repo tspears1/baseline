@@ -1,0 +1,13 @@
+// Generate CSS Variables for all Sass color variables
+@mixin generate-color-variables($colors) {
+    @each $color, $value in $colors {
+        --#{$color}: #{$value};
+    }
+}
+
+// Generate CSS Variables for all Sass color variables in raw HSL format - ex: 0deg 100% 50%
+@mixin generate-color-variables-hsl($colors) {
+    @each $color, $value in $colors {
+        --#{$color}-hsl: #{hue($value)} #{saturation($value)} #{lightness($value)};
+    }
+}

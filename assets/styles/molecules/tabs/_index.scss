@@ -1,0 +1,140 @@
+@use '@styles/abstracts/mixins/button' as btn;
+@use '@styles/abstracts/mixins/container-queries' as cq;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.tabs {
+    --_tab-button-border-color-hover:               var(--tab-button-border-color-hover, var(--color-action-600));
+    --_tab-button-border-color-selected:            var(--tab-button-border-color-selected, var(--color-action-700));
+    --_tab-button-border-color:                     var(--tab-button-border-color, transparent);
+    --_tab-button-border-size-selected:             var(--tab-button-border-size-selected, 0.5rem);
+    --_tab-button-border-size:                      var(--tab-button-border-size, 0.125rem);
+    --_tab-button-focus-outline:                    var(--tab-button-focus-outline , var(--focus-outline));
+    --_tab-button-font-color-hover:                 var(--tab-button-font-color-hover, var(--color-neutral-900));
+    --_tab-button-font-color-selected:              var(--tab-button-font-color-selected, var(--color-neutral-900));
+    --_tab-button-font-color:                       var(--tab-button-font-color, var(--color-neutral-500));
+    --_tab-button-font-size:                        var(--tab-button-font-size, var(--size-2));
+    --_tab-button-line-height:                      var(--tab-button-line-height, var(--leading-normal));
+    --_tab-button-padding:                          var(--tab-button-padding, 0 0 0.25rem 0);
+    --_tab-button-transition-duration:              var(--tab-button-transition-duration, var(--duration-fast));
+    --_tab-button-transition-easing:                var(--tab-button-transition-easing, var(--ease-out));
+    --_tab-list-border:                             var(--tab-list-border, 2px solid var(--color-neutral-300));
+    --_tab-list-gap:                                var(--tab-list-gap, var(--size-5));
+    --_tab-panel-padding:                           var(--tab-panel-padding, var(--size-1));
+
+    $b: &;
+
+    container: tabs / inline-size;
+    inline-size: 100%;
+
+    &[data-tabs-direction="vertical"] #{$b}__container {
+        @include cq.container('lg', tabs) {
+            --_tab-button-padding: 0.5rem 1rem 0.5rem 0;
+            --_tab-list-gap: var(--size-2);
+
+            display: flex;
+        }
+    }
+
+    &__tabList {
+        border-bottom: var(--_tab-list-border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_tab-list-gap);
+    }
+
+    &[data-tabs-direction="vertical"] #{$b}__tabList {
+        @include cq.container('lg', tabs) {
+            border-bottom: none;
+            border-right: var(--_tab-list-border);
+            flex-direction: column;
+        }
+    }
+
+    &__tabButton {
+        @include btn.button-reset();
+        color: var(--_tab-button-font-color);
+        cursor: pointer;
+        font-size: var(--_tab-button-font-size);
+        line-height: var(--_tab-button-line-height);
+        padding: var(--_tab-button-padding);
+        position: relative;
+        transition: color var(--_tab-button-transition-duration) var(--_tab-button-transition-easing);
+
+        @include mq.hover() {
+            color: var(--_tab-button-font-color-hover);
+
+            &::after {
+                background-color: var(--_tab-button-border-color-hover);
+            }
+        }
+
+        &:focus-visible {
+            outline-color: var(--_tab-button-focus-outline);
+        }
+    }
+
+    &[data-tabs-direction="vertical"] #{$b}__tabButton {
+        @include cq.container('lg', tabs) {
+            text-align: left;
+            margin-right: -0.125rem;
+        }
+    }
+
+    &__tabButton::after {
+        background-color: var(--_tab-button-border-color);
+        block-size: var(--_tab-button-border-size);
+        content: '';
+        display: block;
+        inline-size: 100%;
+        inset-block-end: 0;
+        inset-inline-end: 0;
+        position: absolute;
+        transition:
+            background-color var(--_tab-button-transition-duration) var(--_tab-button-transition-easing),
+            block-size var(--_tab-button-transition-duration) var(--_tab-button-transition-easing);
+    }
+
+    &[data-tabs-direction="vertical"] #{$b}__tabButton::after {
+        transition:
+            background-color var(--_tab-button-transition-duration) var(--_tab-button-transition-easing),
+            inline-size var(--_tab-button-transition-duration) var(--_tab-button-transition-easing);
+
+        @include cq.container('lg', tabs) {
+            block-size: 100%;
+            inline-size: var(--_tab-button-border-size);
+            inset-block-end: auto;
+            inset-block-start: 0;
+        }
+    }
+
+    &__tabButton[aria-selected="true"]{
+        color: var(--_tab-button-font-color-selected);
+    }
+
+    &[data-tabs-direction="vertical"] #{$b}__tabButton[aria-selected="true"] {
+        @include cq.container('lg', tabs) {
+            color: var(--_tab-button-font-color-selected);
+        }
+    }
+
+    &__tabButton[aria-selected="true"]::after {
+        background-color: var(--_tab-button-border-color-selected);
+        block-size: var(--_tab-button-border-size-selected);
+    }
+
+    &[data-tabs-direction="vertical"] #{$b}__tabButton[aria-selected="true"]::after {
+        @include cq.container('lg', tabs) {
+            background-color: var(--_tab-button-border-color-selected);
+            inline-size: var(--_tab-button-border-size-selected);
+        }
+    }
+
+    &__tabPanel {
+        display: none;
+        padding: var(--_tab-panel-padding);
+    }
+
+    &__tabPanel[data-active-tab="true"] {
+        display: block;
+    }
+}

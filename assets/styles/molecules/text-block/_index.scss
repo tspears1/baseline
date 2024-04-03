@@ -1,0 +1,66 @@
+/*
+ * Text Block
+ * The text-block is really a container component with three main sections: header, body, and footer.
+ * The three sections are wrapped in a group element, to allow greater control over alignment and spacing.
+ * Variables and overrides are written to allow either group or section level control over alignment and spacing.
+ * There is also an override for text-alignment if you want to justify the text differently than the group/section.
+ * The text-block is a common pattern used in callouts, cards, heros, and other components.
+ *
+ * @variable { unit } --textblock-grid-align=start - The align-items value for the grid.
+ * @variable { unit } --textblock-grid-gap=var(--size-fluid-1) - The gap value for the grid.
+ * @variable { unit } --textblock-grid-justify=start - The justify-items value for the grid.
+ * @variable { unit } --textblock-text-align=var(--textblock-grid-justify) - The text-align value for the grid.
+ */
+
+.textBlock {
+    --_textblock-grid-align:                var(--textblock-grid-align, start);
+    --_textblock-grid-gap:                  var(--textblock-grid-gap, var(--size-fluid-1));
+    --_textblock-grid-justify:              var(--textblock-grid-justify, start);
+    --_textblock-text-align:                var(--textblock-text-align, var(--_textblock-grid-justify));
+
+    align-items: var(--_textblock-grid-align);
+    display: grid;
+    gap: var(--_textblock-grid-gap);
+    justify-items: var(--_textblock-grid-justify);
+    text-align: var(--_textblock-text-align, var(--_textblock-grid-justify));
+
+    > * {
+        margin-block-end: 0;
+
+        > * {
+            margin-block-end: 0;
+        }
+    }
+
+    &__group {
+        align-items: var(--textblock-group-grid-align, var(--_textblock-grid-align));
+        display: grid;
+        gap: var(--textblock-group-grid-gap, var(--_textblock-grid-gap));
+        justify-items: var(--textblock-group-grid-justify, var(--_textblock-grid-justify));
+        text-align: var(--textblock-group-text-align, var(--textblock-group-grid-justify, var(--_textblock-text-align)));
+
+        &--header {
+            align-items: var(--textblock-header-grid-align, var(--textblock-group-grid-align, var(--_textblock-grid-align)));
+            display: grid;
+            gap: var(--textblock-header-grid-gap, var(--textblock-group-grid-gap, var(--_textblock-grid-gap)));
+            justify-items: var(--textblock-header-grid-justify, var(--textblock-group-grid-justify, var(--_textblock-grid-justify)));
+            text-align: var(--textblock-header-text-align, var(--textblock-header-grid-justify, var(--textblock-group-text-align, var(--textblock-text-align))));
+        }
+
+        &--body {
+            align-items: var(--textblock-body-grid-align, var(--textblock-group-grid-align, var(--_textblock-grid-align)));
+            display: grid;
+            gap: var(--textblock-body-grid-gap, var(--textblock-group-grid-gap, var(--_textblock-grid-gap)));
+            justify-items: var(--textblock-body-grid-justify, var(--textblock-group-grid-justify, var(--_textblock-grid-justify)));
+            text-align: var(--textblock-body-text-align, var(--textblock-body-grid-justify, var(--textblock-group-text-align, var(--textblock-text-align))));
+        }
+
+        &--footer {
+            align-items: var(--textblock-footer-grid-align, var(--textblock-group-grid-align, var(--_textblock-grid-align)));
+            display: grid;
+            gap: var(--textblock-footer-grid-gap, var(--textblock-group-grid-gap, var(--_textblock-grid-gap)));
+            justify-items: var(--textblock-footer-grid-justify, var(--textblock-group-grid-justify, var(--_textblock-grid-justify)));
+            text-align: var(--textblock-footer-text-align, var(--textblock-footer-grid-justify, var(--textblock-group-text-align, var(--textblock-text-align))));
+        }
+    }
+}

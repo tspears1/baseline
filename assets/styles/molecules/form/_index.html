@@ -1,0 +1,37 @@
+<form class="form" aria-label="Contact Us">
+    <legend class="form__legend">
+        <h2 class="form__title">Contact Us</h2>
+    </legend>
+    <div class="form__grid">
+        <div class="form__field form__field--md form__field--required">
+            <label class="form__label" for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" placeholder="First" required>
+        </div>
+        <div class="form__field form__field--md form__field--required">
+            <label class="form__label" for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Last" required>
+        </div>
+        <div class="form__field form__field--lg form__field--required">
+            <label class="form__label" for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="address@domain.com" required>
+            <div class="form__hint">Please note that you should use your work address.</div>
+        </div>
+        <div class="form__field form__field--sm">
+            <label class="form__label" for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Role">
+        </div>
+        <div class="form__field form__field--xxl">
+            <label class="form__label" for="comments">Questions or Comments</label>
+            <textarea id="comments" name="comments" placeholder="Tell us more..."></textarea>
+        </div>
+        <div class="form__field form__field--xl">
+            <label for="terms-conditions" class="checkbox">
+                <input type="checkbox" id="terms-conditions">
+                <span>I agree to the <a href="#">Terms and Conditions</a>.</span>
+            </label>
+        </div>
+        <div class="form__field form__field--xs form__field--inline-end">
+            <button class="button" type="submit">Let's Get Started</button>
+        </div>
+    </div>
+</form>

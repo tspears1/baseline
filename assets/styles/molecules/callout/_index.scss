@@ -1,0 +1,134 @@
+@use '@styles/abstracts/functions/fluid' as *;
+@use '@styles/abstracts/mixins/container-queries' as cq;
+
+.callout {
+    $b: &;
+
+    --_callout-content-align:                               var(--callout-content-align, start);
+    --_callout-content-padding:                             var(--callout-content-padding, 0);
+    --_callout-media-padding:                               var(--callout-media-padding, 0);
+    --_callout-padding-x:                                   var(--callout-padding-x, 0);
+    --_callout-padding-y:                                   var(--callout-padding-y, var(--size-fluid-5));
+
+    --split-gap: calc(var(--_callout-padding-y) / 2);
+
+    background: var(--theme-color-background, transparent);
+    display: grid;
+    inline-size: 100%;
+    padding: var(--_callout-padding-y) var(--_callout-padding-x);
+
+    &--center {
+        --_callout-content-align: center;
+        --split-area-align: center;
+    }
+
+    &--end {
+        --_callout-content-align: end;
+    }
+
+    &--inline {
+        --callout-content-padding: var(--size-fluid-5) var(--size-fluid-3);
+        --callout-media-padding: var(--size-fluid-3);
+        --callout-padding-y: 0;
+    }
+
+    &--featured-media {
+        --_callout-grid-offset: calc(var(--grid-gutter-width) * 1);
+        --callout-content-padding: var(--size-fluid-5) var(--_callout-grid-offset) 0;
+        --callout-media-padding: 0 var(--_callout-grid-offset);
+
+        grid-template-rows: max-content auto;
+
+        @include cq.container(md) {
+            --_callout-grid-offset: calc(var(--grid-column-width) * 2);
+        }
+
+        #{$b}__media {
+            --media-aspect-ratio: var(--ratio-widescreen);
+            grid-row: 1 / span 1;
+            margin: var(--_callout-media-padding);
+            padding: 0;
+            position: relative;
+
+            &::before {
+                content: '';
+                inset: calc(var(--_callout-padding-y) * -1) calc(var(--_callout-grid-offset) * -1) 50%;
+                background: var(--callout-media-accent-color, var(--callout-media-color-background));
+                position: absolute;
+            }
+        }
+
+    }
+
+    &__content {
+        --callout-content-color-background: var(--theme-color-background, transparent);
+        align-content: start;
+        background: var(--callout-content-color-background);
+        container-type: inline-size;
+        display: grid;
+        gap: var(--size-fluid-3);
+        justify-content: var(--split-area-align, var(--_callout-content-align));
+        justify-items: var(--split-area-align, var(--_callout-content-align));
+        padding: var(--_callout-content-padding);
+
+        .split & {
+            --split-area-align: start;
+        }
+
+        .split .callout--center & {
+            --split-area-align: center;
+        }
+    }
+
+    &__title {
+        color: var(--theme-color-heading, var(--color-neutral-900));
+        font-size: c-fluid(1.5rem, 3rem, 'xs', 'xl');
+        font-weight: var(--font-weight-bold);
+        line-height: var(--leading-tight);
+        margin: 0;
+        max-inline-size: var(--size-header-3);
+        text-align: var(--split-area-align, var(--_callout-content-align));
+    }
+
+    &__subtitle {
+        color: var(--theme-color-text, var(--color-neutral-700));
+        font-size: c-fluid(1rem, 2rem, 'xs', 'xl');
+        line-height: var(--leading-normal);
+        margin: 0;
+        max-inline-size: var(--size-content-3);
+        text-align: var(--split-area-align, var(--_callout-content-align));
+    }
+
+    &__text {
+        --text-color: var(--theme-color-text, var(--color-neutral-700));
+        text-align: var(--split-area-align, var(--_callout-content-align));
+    }
+
+    &__media {
+        --callout-media-color-background: var(--theme-color-background, var(--color-neutral-0));
+        background: var(--callout-media-color-background);
+        padding: var(--_callout-media-padding);
+
+        &:where(:not(.media--block)) {
+            --media-aspect-ratio: var(--ratio-photo);
+            padding: 0;
+            position: relative;
+
+            @include cq.container(md) {
+                --media-aspect-ratio: auto;
+            }
+
+            > * {
+                block-size: auto;
+                inline-size: auto;
+                inset: var(--_callout-media-padding);
+                position: absolute;
+            }
+        }
+    }
+
+    &__actions {
+        --actions-justify: var(--_callout-content-align);
+    }
+
+}

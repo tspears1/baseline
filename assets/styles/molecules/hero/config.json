@@ -1,0 +1,6 @@
+{
+    "split" : {
+        "path": "assets/styles/utilities/_split.scss",
+        "type": "utility"
+    }
+}

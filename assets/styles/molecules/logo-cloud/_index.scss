@@ -1,0 +1,38 @@
+@use '@styles/abstracts/mixins/links' as links;
+
+.logoCloud {
+    --_logo-cloud-gap:                              var(--logo-cloud-gap, var(--size-fluid-4));
+    --_logo-cloud-justify:                          var(--logo-cloud-justify, center);
+    --_logo-item-aspect-ratio:                      var(--logo-item-aspect-ratio, auto);
+    --_logo-item-block-size:                        var(--logo-item-block-size, var(--size-fluid-6));
+    --_logo-item-inline-size:                       var(--logo-item-inline-size, auto);
+    --_logo-item-margin:                            var(--logo-item-margin, 0);
+    --_logo-block-size:                             var(--logo-block-size, 100%);
+    --_logo-inline-size:                            var(--logo-inline-size, auto);
+
+    &__logos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--_logo-cloud-gap);
+        justify-content: var(--_logo-cloud-justify);
+    }
+
+    &__logo {
+        aspect-ratio: var(--_logo-item-aspect-ratio);
+        block-size: var(--_logo-item-block-size);
+        inline-size: var(--_logo-item-inline-size);
+        margin: var(--_logo-item-margin);
+        position: relative;
+    }
+
+    &__img {
+        block-size: var(--_logo-block-size);
+        inline-size: var(--_logo-inline-size);
+        min-inline-size: 100%;
+    }
+
+    &__link {
+        @include links.pseudo-link();
+    }
+}

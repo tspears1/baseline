@@ -1,0 +1,84 @@
+//// ===================== Functions =====================
+// =====https://kittygiraudel.com/2013/08/08/advanced-sass-list-functions/
+@use "sass:math";
+
+// FIRST =============================
+@function first($list) {
+    @return nth($list, 1);
+}
+
+// LAST =============================
+@function last($list) {
+    @return nth($list, length($list));
+}
+
+// PREPEND =============================
+@function prepend($list, $value) {
+    @return join($value, $list);
+}
+
+// SLICE =============================
+@function slice($list, $start: 1, $end: length($list)) {
+    $result: null;
+
+    @if type-of($start) != number or type-of($end) != number {
+        @warn "Either $start or $end are not a number for `slice`.";
+    }
+
+    @else if $start > $end {
+        @warn "The start index has to be lesser than or equals to the end index for `slice`.";
+    }
+
+    @else if $start < 1 or $end < 1 {
+        @warn "List indexes must be non-zero integers for `slice`.";
+    }
+
+    @else if $start > length($list) {
+        @warn "List index is #{$start} but list is only #{length($list)} item long for `slice`.";
+    }
+
+    @else if $end > length($list) {
+        @warn "List index is #{$end} but list is only #{length($list)} item long for `slice`.";
+    }
+
+    @else {
+        $result: ();
+
+        @for $i from $start through $end {
+            $result: append($result, nth($list, $i));
+        }
+    }
+
+    @return $result;
+}
+
+// REVERSE =============================
+@function reverse($list, $recursive: false) {
+    $result: ();
+
+    @for $i from length($list) * -1 through -1 {
+        @if type-of(nth($list, abs($i))) == list and $recursive {
+            $result: append($result, reverse(nth($list, abs($i)), $recursive));
+        } @else {
+            $result: append($result, nth($list, abs($i)), $separator: comma);
+        }
+    }
+
+    @return $result;
+}
+
+// Next Key =============================
+@function next-key($current, $list) {
+    $index: index($list, $current);
+
+    @if $index == length($list) {
+        @return null;
+    }
+    @if $index == null {
+        @return null;
+    }
+
+    $next: $index + 1;
+
+    @return nth($list, $next);
+}

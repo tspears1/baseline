@@ -1,0 +1,171 @@
+@use '@styles/abstracts/functions/fluid' as fluid;
+@use '@styles/abstracts/mixins/button' as btn;
+@use '@styles/abstracts/mixins/dialog' as dialog;
+@use '@styles/abstracts/mixins/media' as media;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.message {
+    @include dialog.dialog-reset();
+
+    --_message-close-size:                                        var(--message-close-size, #{fluid.fluid(0.75, 1.125)});
+    --_message-font-size-text:                                    var(--message-font-size-text, var(--size-1));
+    --_message-icon-offset:                                       var(--message-icon-offset, calc((var(--_message-font-size-text) * var(--_message-line-height-text) - var(--_message-icon-size)) / 2));
+    --_message-icon-size:                                         var(--message-icon-size, var(--size-fluid-3));
+    --_message-line-height-text:                                  var(--message-line-height-text, var(--leading-loose));
+    --_message-max-inline-size:                                   var(--message-max-inline-size, max(40vw, var(--breakpoint-sm)));
+    --_message-padding:                                           var(--message-padding, var(--size-1));
+
+    background: var(--theme-color-background, var(--color-neutral-50));
+    box-shadow:
+        0px 8px 24px 0px hsl(var(--theme-color-base-hsl) / 0.10),
+        1px 1px 1px 0px hsl(var(--theme-color-foreground-hsl) / 0.10);
+    color: var(--theme-color-foreground, var(--color-neutral-900));
+    display: block;
+    border-radius: var(--radius-3);
+    inline-size: fit-content;
+    max-inline-size: var(--_message-max-inline-size);
+    padding: var(--_message-padding);
+
+    &:where(:not([message-status])) {
+        --theme-color-background: var(--color-neutral-50);
+        --theme-color-background-hsl: var(--color-neutral-50-hsl);
+        --theme-color-base: var(--color-neutral-500);
+        --theme-color-base-hsl: var(--color-neutral-500-hsl);
+        --theme-color-foreground: var(--color-neutral-800);
+        --theme-color-foreground-hsl: var(--color-neutral-800-hsl);
+
+        &[message-theme='dark'] {
+            --theme-color-background: var(--color-neutral-800);
+            --theme-color-background-hsl: var(--color-neutral-800-hsl);
+            --theme-color-foreground: var(--color-neutral-50);
+            --theme-color-foreground-hsl: var(--color-neutral-50-hsl);
+        }
+    }
+
+    &[message-status='error'] {
+        --theme-color-background: var(--color-error-50);
+        --theme-color-background-hsl: var(--color-error-50-hsl);
+        --theme-color-base: var(--color-error-500);
+        --theme-color-base-hsl: var(--color-error-500-hsl);
+        --theme-color-foreground: var(--color-error-900);
+        --theme-color-foreground-hsl: var(--color-error-900-hsl);
+
+        &[message-theme='dark'] {
+            --theme-color-background: var(--color-error-900);
+            --theme-color-background-hsl: var(--color-error-900-hsl);
+            --theme-color-foreground: var(--color-error-50);
+            --theme-color-foreground-hsl: var(--color-error-50-hsl);
+        }
+    }
+
+    &[message-status='info'] {
+        --theme-color-background: var(--color-info-50);
+        --theme-color-background-hsl: var(--color-info-50-hsl);
+        --theme-color-base: var(--color-info-500);
+        --theme-color-base-hsl: var(--color-info-500-hsl);
+        --theme-color-foreground: var(--color-info-900);
+        --theme-color-foreground-hsl: var(--color-info-900-hsl);
+
+        &[message-theme='dark'] {
+            --theme-color-background: var(--color-info-900);
+            --theme-color-background-hsl: var(--color-info-900-hsl);
+            --theme-color-foreground: var(--color-info-50);
+            --theme-color-foreground-hsl: var(--color-info-50-hsl);
+        }
+    }
+
+    &[message-status='success'] {
+        --theme-color-background: var(--color-success-50);
+        --theme-color-background-hsl: var(--color-success-50-hsl);
+        --theme-color-base: var(--color-success-500);
+        --theme-color-base-hsl: var(--color-success-500-hsl);
+        --theme-color-foreground: var(--color-success-900);
+        --theme-color-foreground-hsl: var(--color-success-900-hsl);
+
+        &[message-theme='dark'] {
+            --theme-color-background: var(--color-success-900);
+            --theme-color-background-hsl: var(--color-success-900-hsl);
+            --theme-color-foreground: var(--color-success-50);
+            --theme-color-foreground-hsl: var(--color-success-50-hsl);
+        }
+    }
+
+    &[message-status='warning'] {
+        --theme-color-background: var(--color-warning-50);
+        --theme-color-background-hsl: var(--color-warning-50-hsl);
+        --theme-color-base: var(--color-warning-500);
+        --theme-color-base-hsl: var(--color-warning-500-hsl);
+        --theme-color-foreground: var(--color-warning-900);
+        --theme-color-foreground-hsl: var(--color-warning-900-hsl);
+
+        &[message-theme='dark'] {
+            --theme-color-background: var(--color-warning-900);
+            --theme-color-background-hsl: var(--color-warning-900-hsl);
+            --theme-color-foreground: var(--color-warning-50);
+            --theme-color-foreground-hsl: var(--color-warning-50-hsl);
+        }
+    }
+
+    &__grid {
+        display: grid;
+        gap: var(--_message-padding);
+        grid-template-columns: 1fr max-content;
+    }
+
+    &__content {
+        display: flex;
+        gap: var(--_message-padding);
+    }
+
+    &__icon {
+        --icon-fill-color: var(--theme-color-base, var(--color-neutral-500));
+        block-size: var(--_message-icon-size);
+        flex: none;
+        inline-size: var(--_message-icon-size);
+        margin-block-start: var(--_message-icon-offset);
+    }
+
+    &__text {
+        font-size: var(--_message-font-size-text);
+        line-height: var(--_message-line-height-text);
+    }
+
+    &__form,
+    &__actions {
+        border-inline-start: 1px solid var(--theme-color-base, var(--color-neutral-500));
+        display: grid;
+        margin-block-start: var(--_message-icon-offset);
+        padding-inline-start: var(--_message-padding);
+        place-items: center;
+    }
+
+    &__trigger {
+        @include btn.button-reset();
+        block-size: var(--_message-close-size);
+        inline-size: var(--_message-close-size);
+        position: relative;
+
+        @include mq.hover() {
+            &::before {
+                scale: 1.8;
+            }
+        }
+
+        &:focus-visible {
+            outline-color: currentColor;
+            outline-width: 1px;
+        }
+
+        &::before {
+            aspect-ratio: var(--ratio-square);
+            background: var(--theme-color-base, var(--color-neutral-500));
+            border-radius: var(--radius-1);
+            content: '';
+            inset: 0;
+            opacity: 0.25;
+            position: absolute;
+            scale: 0;
+            transition: scale var(--duration-quick) var(--ease-out);
+        }
+    }
+}

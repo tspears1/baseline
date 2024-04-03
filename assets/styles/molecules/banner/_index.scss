@@ -1,0 +1,102 @@
+@use '@styles/abstracts/mixins/button' as btn;
+@use '@styles/abstracts/mixins/dialog' as dialog;
+@use '@styles/abstracts/mixins/media' as media;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.banner {
+    @include dialog.dialog-reset();
+
+    --_banner-font-size-text:                                    var(--banner-font-size-text, var(--size-1));
+    --_banner-line-height-text:                                  var(--banner-line-height-text, var(--leading-loose));
+    --_banner-icon-offset:                                       var(--banner-icon-offset, calc((var(--_banner-font-size-text) * var(--_banner-line-height-text) - var(--_banner-icon-size)) / 2));
+    --_banner-icon-size:                                         var(--banner-icon-size, var(--size-fluid-2));
+
+    --icon-fill-color:                                           var(--theme-color-text, var(--color-neutral-100));
+    --icon-stroke-color:                                         var(--theme-color-background, var(--color-neutral-100));
+
+    background: var(--theme-color-background, var(--color-neutral-800));
+    color: var(--theme-color-heading, var(--color-neutral-100));
+    border-radius: var(--radius-2);
+    padding: var(--size-fluid-1) var(--size-fluid-2) var(--size-fluid-1) var(--size-fluid-3);
+
+    &__grid {
+        display: grid;
+        gap: var(--size-fluid-2);
+        grid-template-columns: 1fr max-content;
+
+        .has--icon &,
+        :has(.banner__icon) & {
+            grid-template-columns: max-content 1fr max-content;
+        }
+    }
+
+    &__icon {
+        block-size: var(--_banner-icon-size);
+        inline-size: var(--_banner-icon-size);
+        margin-block-start: var(--_banner-icon-offset);
+    }
+
+    &__content {
+        align-items: center;
+        display: flex;
+        gap: var(--size-fluid-1);
+        flex-wrap: wrap;
+        font-size: var(--_banner-font-size-text);
+        line-height: var(--_banner-line-height-text);
+
+        > * {
+            flex: 0 1 auto;
+        }
+    }
+
+    &__link {
+        color: currentColor;
+        text-decoration: underline solid currentColor 2px;
+        text-underline-offset: 4px;
+
+        @include mq.hover() {
+            text-decoration-style: dotted;
+        }
+
+        &:focus-visible {
+            outline-color: currentColor;
+            outline-width: 1px;
+            text-decoration-style: dotted;
+        }
+    }
+
+    &__form {
+        display: grid;
+    }
+
+    &__trigger {
+        @include btn.button-reset();
+        block-size: var(--_banner-icon-size);
+        inline-size: var(--_banner-icon-size);
+        margin-block-start: var(--_banner-icon-offset);
+        position: relative;
+
+        @include mq.hover() {
+            &::before {
+                scale: 1.75;
+            }
+        }
+
+        &:focus-visible {
+            outline-color: currentColor;
+            outline-width: 1px;
+        }
+
+        &::before {
+            aspect-ratio: var(--ratio-square);
+            background: var(--theme-color-text);
+            border-radius: var(--radius-round);
+            content: '';
+            inset: 0;
+            opacity: 0.25;
+            position: absolute;
+            scale: 0;
+            transition: scale var(--duration-quick) var(--ease-out);
+        }
+    }
+}

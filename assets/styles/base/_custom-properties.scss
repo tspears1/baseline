@@ -1,0 +1,283 @@
+/* ===================================================================
+CSS Custom Properties - [ Table of Contents ]
+
+1. Aspect Ratio
+2. Borders
+3. Breakpoints
+4. Colors
+5. Elevations
+6. Motion
+7. Spacing
+8. Typography
+9. Z-Index
+
+=================================================================== */
+
+@use '/assets/styles/abstracts' as *;
+
+:where(html) {
+    //==========================================================================
+    //==[ 1. Aspect Ratios ]====================================================
+    //==========================================================================
+    --ratio-square:             1;          // 1
+    --ratio-photo:              1.333;      // 4/3
+    --ratio-film:               1.5;        // 3/2
+    --ratio-widescreen:         1.778;      // 16/9
+    --ratio-univisum:           2;          // 2/1
+    --ratio-panorama:           4;          // 4/1
+
+    --ratio-photo-y:            0.75;       // 3/4
+    --ratio-film-y:             0.667;      // 2/3
+    --ratio-widescreen-y:       0.5625;     // 9/16
+    --ratio-univisum-y:         0.5;        // 1/2
+    --ratio-panorama-y:         0.25;       // 1/4
+
+    //==========================================================================
+    //==[ 2. Borders ]==========================================================
+    //==========================================================================
+
+    /* Border Widths ----------------------------------------------------- */
+    --border-size-1:            1px;
+    --border-size-2:            2px;
+    --border-size-3:            5px;
+    --border-size-4:            10px;
+    --border-size-5:            25px;
+
+    /* Border Radii ------------------------------------------------------ */
+    --radius-none:              0;
+    --radius-1:                 0.125rem;
+    --radius-2:                 0.25rem;
+    --radius-3:                 0.5rem;
+    --radius-4:                 1rem;
+    --radius-5:                 2rem;
+    --radius-6:                 4rem;
+    --radius-7:                 8rem;
+    --radius-round:             1e5px;
+
+    //==========================================================================
+    //==[ 3. Breakpoints ]======================================================
+    //==========================================================================
+
+    /* Generate CSS Variables for all SASS breakpoint variables in five formats: */
+    /* Breakpoint Widths:            --breakpoint-[name]-width:    Xpx           */
+    /* Breakpoint Gaps:              --breakpoint-[name]-gap:      Xpx           */
+    /* Active Breakpoint Min-Width:  --breakpoint-min-width:       Xpx           */
+    /* Active Breakpoint Max-Width:  --breakpoint-max-width:       Xpx           */
+    /* Active Breakpoint Gap:        --breakpoint-gap:             Xpx           */
+    @include generate-breakpoint-widths($breakpoints);
+    @include generate-breakpoint-gaps($breakpoints);
+    @include generate-active-breakpoint-variables($breakpoints);
+
+    //==========================================================================
+    //==[ 4. Colors ]===========================================================
+    //==========================================================================
+
+    /* Generate CSS Variables for all SASS color variables in two formats:    */
+    /* HSL Wrapped:     --color-[name]-[value]:      hsl( Xdeg, X% , X% )     */
+    /* HSL Unwrapped:   --color-[name]-[value]-hsl:  Xdeg, X%, X%             */
+    @include generate-color-variables($colors);
+    @include generate-color-variables-hsl($colors);
+
+    --color-heading:        var(--color-neutral-900);
+    --color-text:           var(--color-neutral-500);
+    --focus-outline:        var(--color-info-500);
+
+    //==========================================================================
+    //==[ 5. Elevations ]=======================================================
+    //==========================================================================
+
+    --elevation-color-hsl:  var(--color-primary-700-hsl);
+    --elevation-strength:   1%;
+
+    --elevation-low:        0px 1px 2px 0px hsl(var(--elevation-color-hsl) / 0.20);
+    --elevation-high:        0px 16px 32px 0px hsl(var(--elevation-color-hsl) / 0.10);
+    --elevation-soft:       0px 16px 64px 0px hsl(var(--elevation-color-hsl) / 0.05);
+
+    --elevation-1:          0 1px 2px -1px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 9%));
+
+    --elevation-2:          0 3px 5px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 7px 14px -5px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 5%));
+
+    --elevation-3:          0 -1px 3px 0 hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 2%)),
+                            0 1px 2px -5px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 2%)),
+                            0 2px 5px -5px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 4%)),
+                            0 4px 12px -5px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 5%)),
+                            0 12px 15px -5px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 7%));
+
+    --elevation-4:          0 -2px 5px 0 hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 2%)),
+                            0 1px 1px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 2px 2px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 5px 5px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 4%)),
+                            0 9px 9px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 5%)),
+                            0 16px 16px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 6%));
+
+    --elevation-5:          0 -1px 2px 0 hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 2%)),
+                            0 2px 1px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 5px 5px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 10px 10px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 4%)),
+                            0 20px 20px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 5%)),
+                            0 40px 40px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 7%));
+
+    --elevation-6:          0 -1px 2px 0 hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 2%)),
+                            0 3px 2px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 7px 5px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 3%)),
+                            0 12px 10px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 4%)),
+                            0 22px 18px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 5%)),
+                            0 41px 33px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 6%)),
+                            0 100px 80px -2px hsl(var(--elevation-color-hsl) / calc(var(--elevation-strength) + 7%));
+
+    //==========================================================================
+    //==[ 6. Motion ]===========================================================
+    //==========================================================================
+
+    /* Transition Duration ------------------------------------------------------ */
+    --duration-quick:           150ms;
+    --duration-fast:            300ms;
+    --duration-moderate:        500ms;
+    --duration-slow:            750ms;
+    --duration-gentle:          1200ms;
+    --duration-adagio:          1600ms;
+    --duration-largo:           2000ms;
+    --duration-grave:           2500ms;
+
+    @media (prefers-reduced-motion: reduce) {
+        --duration-quick:       0;
+        --duration-fast:        0;
+        --duration-moderate:    0;
+        --duration-slow:        0;
+        --duration-gentle:      0;
+        --duration-adagio:      0;
+        --duration-largo:       0;
+        --duration-grave:       0;
+    }
+
+    /* Easing Functions ------------------------------------------------------ */
+    /* Based on https://easings.net/ ------------------ */
+    --ease-in-quad:             cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --ease-in-cubic:            cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ease-in-quart:            cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    --ease-in-quint:            cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    --ease-in-expo:             cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    --ease-in-circ:             cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    --ease-in-back:             cubic-bezier(0.36, 0, 0.66, -0.56);
+    --ease-out-quad:            cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out-cubic:           cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-out-quart:           cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-out-quint:           cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-out-expo:            cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-circ:            cubic-bezier(0.075, 0.82, 0.165, 1);
+    --ease-out-back:            cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-quad:         cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    --ease-in-out-cubic:        cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-in-out-quart:        cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-in-out-quint:        cubic-bezier(0.86, 0, 0.07, 1);
+    --ease-in-out-expo:         cubic-bezier(1, 0, 0, 1);
+    --ease-in-out-circ:         cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    --ease-in-out-back:         cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+    --ease-in:                  var(--ease-in-cubic);
+    --ease-out:                 var(--ease-out-cubic);
+    --ease-in-out:              var(--ease-in-out-cubic);
+
+    //==========================================================================
+    //==[ 7. Spacing ]==========================================================
+    //==========================================================================
+
+    /* Spacing Scale ------------------------------------------------------ */
+    --size-0:            0.5rem;     // 8px
+    --size-1:            1rem;       // 16px
+    --size-2:            1.5rem;     // 24px
+    --size-3:            2rem;       // 32px
+    --size-4:            2.5rem;     // 40px
+    --size-5:            3rem;       // 48px
+    --size-6:            3.5rem;     // 56px
+    --size-7:            4rem;       // 64px
+    --size-8:            4.5rem;     // 72px
+    --size-9:            5rem;       // 80px
+    --size-10:           6rem;       // 96px
+
+    /* Fluids Spacing Scale ------------------------------------------------------ */
+    /* Sets clamp base on xs and xl breakpoints ---------- */
+    --size-fluid-1:      clamp(.5rem, 1vw, 1rem);        // 8px - 16px
+    --size-fluid-2:      clamp(1rem, 2vw, 1.5rem);       // 16px - 24px
+    --size-fluid-3:      clamp(1.5rem, 3vw, 2rem);       // 24px - 32px
+    --size-fluid-4:      clamp(2rem, 4vw, 3rem);         // 32px - 48px
+    --size-fluid-5:      clamp(4rem, 5vw, 5rem);         // 64px - 80px
+    --size-fluid-6:      clamp(5rem, 7vw, 7.5rem);       // 80px - 120px
+    --size-fluid-7:      clamp(7.5rem, 10vw, 10rem);     // 120px - 160px
+    --size-fluid-8:      clamp(10rem, 20vw, 15rem);      // 160px - 240px
+    --size-fluid-9:      clamp(15rem, 30vw, 20rem);      // 240px - 320px
+    --size-fluid-10:     clamp(20rem, 40vw, 30rem);      // 320px - 480px
+
+    //==========================================================================
+    //==[ 8. Typography ]=======================================================
+    //==========================================================================
+
+    /* Font Families ------------------------------------------------------ */
+    --font-sans:    Arial, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+    --font-serif:   ui-serif, serif;
+    --font-mono:    Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco, Droid Sans Mono, Source Code Pro, monospace;
+
+    /* Font Weights ------------------------------------------------------ */
+    --font-weight-light:            300;
+    --font-weight-regular:          400;
+    --font-weight-medium:           500;
+    --font-weight-semibold:         600;
+    --font-weight-bold:             700;
+    --font-weight-black:            900;
+
+    /* Line Heights ------------------------------------------------------ */
+    --leading-none:                 1;
+    --leading-tight:                1.125;
+    --leading-snug:                 1.375;
+    --leading-normal:               1.5;
+    --leading-relaxed:              1.625;
+    --leading-loose:                2;
+
+    --leading-header:               var(--leading-tight);
+    --leading-paragraph:            var(--leading-loose);
+
+    /* Letter Spacing ---------------------------------------------------- */
+    --tracking-tighter:             -0.05em;
+    --tracking-tight:               -0.025em;
+    --tracking-normal:              0em;
+    --tracking-wide:                0.025em;
+    --tracking-wider:               0.05em;
+    --tracking-widest:              0.1em;
+
+    /* Header Font Sizes ------------------------------------------------- */
+    /* Fluid function scales from [xs]360px to [xl]1440px ---------- */
+    --header-size-1:                #{c-fluid(2rem, 4rem, xs, xl)};           // 32px - 64px
+    --header-size-2:                #{c-fluid(1.5rem, 3rem, xs, xl)};         // 24px - 48px
+    --header-size-3:                #{c-fluid(1.25rem, 2rem, xs, xl)};        // 20px - 32px
+    --header-size-4:                #{c-fluid(1.125rem, 1.5rem, xs, xl)};     // 18px - 24px
+    --header-size-5:                #{c-fluid(1rem, 1.25rem, xs, xl)};        // 16px - 20px
+
+    /* Paragraph Font Sizes ----------------------------------------------- */
+    --paragraph-size-sm:            0.75rem;
+    --paragraph-size-md:            1rem;
+    --paragraph-size-lg:            1.5rem;
+
+    /* Header Max-Widths -------------------------------------------------- */
+    --size-header-1:                20ch;
+    --size-header-2:                25ch;
+    --size-header-3:                35ch;
+
+    /* Content Max-Widths ------------------------------------------------- */
+    --size-content-1:               20ch;
+    --size-content-2:               45ch;
+    --size-content-3:               60ch;
+    --size-content-4:               75ch;
+    --size-content-5:               90ch;
+
+    //==========================================================================
+    //==[ 9. Z-Index ]==========================================================
+    //==========================================================================
+    --z-sticky:                     4000;
+    --z-drawer:                     5000;
+    --z-dialog:                     6000;
+    --z-dropdown:                   7000;
+    --z-alert:                      8000;
+    --z-tooltip:                    9000;
+    --z-max:                        9999;
+}

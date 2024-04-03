@@ -1,0 +1,26 @@
+<div class="tabs" data-tabs="tabs-optional-id">
+    <div class="tabs__container">
+        <div class="tabs__tabList" role="tablist">
+            <button id="tab-1" class="tabs__tabButton" role="tab" aria-selected="true" aria-controls="tabpanel-1">
+                Tab One
+            </button>
+            <button id="tab-2" class="tabs__tabButton" role="tab" aria-selected="false" aria-controls="tabpanel-2" tabindex="-1">
+                Tab Two
+            </button>
+            <button id="tab-3" class="tabs__tabButton" role="tab" aria-selected="false" aria-controls="tabpanel-3" tabindex="-1">
+                Tab Three
+            </button>
+        </div>
+        <div class="tabs__panels">
+            <div class="tabs__tabPanel" id="tabpanel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1" data-active-tab="true">
+                <p>test 1</p>
+            </div>
+            <div class="tabs__tabPanel" id="tabpanel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2">
+                <p>test 2</p>
+            </div>
+            <div class="tabs__tabPanel" id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3">
+                <p>test 3</p>
+            </div>
+        </div>
+    </div>
+</div>

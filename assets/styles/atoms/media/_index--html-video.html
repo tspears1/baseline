@@ -1,0 +1,20 @@
+<div class="media media--widescreen" data-lazy-video="click" style="block-size: 30vh;">
+    <div class="media__video">
+        <video inert controls autoplay playsinline>
+            <source data-src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="media__mask">
+        <picture>
+            <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 768px)">
+            <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 480px)">
+            <img class="lazyload" srcset="https://unsplash.it/1000/800?random&gravity=center" alt="">
+        </picture>
+    </div>
+    <button class="media__trigger" data-lazy-video-trigger>
+        <svg class="icon icon--play">
+            <use xlink:href="#icon-play"></use>
+        </svg>
+    </button>
+</div>

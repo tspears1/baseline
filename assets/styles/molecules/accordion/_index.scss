@@ -1,0 +1,86 @@
+@use '@styles/abstracts/mixins/rich-text' as rt;
+
+.accordion {
+    --_accordion-heading-padding-y:          var(--accordion-heading-padding-y, var(--size-1));
+    --_accordion-heading-padding-x:          var(--accordion-heading-padding-x, var(--size-2));
+    --_accordion-summary-padding-right:      var(--accordion-summary-padding-right, 0.75rem);
+    --_accordion-heading-font-size:          var(--accordion-heading-font-size, clamp(1.125rem, 3vw, 2rem));
+    --_accordion-heading-font-color:         var(--accordion-heading-font-color, var(--color-neutral-900));
+    --_accordion-background-color:           var(--accordion-background-color, var(--color-neutral-0));
+    --_accordion-content-text-color:         var(--accordion-content-text-color, var(--color-neutral-500));
+    --_accordion-content-padding:            var(--accordion-content-padding, var(--size-2));
+    --_accordion-icon-wrapper-padding:       var(--accordion-icon-wrapper-padding, 0.625rem);
+    --_accordion-icon-block-size:            var(--accordion-icon-block-size, var(--size-fluid-4));
+    --_accordion-icon-rotation:              var(--accordion-icon-rotation, 0deg);
+    --_accordion-icon-rotation-easing:       var(--accordion-icon-rotation-easing, var(--ease-out-expo));
+    --_accordion-icon-rotation-duration:     var(--accordion-icon-rotation-duration, var(--duration-fast));
+    --_accordion-icon-y-offset:              var(--accordion-icon-y-offset, 0);
+    --_accordion-icon-background-color:      var(--accordion-icon-background-color, var(--color-action-600));
+    --_accordion-icon-background-duration:   var(--accordion-icon-background-duration, var(--duration-fast));
+    --_accordion-icon-background-easing:     var(--accordion-icon-background-easing, var(--ease-out-expo));
+    --_accordion-border-radius:              var(--accordion-border-radius, var(--radius-3));
+    --_accordion-shadow-color:               var(--accordion-shadow-color, hsl(0 0% 0% / 0.2));
+    --_accordion-box-shadow:                 var(--accordion-box-shadow, 0 1px 2px 0px var(--_accordion-shadow-color));
+    --_accordion-transition-duration:        var(--accordion-box-shadow-duration, var(--duration-fast));
+    --_accordion-transition-easing:          var(--accordion-box-shadow-easing, var(--ease-out-expo));
+    --_accordion-target-height:              var(--accordion-target-height, auto);
+
+    -webkit-appearance: none;
+
+    background-color: var(--_accordion-background-color);
+    border-radius: var(--_accordion-border-radius);
+    box-shadow: var(--_accordion-box-shadow);
+    transition-property: box-shadow, height;
+    transition-duration: var(--_accordion-transition-duration);
+    transition-timing-function: var(--_accordion-transition-easing);
+    height: var(--_accordion-target-height);
+    overflow: hidden;
+
+    &__summary {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        padding-right: var(--_accordion-summary-padding-right);
+        cursor: pointer;
+    }
+
+    &__heading {
+        font-size: var(--header-size-3);
+        color: var(--_accordion-heading-font-color);
+        padding: var(--_accordion-heading-padding-y) var(--_accordion-heading-padding-x);
+        margin-bottom: 0;
+        flex-grow: 1;
+    }
+
+    &__iconWrapper {
+        padding: var(--_accordion-icon-wrapper-padding);
+        aspect-ratio: 1;
+        block-size: var(--_accordion-icon-block-size);
+        background-color: var(--_accordion-icon-background-color);
+        transition: background-color var(--_accordion-icon-background-duration) var(--_accordion-icon-background-easing);
+    }
+
+    &__icon {
+        transform: rotate(var(--_accordion-icon-rotation)) translateY(var(--_accordion-icon-y-offset));
+        height: 2em;
+        transition: transform var(--_accordion-icon-rotation-duration) var(--_accordion-icon-rotation-easing);
+    }
+
+    &__content {
+        --text-color: var(--_accordion-content-text-color);
+        --text-max-inline-size: 100%;
+
+        padding: var(--_accordion-content-padding);
+        padding-top: 0;
+
+        @include rt.rich-text;
+    }
+
+    &[data-accordion-open] {
+        --accordion-shadow-color: hsl(0 0% 0% / 0.1);
+        --accordion-box-shadow: 0 var(--size-1) var(--size-3) 0px var(--_accordion-shadow-color);
+        --accordion-icon-background-color: var(--color-neutral-200);
+        --accordion-icon-rotation: 180deg;
+        --accordion-icon-y-offset: 0.125rem;
+    }
+}

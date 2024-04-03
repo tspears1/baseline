@@ -1,0 +1,110 @@
+@use '@styles/abstracts/mixins/media' as media;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.tile {
+    --_tile-background-color:           var(--tile-background-color, var(--color-neutral-0));
+    --_tile-border-radius:              var(--tile-border-radius, var(--size-1));
+    --_tile-box-shadow:                 var(--tile-box-shadow, 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1));
+    --_tile-content-gap:                var(--tile-content-gap, var(--size-1));
+    --_tile-content-padding:            var(--tile-content-padding, var(--size-2));
+    --_tile-description-color:          var(--tile-description-color, var(--color-neutral-500));
+    --_tile-description-line-height:    var(--tile-description-line-height, var(--leading-loose));
+    --_tile-icon-size:                  var(--tile-icon-size, var(--size-10));
+    --_tile-meta-color:                 var(--tile-meta-color, var(--color-neutral-500));
+    --_tile-meta-icon-margin-right:     var(--tile-meta-icon-margin-right, 0.5em);
+    --_tile-meta-icon-size:             var(--tile-meta-icon-size, 1.25em);
+    --_tile-meta-line-height:           var(--tile-meta-line-height, var(--leading-normal));
+    --_tile-meta-link-color-hover:      var(--tile-meta-link-color-hover, var(--color-link-700));
+    --_tile-meta-link-color:            var(--tile-meta-link-color, var(--color-link-500));
+    --_tile-tag-list-gap:               var(--tile-tag-list-gap, var(--size-1));
+    --_tile-text-underline-offset:      var(--tile-text-underline-offset, 4px);
+    --_tile-title-font-size:            var(--tile-title-font-size, var(--size-fluid-3));
+    --_tile-title-margin-y:             var(--tile-title-margin-y, var(--size-0));
+
+    background-color: var(--_tile-background-color);
+    border-radius: var(--_tile-border-radius);
+    box-shadow: var(--_tile-box-shadow);
+    display: flex;
+    flex-direction: var(--tile-flex-direction, column-reverse);
+    max-inline-size: var(--tile-max-inline-size, none);
+    overflow: hidden;
+
+    &__imageWrapper {
+        aspect-ratio: var(--tile-media-ratio, 1.78);
+        overflow: hidden;
+    }
+
+    &__imageWrapper:last-child {
+        margin-top: auto;
+    }
+
+    &__image {
+        @include media.image-fit(cover);
+    }
+
+    &__tagList {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_tile-tag-list-gap);
+        margin-top: 0;
+    }
+
+    &__cta {
+        margin-top: 0;
+        display: flex;
+        width: 100%;
+    }
+
+    &__meta {
+        color: var(--_tile-meta-color);
+        line-height: var(--_tile-meta-line-height);
+        margin-top: 0;
+    }
+
+    &__metaLink {
+        color: var(--_tile-meta-link-color);
+        text-underline-offset: var(--_tile-text-underline-offset);
+
+        @include mq.hover() {
+            color: var(--_tile-meta-link-color-hover);
+        }
+    }
+
+    &__metaIcon {
+        display: inline-block;
+        block-size: var(--_tile-meta-icon-size);
+        margin-right: var(--_tile-meta-icon-margin-right);
+        aspect-ratio: 1;
+        vertical-align: text-bottom;
+    }
+
+    &__title {
+        font-size: var(--_tile-title-font-size);
+        margin: var(--_tile-title-margin-y) 0;
+    }
+
+    &__description {
+        color: var(--_tile-description-color);
+        line-height: var(--_tile-description-line-height);
+        margin-top: 0;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--_tile-content-padding);
+        gap: var(--_tile-content-gap);
+    }
+
+    &__iconWrapper {
+        block-size: var(--_tile-icon-size);
+        aspect-ratio: 1;
+    }
+
+    &--condensed {
+        --tile-description-line-height: var(--leading-normal);
+    }
+}

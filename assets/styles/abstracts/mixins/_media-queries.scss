@@ -1,0 +1,65 @@
+@use '../config' as config;
+@use 'sass:map';
+
+/* === Breakpoint @media query mixin ============================================ */
+// $bp (string): The breakpoint to query. Options: 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl', 'xxxxl', 'xxxxxl', 'xxxxxxl'. Default is 'xs'.
+// $rule (string): The rule to query. Options: 'min-width' or 'max-width'. Default is 'min-width'.
+// $breakpoints (map): The breakpoints map. Default is $breakpoints.
+@mixin breakpoint($bp: xs, $rule: min-width, $breakpoints: config.$breakpoints) {
+    @if map.has-key($breakpoints, $bp, width) {
+        $bp: map.get($breakpoints, $bp, width);
+    }
+    @if $rule == max-width {
+        $bp: $bp - 1;
+    }
+    @media screen and (#{$rule}: $bp) {
+        @content;
+    }
+}
+
+/* === Hover @media query mixin ============================================ */
+// $any (boolean): True will query 'any-hover', false will query 'hover'. Default is true.
+// $value (string): The value to query. Options: 'hover' or 'none'. Default is 'hover'.
+@mixin hover($any: true, $value: hover) {
+    @if $any {
+        @media (any-hover: $value) {
+            &:hover {
+                @content;
+            }
+        }
+    } @else {
+        @media (hover: $value) {
+            &:hover {
+                @content;
+            }
+        }
+    }
+}
+
+/* === Pointer @media query mixin ============================================ */
+// $any (boolean): True will query 'any-pointer', false will query 'pointer'. Default is false.
+// $value (string): The value to query. Options: 'fine', 'coarse', or 'none'. Default is 'coarse'.
+
+@mixin pointer($any: false, $value: coarse) {
+    @if $any {
+        @media (any-pointer: $value) {
+            @content;
+        }
+    } @else {
+        @media (pointer: $value) {
+            @content;
+        }
+    }
+}
+
+/* === Prefers Reduced Motion @media query mixin ============================================ */
+// $value (string): The value to query. Options: 'reduce' or 'no-preference'. Default is 'reduce'.
+
+@mixin prefers-reduced-motion($value: reduce) {
+    @media (prefers-reduced-motion: $value) {
+        @content;
+    }
+}
+
+
+

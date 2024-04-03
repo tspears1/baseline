@@ -1,0 +1,115 @@
+@use '@styles/abstracts/mixins/button' as btn;
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+
+.navigation {
+    --_nav-heading-border-bottom:                   var(--nav-heading-border-bottom, 2px solid var(--color-neutral-500));
+    --_nav-heading-font-size:                       var(--nav-heading-font-size, var(--size-1));
+    --_nav-heading-font-weight:                     var(--nav-heading-font-weight, var(--font-weight-regular));
+    --_nav-heading-line-height:                     var(--nav-heading-line-height, var(--leading-loose));
+    --_nav-heading-padding-x:                       var(--nav-heading-padding-x, var(--size-2));
+    --_nav-heading-padding-y:                       var(--nav-heading-padding-y, var(--size-1));
+    --_nav-list-gap:                                var(--nav-list-gap, var(--size-fluid-2));
+    --_nav-trigger-flex-gap:                        var(--nav-trigger-flex-gap, var(--size-0));
+    --_nav-trigger-font-color-hover:                var(--nav-trigger-font-color-hover, var(--color-link-700));
+    --_nav-trigger-font-color:                      var(--nav-trigger-font-color, var(--color-neutral-500));
+    --_nav-trigger-font-size:                       var(--nav-trigger-font-size, var(--size-1));
+    --_nav-trigger-icon-color:                      var(--nav-trigger-icon-color, var(--color-action-600));
+    --_nav-trigger-icon-height:                     var(--nav-trigger-icon-height, 0.5em);
+    --_nav-trigger-icon-width:                      var(--nav-trigger-icon-width, 1.25em);
+    --_nav-trigger-icon-wrapper-border-radius:      var(--nav-trigger-icon-wrapper-border-radius, 50%);
+    --_nav-trigger-line-height:                     var(--nav-trigger-line-height, var(--leading-loose));
+
+    &__list {
+        align-items: center;
+        box-shadow: none;
+        display: flex;
+        gap: var(--_nav-list-gap);
+        justify-content: space-between;
+        position: static;
+        transform: none;
+    }
+
+    &__heading {
+        border-bottom: var(--_nav-heading-border-bottom);
+        font-size: var(--_nav-heading-font-size);
+        font-weight: var(--_nav-heading-font-weight);
+        line-height: var(--_nav-heading-line-height);
+        margin-bottom: 0;
+        padding: var(--_nav-heading-padding-y) var(--_nav-heading-padding-x);
+        text-align: center;
+    }
+
+    &__trigger {
+        @include btn.button-reset;
+        align-items: center;
+        color: var(--_nav-trigger-font-color);
+        cursor: pointer;
+        display: flex;
+        font-size: var(--_nav-trigger-font-size);
+        gap: var(--_nav-trigger-flex-gap);
+        justify-content: space-between;
+        text-decoration: none;
+        transition: color var(--duration-fast) var(--ease-out);
+        white-space: nowrap;
+        width: 100%;
+
+        @include mq.hover() {
+            color: var(--_button-color-text-hover);
+        }
+    }
+
+    &__triggerIcon {
+        color: var(--_nav-trigger-icon-color);
+        width: var(--_nav-trigger-icon-width);
+        height: var(--_nav-trigger-icon-height);
+    }
+
+    &__triggerIconWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        border-radius: var(--_nav-trigger-icon-wrapper-border-radius);
+    }
+
+    &__megaMenu {
+        --mega-menu-wrapper-grid-columns: main-start / main-end;
+
+        display: none;
+        grid-template-columns: subgrid;
+        grid-column: main-start / main-end;
+        position: absolute;
+        left: 0;
+        transform: translateY(1rem);
+        opacity: 0;
+        transition: opacity var(--duration-fast) var(--ease-out);
+        width: 100%;
+    }
+
+    &__menu {
+        display: none;
+        position: absolute;
+        transform: translateY(1rem);
+        opacity: 0;
+        transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    &__megaMenu[aria-hidden="false"] {
+        display: grid;
+    }
+
+    &__menu[aria-hidden="false"] {
+        display: inline-block;
+    }
+
+    &__megaMenu--active,
+    &__menu--active {
+        opacity: 1;
+    }
+
+    &--secondary {
+        --nav-trigger-font-size: 0.75rem;
+        --nav-trigger-line-height: var(--leading-normal);
+    }
+}

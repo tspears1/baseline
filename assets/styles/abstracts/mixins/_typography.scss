@@ -1,0 +1,62 @@
+@mixin heading-1() {
+    font-family:        var(--font-sans);
+    font-size:          var(--header-size-1);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--leading-header);
+}
+
+@mixin heading-2() {
+    font-family:        var(--font-sans);
+    font-size:          var(--header-size-2);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--leading-header);
+}
+
+@mixin heading-3() {
+    font-family:        var(--font-sans);
+    font-size:          var(--header-size-3);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--leading-header);
+}
+
+@mixin heading-4() {
+    font-family:        var(--font-sans);
+    font-size:          var(--header-size-4);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--leading-header);
+}
+
+@mixin heading-5() {
+    font-family:        var(--font-sans);
+    font-size:          var(--header-size-5);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--leading-header);
+}
+
+@mixin paragram-sm() {
+    font-family:        var(--font-sans);
+    font-size:          var(--paragraph-size-sm);
+    font-weight:        var(--font-weight-regular);
+    line-height:        var(--leading-normal);
+}
+
+@mixin paragraph-md() {
+    font-family:        var(--font-sans);
+    font-size:          var(--paragraph-size-md);
+    font-weight:        var(--font-weight-regular);
+    line-height:        var(--leading-paragraph);
+}
+
+@mixin paragraph-lg() {
+    font-family:        var(--font-sans);
+    font-size:          var(--paragraph-size-lg);
+    font-weight:        var(--font-weight-regular);
+    line-height:        var(--leading-normal);
+}
+
+@mixin paragraph-tight() {
+    font-family:        var(--font-sans);
+    font-size:          var(--paragraph-size-md);
+    font-weight:        var(--font-weight-regular);
+    line-height:        var(--leading-normal);
+}

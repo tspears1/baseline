@@ -1,0 +1,6 @@
+{
+    "button" : {
+        "path": "assets/styles/abstracts/mixins/_button.scss",
+        "type": "mixin"
+    }
+}

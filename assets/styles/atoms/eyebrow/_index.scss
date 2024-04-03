@@ -1,0 +1,10 @@
+.eyebrow {
+    background: var(--theme-color-text, var(--color-neutral-1000));
+    border-radius: var(--radius-2);
+    color: var(--theme-color-background, var(--color-neutral-0));
+    font-size: 0.75em;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wider);
+    padding: 0.25em 1.5em;
+    text-transform: uppercase;
+}

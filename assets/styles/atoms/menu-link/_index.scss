@@ -1,0 +1,38 @@
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+.menuLink {
+    --_menu-link-color: var(--menu-link-color, var(--color-link-500));
+    --_menu-link-font-weight: var(--menu-link-font-weight, var(--font-weight-bold));
+    --_menu-link-icon-block-size: var(--menu-link-icon-block-size, 0.75rem);
+    --_menu-link-icon-opacity: var(--menu-link-icon-opacity, 0);
+    --_menu-link-icon-spacing: var(--menu-link-icon-spacing, var(--size-1));
+    --_menu-link-icon-translate-x: var(--menu-link-icon-translate-x, -50%);
+    --_menu-link-icon-inline-size: var(--menu-link-icon-inline-size, 1.125rem);
+    --_menu-link-line-height: var(--menu-link-line-height, var(--leading-normal));
+
+    color: var(--_menu-link-color);
+    display: block;
+    font-weight: var(--_menu-link-font-weight);
+    line-height: var(--_menu-link-line-height);
+    position: relative;
+    text-decoration: none;
+
+    &__icon {
+        block-size: var(--_menu-link-icon-block-size);
+        display: inline;
+        inline-size: var(--_menu-link-icon-inline-size);
+        inset-block-end: 0.4em;
+        margin-inline-start: var(--_menu-link-icon-spacing);
+        opacity: var(--_menu-link-icon-opacity);
+        position: absolute;
+        translate: var(--_menu-link-icon-translate-x) 0;
+        transition:
+            opacity var(--duration-fast) var(--ease-out),
+            translate var(--duration-fast) var(--ease-out);
+    }
+
+    @include mq.hover() {
+        --_menu-link-icon-opacity: 1;
+        --_menu-link-icon-translate-x: 0;
+    }
+}

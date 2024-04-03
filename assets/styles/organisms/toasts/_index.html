@@ -1,0 +1,82 @@
+<!-- Behind the Scenes ========================================================================
+<div class="toasts">
+    <div class="toasts__stack">
+        <output role="status" class="message toast" message-status="info" message-theme="light">
+            <div class="message__grid">
+                <div class="message__content">
+                    <div class="message__icon">
+                        <svg class="icon icon--info-square" aria-hidden="true" role="presentation">
+                            <use href="#icon-info-square" />
+                        </svg>
+                    </div>
+                    <div class="message__text">
+                        Message content neque tincidunt, rhoncus sapien ac, volutpat enim.
+                    </div>
+                </div>
+                <span class="message__actions">
+                    <button class="message__trigger" >
+                        <span class="sr-only">Close message</span>
+                        <svg class="icon icon--close" aria-hidden="true" role="presentation">
+                            <use href="#icon-close" />
+                        </svg>
+                    </button>
+                </span>
+            </div>
+        </output>
+
+        <output role="status" class="message" message-theme="light">
+            <div class="message__grid">
+                <div class="message__content">
+                    <div class="message__text">
+                        Message content neque tincidunt, rhoncus sapien ac, volutpat enim.
+                    </div>
+                </div>
+            </div>
+        </output>
+
+        <output role="status" class="message" message-theme="light">
+            <div class="message__grid">
+                <div class="message__content">
+                    <div class="message__text">
+                        Message content neque tincidunt, rhoncus sapien ac, volutpat enim.
+                    </div>
+                </div>
+            </div>
+        </output>
+    </div>
+</div>
+======================================================================================== -->
+
+<!-- Trigger Group ============================================================================================ -->
+<div class="actions">
+    <button
+        class="button"
+        toast-trigger="Message content neque tincidunt, rhoncus sapien ac, volutpat enim."
+        toast-status="warning"
+    >
+        Trigger Warning
+    </button>
+    <button
+        class="button"
+        toast-trigger="Message content neque tincidunt, rhoncus sapien ac, volutpat enim."
+        toast-status="info"
+    >
+        Trigger Info
+    </button>
+    <button
+        class="button"
+        toast-trigger="Message content neque tincidunt, rhoncus sapien ac, volutpat enim."
+        toast-status="success"
+        toast-options='{ "icon": "icon-layer-group", "position": "end-start" }'
+    >
+            Trigger Success
+    </button>
+    <button
+        class="button"
+        toast-trigger="Message content neque tincidunt, rhoncus sapien ac, volutpat enim."
+        toast-status="error"
+        toast-options='{ "position": "end-start", "theme": "dark" }'
+    >
+        Trigger Error
+    </button>
+</div>

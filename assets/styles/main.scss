@@ -1,0 +1,47 @@
+
+@use 'sass:meta';
+
+// IBM Plex Mono font family from Google ========================================
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+// Set cascade layer order =========================================
+@layer base, utils, plugins, components;
+
+// Import layers ---------------------------------------------------
+@layer base {
+    @include meta.load-css('base');
+}
+
+@layer components {
+    @layer atoms {
+        @include meta.load-css('atoms');
+    }
+
+    @layer molecules {
+        @include meta.load-css('molecules');
+    }
+
+    @layer organisms {
+        @include meta.load-css('organisms');
+    }
+
+    @layer pages {
+        @include meta.load-css('pages');
+    }
+
+    @layer templates {
+        @include meta.load-css('templates');
+    }
+}
+
+@layer pronto {
+    @include meta.load-css('pronto');
+}
+
+@layer plugins {
+    @include meta.load-css('plugins');
+}
+
+@layer utils {
+    @include meta.load-css('utilities');
+}

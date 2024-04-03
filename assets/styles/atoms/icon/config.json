@@ -1,0 +1,6 @@
+{
+    "image-fit" : {
+        "path": "assets/styles/abstracts/mixins/_media.scss",
+        "type": "mixin"
+    }
+}

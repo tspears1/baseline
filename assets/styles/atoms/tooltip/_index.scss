@@ -1,0 +1,229 @@
+/**
+* Tooltip
+* @description based on: https://web.dev/building-a-tooltip-component/
+*
+* As of December 2023, the :has selector now has full support in all major browsers.
+* However, because support for :has is still relatively new, we may need to use
+* the .has--tooltip class, applied by has-polyfill.js.
+*/
+
+@use '@styles/abstracts/mixins/media-queries' as mq;
+
+@mixin css-has-transition() {
+    &:is(:hover, :active) > :where(tooltip, .tooltip),
+    &:is(:focus-visible) > :where(tooltip, .tooltip):where(:not([tip-focus-within])),
+    &:is(:focus-within) > :where(tooltip, .tooltip):where([tip-focus-within]) {
+        opacity: 1;
+        transition-delay: var(--_tooltip-delay);
+
+        &:is(
+            [tip-position="top"],
+            [tip-position="block-start"],
+            :not([tip-position]),
+            [tip-position="bottom"],
+            [tip-position="block-end"]
+        ) {
+            --_tooltip-y: 0;
+        }
+
+        &:is(
+            [tip-position="left"],
+            [tip-position="inline-start"],
+            [tip-position="right"],
+            [tip-position="inline-end"]
+        ) {
+            --_tooltip-x: 0;
+        }
+    }
+}
+
+:has( > :where(tooltip, .tooltip)) {
+    position: relative;
+}
+
+@supports not (selector(:has(*))) {
+    .has--tooltip {
+        position: relative;
+    }
+}
+
+:has( > :where(tooltip, .tooltip)) {
+    @include css-has-transition();
+}
+
+@supports not (selector(:has(*))) {
+    .has--tooltip {
+        @include css-has-transition();
+    }
+}
+
+:where(tooltip, .tooltip) {
+    --_tooltip-color-background:                    var(--tooltip-color-background, var(--color-neutral-0));
+    --_tooltip-color-text:                          var(--tooltip-color-text, var(--color-neutral-800));
+    --_tooltip-delay:                               var(--tooltip-delay, var(--duration-quick));
+    --_tooltip-duration:                            var(--tooltip-duration, var(--duration-fast));
+    --_tooltip-easing:                              var(--tooltip-easing, var(--ease-out));
+    --_tooltip-font-size:                           var(--tooltip-font-size, 0.875rem);
+    --_tooltip-font-weight:                         var(--tooltip-font-weight, 400);
+    --_tooltip-gap:                                 var(--tooltip-gap, 0.75ch);
+    --_tooltip-motion-offset:                       var(--tooltip-motion-offset, 3px);
+    --_tooltip-padding-block:                       var(--tooltip-padding-block, 1.25ch);
+    --_tooltip-padding-inline:                      var(--tooltip-padding-inline, 1.5ch);
+    --_tooltip-shadow-alpha:                        var(--tooltip-shadow-alpha, 10%);
+    --_tooltip-shadow-hsl:                          var(--tooltip-shadow-hsl, 0 0% 0%);
+    --_tooltip-triangle-size:                       var(--tooltip-triangle-size, 0.5rem);
+
+    --_tooltip-bottom-tip: conic-gradient(from -30deg at bottom, rgba(0,0,0,0), #000 1deg 60deg, rgba(0,0,0,0) 61deg) bottom / 100% 50% no-repeat;
+    --_tooltip-top-tip: conic-gradient(from 150deg at top, rgba(0,0,0,0), #000 1deg 60deg, rgba(0,0,0,0) 61deg) top / 100% 50% no-repeat;
+    --_tooltip-right-tip: conic-gradient(from -120deg at right, rgba(0,0,0,0), #000 1deg 60deg, rgba(0,0,0,0) 61deg) right / 50% 100% no-repeat;
+    --_tooltip-left-tip: conic-gradient(from 60deg at left, rgba(0,0,0,0), #000 1deg 60deg, rgba(0,0,0,0) 61deg) left / 50% 100% no-repeat;
+
+    --_tooltip-isRTL: -1;
+
+    background: var(--_tooltip-color-background);
+    border-radius: 0.4rem;
+    color: var(--_tooltip-color-text);
+    filter:
+        drop-shadow(0 3px 3px hsl(var(--_tooltip-shadow-hsl) / var(--_tooltip-shadow-alpha)))
+        drop-shadow(0 12px 12px hsl(var(--_tooltip-shadow-hsl) / var(--_tooltip-shadow-alpha)));
+    font-size: var(--_tooltip-font-size);
+    font-weight: var(--_tooltip-font-weight);
+    inline-size: max-content;
+    line-height: initial;
+    line-height: var(--leading-none);
+    margin: 0;
+    max-inline-size: 25ch;
+    opacity: 0;
+    padding: var(--_tooltip-padding-block) var(--_tooltip-padding-inline);
+    pointer-events: none;
+    position: absolute;
+    text-align: start;
+    transition: opacity var(--_tooltip-duration) var(--_tooltip-easing), translate var(--_tooltip-duration) var(--_tooltip-easing);
+    translate: var(--_tooltip-x, 0) var(--_tooltip-y, 0);
+    user-select: none;
+    will-change: filter;
+    z-index: 1;
+
+    &::before {
+        clip-path: inset(50%);
+        clip: rect(1px, 1px, 1px, 1px);
+        content: "; Has tooltip: ";
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    &::after {
+        background: var(--_tooltip-color-background);
+        content: "";
+        inset: 0;
+        position: absolute;
+        z-index: -1;
+        -webkit-mask: var(--_tooltip-tip);
+        mask: var(--_tooltip-tip);
+    }
+
+    &:is(
+        [tip-position="top"],
+        [tip-position="block-start"],
+        :not([tip-position]),
+        [tip-position="bottom"],
+        [tip-position="block-end"]
+    ) {
+        text-align: center;
+    }
+
+    // Top Position
+    &:is([tip-position="top"], [tip-position="block-start"], :not([tip-position])) {
+        inset-inline-start: 50%;
+        inset-block-end: calc(100% + var(--_tooltip-gap) + var(--_tooltip-triangle-size));
+        --_tooltip-x: calc(50% * var(--_tooltip-isRTL));
+
+        &::after {
+            --_tooltip-tip: var(--_tooltip-bottom-tip);
+            inset-block-end: calc(var(--_tooltip-triangle-size) * -1);
+            border-block-end: var(--_tooltip-triangle-size) solid transparent;
+        }
+    }
+
+    // Right Position
+    &:is([tip-position="right"], [tip-position="inline-end"]) {
+        inset-inline-start: calc(100% + var(--_tooltip-gap) + var(--_tooltip-triangle-size));
+        inset-block-end: 50%;
+        --_tooltip-y: 50%;
+
+        &::after {
+            --_tooltip-tip: var(--_tooltip-left-tip);
+            inset-inline-start: calc(var(--_tooltip-triangle-size) * -1);
+            border-inline-start: var(--_tooltip-triangle-size) solid transparent;
+        }
+
+        &:dir(rtl)::after {
+            --_tooltip-tip: var(--_tooltip-right-tip);
+        }
+    }
+
+    // Bottom Position
+    &:is([tip-position="bottom"], [tip-position="block-end"]) {
+        inset-inline-start: 50%;
+        inset-block-start: calc(100% + var(--_tooltip-gap) + var(--_tooltip-triangle-size));
+        --_tooltip-x: calc(50% * var(--_tooltip-isRTL));
+
+        &::after {
+            --_tooltip-tip: var(--_tooltip-top-tip);
+            inset-block-start: calc(var(--_tooltip-triangle-size) * -1);
+            border-block-start: var(--_tooltip-triangle-size) solid transparent;
+        }
+    }
+
+    // Left Position
+    &:is([tip-position="left"], [tip-position="inline-start"]) {
+        inset-inline-end: calc(100% + var(--_tooltip-gap) + var(--_tooltip-triangle-size));
+        inset-block-end: 50%;
+        --_tooltip-y: 50%;
+
+        &::after {
+            --_tooltip-tip: var(--_tooltip-right-tip);
+            inset-inline-end: calc(var(--_tooltip-triangle-size) * -1);
+            border-inline-end: var(--_tooltip-triangle-size) solid transparent;
+        }
+
+        &:dir(rtl)::after {
+            --_tooltip-tip: var(--_tooltip-left-tip);
+        }
+    }
+
+    @include mq.prefers-reduced-motion('no-preference') {
+        &:is(
+            [tip-position="top"],
+            [tip-position="block-start"],
+            :not([tip-position])
+        ) {
+            --_tooltip-y: var(--_tooltip-motion-offset);
+        }
+
+        &:is(
+            [tip-position="right"],
+            [tip-position="inline-end"]
+        ) {
+            --_tooltip-x: calc(var(--_tooltip-motion-offset) * -1);
+        }
+
+        &:is(
+            [tip-position="bottom"],
+            [tip-position="block-end"]
+        ) {
+            --_tooltip-y: calc(var(--_tooltip-motion-offset) * -1);
+        }
+
+        &:is(
+            [tip-position="left"],
+            [tip-position="inline-start"]
+        ) {
+            --_tooltip-x: var(--_tooltip-motion-offset);
+        }
+    }
+}

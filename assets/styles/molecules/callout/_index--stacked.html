@@ -1,0 +1,28 @@
+<div class="callout callout--center callout--featured-media theme--primary-dark">
+    <div class="callout__content">
+        <h3 class="callout__title">Suspendisse vitae velit malesuada, dapibus lacus malesuada ex.</h3>
+        <div class="callout__text richText">
+            <p>Mauris sit amet aliquet tortor, sollicitudin tincidunt est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis eget massa id varius. Praesent massa sem, congue id ipsum sed, suscipit lacinia nisl.</p>
+        </div>
+    </div>
+    <div class="callout__media media media--block theme--primary-light" data-lazy-video="click">
+        <div class="media__video">
+            <video inert controls autoplay playsinline>
+                <source data-src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="media__mask">
+            <picture>
+                <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 768px)">
+                <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 480px)">
+                <img class="lazyload" srcset="https://unsplash.it/1000/800?random&gravity=center" alt="">
+            </picture>
+        </div>
+        <button class="media__trigger" data-lazy-video-trigger>
+            <svg class="icon icon--play">
+                <use xlink:href="#icon-play"></use>
+            </svg>
+        </button>
+    </div>
+</div>

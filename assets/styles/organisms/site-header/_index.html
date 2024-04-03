@@ -1,0 +1,604 @@
+<header class="siteHeader">
+    <a href="/" class="siteHeader__home">
+        <img src="https://img.logoipsum.com/279.svg" alt="Company Logo" class="siteHeader__logo">
+        <span class="sr-only">Homepage</span>
+    </a>
+    <nav class="siteHeader__mobileNavigation mobileNavigation">
+        <button
+            type="button"
+            class="mobileNavigation__menuButton hamburger hamburger--collapse"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            data-menu-button="mobile-menu"
+            data-open-with-transition="true"
+            data-active-class="is-active"
+            id="mobile-menu-button"
+        >
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+            <span class="sr-only">
+                Mobile Menu
+            </span>
+        </button>
+        <ul
+            class="mobileNavigation__list"
+            data-arrow-navigation
+            data-menu="mobile-menu"
+            aria-hidden="true"
+            aria-labelledby="mobile-menu-button"
+            data-active-class="mobileNavigation__list--active"
+            id="mobile-menu"
+            inert
+        >
+            <h2 class="mobileNavigation__heading">
+                <span class="mobileNavigation__headingText">
+                    Menu
+                </span>
+            </h2>
+            <li class="mobileNavigation__item">
+                <button
+                    type="button"
+                    class="mobileNavigation__trigger"
+                    aria-expanded="false"
+                    aria-controls="submenu"
+                    data-menu-button="submenu"
+                    data-open-with-transition="true"
+                    data-active-class="mobileNavigation__trigger--active"
+                    id="submenu-button"
+                >
+                    Navigation Item
+                    <span class="mobileNavigation__triggerIconWrapper">
+                        <svg class="mobileNavigation__triggerIcon icon icon--chevron-right" aria-hidden="true" role="presentation">
+                            <use href="#icon-chevron-right" />
+                        </svg>
+                    </span>
+                </button>
+                <ul
+                    class="mobileNavigation__list"
+                    data-arrow-navigation
+                    data-menu="submenu"
+                    aria-hidden="true"
+                    aria-labelledby="submenu-button"
+                    data-active-class="mobileNavigation__list--active"
+                    id="submenu"
+                    inert
+                >
+                    <h2 class="mobileNavigation__heading">
+                        <button type="button" class="mobileNavigation__back" data-menu-back="submenu">
+                            <span class="sr-only">Back to Parent Menu</span>
+                            <span class="mobileNavigation__triggerIconWrapper">
+                                <svg class="mobileNavigation__triggerIcon icon icon--chevron-right" aria-hidden="true" role="presentation">
+                                    <use href="#icon-chevron-left" />
+                                </svg>
+                            </span>
+                        </button>
+                        <span class="mobileNavigation__headingText">
+                            Submenu
+                        </span>
+                    </h2>
+                    <li class="mobileNavigation__item">
+                    </li>
+                    <li class="mobileNavigation__item">
+                        <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                    </li>
+                    <li class="mobileNavigation__item">
+                        <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                    </li>
+                    <li class="mobileNavigation__item">
+                        <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                    </li>
+                    <li class="mobileNavigation__item">
+                        <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="mobileNavigation__item">
+                <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+            </li>
+            <li class="mobileNavigation__item">
+                <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+            </li>
+            <li class="mobileNavigation__item">
+                <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+            </li>
+            <li class="mobileNavigation__item">
+                <a href="https://www.google.com" class="mobileNavigation__trigger">Navigation Item</a>
+            </li>
+        </ul>
+    </nav>
+    <nav class="siteHeader__navigation navigation">
+        <ul class="navigation__list">
+            <h2 class="navigation__heading sr-only">
+                Menu
+            </h2>
+            <li class="navigation__item">
+                <button
+                    type="button"
+                    class="navigation__trigger"
+                    aria-expanded="false"
+                    aria-controls="menu-one"
+                    data-menu-button="menu-one"
+                    data-active-class="navigation__trigger--active"
+                    id="menu-one-button"
+                >
+                    Navigation Item
+                    <span class="navigation__triggerIconWrapper">
+                        <svg class="navigation__triggerIcon icon icon--chevron-down" aria-hidden="true" role="presentation">
+                            <use href="#icon-chevron-down" />
+                        </svg>
+                    </span>
+                </button>
+                <div
+                    class="megaMenu navigation__megaMenu"
+                    data-arrow-navigation
+                    data-menu="menu-one"
+                    aria-hidden="true"
+                    aria-labelledby="menu-one-button"
+                    data-active-class="navigation__megaMenu--active"
+                    id="menu-one"
+                    inert
+                >
+                    <div class="megaMenu__container">
+                        <div class="megaMenu__wrapper">
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <p class="megaMenu__columnDescription">
+                                    Mauris vehicula iaculis, vitae fringilla ex porta imperdiet donec in pellent esque erat, at rutrum felis.
+                                </p>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link that is really long that it will wrap
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <p class="megaMenu__columnDescription">
+                                    Mauris vehicula iaculis, vitae fringilla ex porta imperdiet donec in pellent esque erat, at rutrum felis.
+                                </p>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <p class="megaMenu__columnDescription">
+                                    Mauris vehicula iaculis, vitae fringilla ex porta imperdiet donec in pellent esque erat, at rutrum felis.
+                                </p>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="megaMenu__column">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg/640px-Abraham_Lincoln_O-77_matte_collodion_print.jpg" alt="" class="megaMenu__image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="navigation__item">
+                <button
+                    type="button"
+                    class="navigation__trigger"
+                    aria-expanded="false"
+                    aria-controls="menu-two"
+                    data-menu-button="menu-two"
+                    data-active-class="navigation__trigger--active"
+                    id="menu-two-button"
+                >
+                    Navigation Item
+                    <span class="navigation__triggerIconWrapper">
+                        <svg class="navigation__triggerIcon icon icon--chevron-down" aria-hidden="true" role="presentation">
+                            <use href="#icon-chevron-down" />
+                        </svg>
+                    </span>
+                </button>
+                <div
+                    class="menu navigation__menu"
+                    data-arrow-navigation
+                    data-menu="menu-two"
+                    aria-hidden="true"
+                    aria-labelledby="menu-two-button"
+                    data-active-class="navigation__menu--active"
+                    id="menu-two"
+                    inert
+                >
+                    <ul class="menu__list">
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="navigation__item">
+                <button
+                    type="button"
+                    class="navigation__trigger"
+                    aria-expanded="false"
+                    aria-controls="menu-three"
+                    data-menu-button="menu-three"
+                    data-active-class="navigation__trigger--active"
+                    id="menu-three-button"
+                >
+                    Navigation Item
+                    <span class="navigation__triggerIconWrapper">
+                        <svg class="navigation__triggerIcon icon icon--chevron-down" aria-hidden="true" role="presentation">
+                            <use href="#icon-chevron-down" />
+                        </svg>
+                    </span>
+                </button>
+                <div
+                    class="megaMenu navigation__megaMenu"
+                    data-arrow-navigation
+                    data-menu="menu-three"
+                    aria-hidden="true"
+                    aria-labelledby="menu-three-button"
+                    data-active-class="navigation__megaMenu--active"
+                    id="menu-three"
+                    inert
+                >
+                    <div class="megaMenu__container">
+                        <div class="megaMenu__wrapper">
+                            <div class="megaMenu__tile tile">
+                                <div class="tile__imageWrapper">
+                                    <img src="https://panoramicireland.com/media/k2/items/cache/cb9c495b17bc28a44ffb50c55572ed63_XL.jpg" alt="" class="tile__image">
+                                </div>
+                                <div class="tile__content">
+                                    <h3 class="tile__title">
+                                        Title of card that will fall to two lines
+                                    </h3>
+                                    <a href="#" class="tile__cta link">
+                                        Standard Text Link
+                                        <svg class="tile__ctaIcon link__icon">
+                                            <use xlink:href="#icon-arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link that is really long that it will wrap
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="megaMenu__column">
+                                <h3 class="megaMenu__columnTitle">
+                                    Heading
+                                </h3>
+                                <ul class="megaMenu__columnList">
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="megaMenu__listItem">
+                                        <a href="#" class="megaMenu__link menuLink">
+                                            Standalone Text Link
+                                            <svg class="menuLink__icon" role="presentation">
+                                                <use xlink:href="#icon-arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="navigation__item">
+                <button type="button" class="navigation__trigger">
+                    Navigation Item
+                </button>
+            </li>
+            <li class="navigation__item">
+                <a href="#" class="navigation__trigger">Navigation Item</a>
+            </li>
+        </ul>
+    </nav>
+    <nav class="siteHeader__secondaryNav navigation navigation--secondary">
+        <ul class="navigation__list">
+            <li class="navigation__item">
+                <button
+                    type="button"
+                    class="navigation__trigger"
+                    aria-expanded="false"
+                    aria-controls="menu-six"
+                    data-menu-button="menu-six"
+                    data-active-class="navigation__trigger--active"
+                    id="menu-six-button"
+                >
+                    Navigation Item
+                    <span class="navigation__triggerIconWrapper">
+                        <svg class="navigation__triggerIcon icon icon--chevron-down" aria-hidden="true" role="presentation">
+                            <use href="#icon-chevron-down" />
+                        </svg>
+                    </span>
+                </button>
+                <div
+                    class="menu navigation__menu"
+                    data-arrow-navigation
+                    data-menu="menu-six"
+                    aria-hidden="true"
+                    aria-labelledby="menu-six-button"
+                    data-active-class="navigation__menu--active"
+                    id="menu-six"
+                    inert
+                >
+                    <ul class="menu__list">
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="menu__listItem">
+                            <a href="" class="menu__link menuLink">
+                                Standalone Text Link
+                                <svg class="menuLink__icon" role="presentation">
+                                    <use xlink:href="#icon-arrow-right"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="navigation__item">
+                <a href="#" class="navigation__trigger">Navigation Item</a>
+            </li>
+            <li class="navigation__item">
+                <a href="#" class="navigation__trigger">Navigation Item</a>
+            </li>
+            <li class="navigation__item">
+                <form class="navigation__searchInput searchInput">
+                    <label for="search" class="sr-only searchInput__label">Search</label>
+                    <input type="search" id="search" class="searchInput__input" placeholder="Search">
+                    <button type="submit" class="searchInput__submit">
+                        <svg class="searchInput__icon icon icon--search" aria-hidden="true" role="presentation">
+                            <use href="#icon-search" />
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div style="background: var(--color-primary-50); block-size: 32rem; inline-size: 100%;"></div>

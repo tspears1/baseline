@@ -1,0 +1,32 @@
+<div class="hero split split--flip-y">
+    <div class="hero__content">
+        <h1 class="hero__title">Etiam pharetra auctor dolor ac posuere pellentes vulput magna sed ascipit. </h1>
+        <div class="hero__text richText">
+            <p>Donec elementum tempus est, at gravida sem dapibus semper. Aliquam id diam sit amet purus faucibus fringilla. Mauris euismod sit amet dolor vel vehicula. Nulla lacinia augue sem, accumsan luctus nunc facilisis ut. Praesent dictum sit amet quam efficitur placerat. </p>
+        </div>
+        <div class="hero__actions actions">
+            <button class="button">Default Button</button>
+            <button class="button -styleOutline">Outline Button</button>
+        </div>
+    </div>
+    <div class="hero__media media" data-lazy-video="click">
+        <div class="media__video">
+            <video inert controls autoplay playsinline>
+                <source data-src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="media__mask">
+            <picture>
+                <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 768px)">
+                <source srcset="https://unsplash.it/1000/800?random&gravity=center" media="(min-width: 480px)">
+                <img class="lazyload" srcset="https://unsplash.it/1000/800?random&gravity=center" alt="">
+            </picture>
+        </div>
+        <button class="media__trigger" data-lazy-video-trigger>
+            <svg class="icon icon--play">
+                <use xlink:href="#icon-play"></use>
+            </svg>
+        </button>
+    </div>
+</div>
